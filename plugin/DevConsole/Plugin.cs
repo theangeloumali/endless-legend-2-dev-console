@@ -10,11 +10,12 @@ namespace DevConsole
     public sealed class Plugin : BaseUnityPlugin
     {
         public const string Guid = "angelo.el2.devconsole";
-        public const string Version = "1.4.0";
+        public const string Version = "1.5.0";
 
         private State state;
         private Window window;
         private bool visible;
+        private int lastPlacedFrame = -1;
 
         private void Awake()
         {
@@ -48,22 +49,30 @@ namespace DevConsole
             Place();
         }
 
-        /// <summary>An armed tool places on a left click that lands on the map rather than on the console.</summary>
+        /// <summary>The game ships Unity's new Input System, so UnityEngine.Input and IMGUI mouse events never
+        /// arrive here. Everything goes through BepInEx's abstraction — the same path the hotkey already uses.</summary>
         private void Place()
         {
             if (!Cheats.World.IsArmed)
             {
                 return;
             }
-            if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
+            var input = UnityInput.Current;
+            if (input.GetMouseButtonDown(1) || input.GetKey(KeyCode.Escape))
             {
                 Cheats.World.Disarm();
                 return;
             }
-            if (Input.GetMouseButtonDown(0) && !(visible && window.ContainsMouse()))
+            if (!input.GetMouseButtonDown(0) || Time.frameCount == lastPlacedFrame)
             {
-                Cheats.World.PlaceAt(Cheats.World.HoveredTile);
+                return;
             }
+            if (visible && window.ContainsMouse())
+            {
+                return;  // a click on the console is not a click on the map
+            }
+            lastPlacedFrame = Time.frameCount;
+            Cheats.World.PlaceAt(Cheats.World.HoveredTile);
         }
 
         private void OnGUI()

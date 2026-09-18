@@ -1,7 +1,9 @@
 using System;
 using Amplitude.Mercury.Interop;
 using Amplitude.Mercury.Sandbox;
+using System.Reflection;
 using BepInEx.Logging;
+using HarmonyLib;
 
 namespace DevConsole
 {
@@ -26,9 +28,42 @@ namespace DevConsole
         public static void Post(Order order, string what) =>
             Send(order, what, () => SandboxManager.PostOrder(order, Sim.LocalEmpireIndex));
 
-        /// <summary>Editor orders carry their own empire fields and are validated by EditorOrderProcessors.</summary>
-        public static void Post(EditorOrder order, string what) =>
+        /// <summary>Editor orders are checked by the game before posting, because a rejected one is silently
+        /// dropped — a village on the wrong terrain or a camp your faction cannot build would otherwise look like
+        /// the console doing nothing at all.</summary>
+        public static void Post(EditorOrder order, string what)
+        {
+            if (!Allowed(order, what))
+            {
+                return;
+            }
             Send(order, what, () => SandboxManager.PostOrder(order));
+        }
+
+        private static readonly MethodInfo Validate =
+            AccessTools.Method(AccessTools.TypeByName("Amplitude.Mercury.Simulation.EditorOrderProcessors"), "ValidateOrder");
+
+        private static bool Allowed(EditorOrder order, string what)
+        {
+            if (Validate == null)
+            {
+                return true;  // no validator on this build: post and let the game decide
+            }
+            try
+            {
+                if ((bool)Validate.Invoke(null, new object[] { order }))
+                {
+                    return true;
+                }
+                log.LogWarning($"{what}: the game rejected this — not valid here (terrain, ownership or a faction ability)");
+                return false;
+            }
+            catch (Exception exception)
+            {
+                log.LogWarning($"{what}: validation threw ({exception.InnerException?.Message ?? exception.Message}); posting anyway");
+                return true;
+            }
+        }
 
         private static void Send(object order, string what, Action post)
         {

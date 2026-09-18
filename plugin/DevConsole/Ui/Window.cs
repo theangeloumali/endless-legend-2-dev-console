@@ -51,7 +51,8 @@ namespace DevConsole.Ui
         public bool ContainsMouse()
         {
             var scale = state.EffectiveUiScale;
-            var mouse = new Vector2(Input.mousePosition.x / scale, (Screen.height - Input.mousePosition.y) / scale);
+            var position = BepInEx.UnityInput.Current.mousePosition;
+            var mouse = new Vector2(position.x / scale, (Screen.height - position.y) / scale);
             return rect.Contains(mouse);
         }
 

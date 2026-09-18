@@ -62,13 +62,23 @@ namespace DevConsole.Cheats
             armed = null;
         }
 
-        /// <summary>Fired by a map click. Stays armed so the next click places another.</summary>
-        public static void PlaceAt(int tileIndex)
+        /// <summary>Fired by a map click. Stays armed so the next click places another. The live hover wins, but
+        /// falls back to the latched tile: the cursor controller reports nothing in some camera and UI states, and
+        /// silently doing nothing was impossible to diagnose.</summary>
+        public static void PlaceAt(int hovered)
         {
-            if (tileIndex >= 0)
+            if (armed == null)
             {
-                armed?.Invoke(tileIndex);
+                return;
             }
+            var tile = hovered >= 0 ? hovered : TargetTile;
+            if (tile < 0)
+            {
+                Orders.Log.LogWarning($"{ArmedLabel}: click ignored — no tile resolved (hover={hovered}, latched={TargetTile})");
+                return;
+            }
+            Orders.Log.LogInfo($"placing {ArmedLabel} at tile {tile} (hover={hovered}, latched={TargetTile})");
+            armed(tile);
         }
 
         /// <summary>Called once per frame; the last valid hover wins unless the target is locked.</summary>
