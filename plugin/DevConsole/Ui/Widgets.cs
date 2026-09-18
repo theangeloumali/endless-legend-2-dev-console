@@ -79,7 +79,8 @@ namespace DevConsole.Ui
         }
 
         /// <summary>IMGUI has no combo box. This draws the current choice as a button that expands into a
-        /// filterable, scrolling list — the only practical shape for the larger definition catalogues.</summary>
+        /// filterable, scrolling list — the only practical shape for the larger definition catalogues.
+        /// Rows show the player-facing title and icon; the caller reads Name for the order.</summary>
         public sealed class Dropdown
         {
             private readonly string label;
@@ -91,13 +92,15 @@ namespace DevConsole.Ui
 
             public Dropdown(string label) => this.label = label;
 
-            public string Selected(string[] items) => items != null && Index >= 0 && Index < items.Length ? items[Index] : null;
+            public Catalog.Entry Selected(Catalog.Entry[] items) =>
+                items != null && Index >= 0 && Index < items.Length ? items[Index] : null;
 
-            public void Draw(string[] items, float listHeight = 160f)
+            public void Draw(Catalog.Entry[] items, float listHeight = 200f)
             {
+                var selected = Selected(items);
                 GUILayout.BeginHorizontal();
                 GUILayout.Label(label, GUILayout.Width(110));
-                var current = Selected(items) ?? (items == null || items.Length == 0 ? "(none loaded)" : "(select)");
+                var current = selected?.Display ?? (items == null || items.Length == 0 ? "(none loaded)" : "(select)");
                 if (GUILayout.Button(current + "   ▼"))
                 {
                     open = !open;
@@ -114,11 +117,11 @@ namespace DevConsole.Ui
                 scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(listHeight));
                 for (var i = 0; i < items.Length; i++)
                 {
-                    if (filter.Length > 0 && items[i].IndexOf(filter, StringComparison.OrdinalIgnoreCase) < 0)
+                    if (!Matches(items[i], filter))
                     {
                         continue;
                     }
-                    if (GUILayout.Button(items[i]))
+                    if (GUILayout.Button(items[i].Display))
                     {
                         Index = i;
                         open = false;
@@ -126,6 +129,12 @@ namespace DevConsole.Ui
                 }
                 GUILayout.EndScrollView();
             }
+
+            /// <summary>Matches the title or the element name, so a known internal name still finds its entry.</summary>
+            public static bool Matches(Catalog.Entry entry, string filter) =>
+                filter.Length == 0
+                || entry.Display.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0
+                || entry.Name.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0;
         }
     }
 }

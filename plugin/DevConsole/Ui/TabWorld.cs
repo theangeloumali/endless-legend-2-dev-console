@@ -22,7 +22,7 @@ namespace DevConsole.Ui
             Widgets.Section("Spawn at the hovered tile");
             unit.Draw(Catalog.Units);
             var chosen = unit.Selected(Catalog.Units);
-            Widgets.Button(chosen == null ? "Pick a unit" : "Spawn army", () => World.SpawnArmy(chosen, tile), chosen != null && tile >= 0);
+            Widgets.Button(chosen == null ? "Pick a unit" : "Spawn " + chosen.Display, () => World.SpawnArmy(chosen.Name, tile), chosen != null && tile >= 0);
             GUILayout.BeginHorizontal();
             Widgets.Button("Create city", () => World.CreateCity(tile), tile >= 0);
             Widgets.Button("Create camp", () => World.CreateCamp(tile), tile >= 0);

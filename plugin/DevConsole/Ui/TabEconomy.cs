@@ -45,9 +45,9 @@ namespace DevConsole.Ui
             Widgets.Button("All", Economy.UnlockAllEras);
             GUILayout.EndHorizontal();
             technology.Draw(Catalog.Technologies);
-            Widgets.Button("Complete selected technology",
-                           () => Economy.CompleteTechnology(technology.Selected(Catalog.Technologies)),
-                           technology.Selected(Catalog.Technologies) != null);
+            var tech = technology.Selected(Catalog.Technologies);
+            Widgets.Button(tech == null ? "Pick a technology" : "Complete " + tech.Display,
+                           () => Economy.CompleteTechnology(tech.Name), tech != null);
         }
 
         private static readonly string[] Roman = { "I", "II", "III", "IV", "V", "VI", "VII" };

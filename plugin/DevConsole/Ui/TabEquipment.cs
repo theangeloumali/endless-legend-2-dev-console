@@ -39,14 +39,16 @@ namespace DevConsole.Ui
             Widgets.Section("Add to stash");
             definition.Draw(Catalog.Equipment);
             var chosen = definition.Selected(Catalog.Equipment);
-            Widgets.Button(chosen == null ? "Pick a definition" : "Add " + chosen, () => { Equipment.Add(chosen); Refresh(); }, chosen != null);
+            Widgets.Button(chosen == null ? "Pick a definition" : "Add " + chosen.Display, () => { Equipment.Add(chosen.Name); Refresh(); }, chosen != null);
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Bulk filter", GUILayout.Width(110));
             filter = GUILayout.TextField(filter);
             GUILayout.EndHorizontal();
-            var matching = Catalog.Equipment.Where(name => filter.Length > 0 && name.IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0).ToArray();
-            Widgets.Button($"Add every definition matching the filter ({matching.Length})",
+            var matching = filter.Length == 0
+                ? new string[0]
+                : Catalog.Equipment.Where(entry => Widgets.Dropdown.Matches(entry, filter)).Select(entry => entry.Name).ToArray();
+            Widgets.Button($"Add every item matching the filter ({matching.Length})",
                            () => { Equipment.AddAll(matching); Refresh(); }, matching.Length > 0);
 
             Widgets.Section("Equipped");

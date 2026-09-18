@@ -31,6 +31,7 @@
     <!-- The order DTOs and SandboxManager.PostOrder are public here; the simulation entities are not. -->
     <Reference Include="Amplitude.Mercury.Firstpass" HintPath="$(Managed)\Amplitude.Mercury.Firstpass.dll" Private="false" />
     <Reference Include="Assembly-CSharp" HintPath="$(Managed)\Assembly-CSharp.dll" Private="false" />
+    <Reference Include="Amplitude.UI" HintPath="$(Managed)\Amplitude.UI.dll" Private="false" />
     <Reference Include="Amplitude.DebugOverlay" HintPath="$(Managed)\Amplitude.DebugOverlay.dll" Private="false" />
   </ItemGroup>
 

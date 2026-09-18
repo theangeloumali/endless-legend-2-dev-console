@@ -50,6 +50,13 @@ per-turn income — and since orders are processed asynchronously, a console "+r
 Science multiplier is on. Battle cheats call `BattleDebug.SetCheat` directly with `writeRegistry: false`, so they
 never outlive the session.
 
+Dropdowns show the game's **real names** — "Scions' Charm", "Heart of Glassteel" — not element ids. Each
+definition is paired with its `UIMapper` by element name (the convention the game's own data uses) and the
+mapper's `%Key` title is resolved through `ILocalizationService`, so the list follows your game language and any
+data mod. Filtering matches both the display name and the element id. Icons are deliberately absent: the mappers
+reference Amplitude virtual textures sampled by their own UI shader, which `GUI.DrawTextureWithTexCoords` renders
+as blank white.
+
 Only your empire is affected: everything targets `Sandbox.LocalEmpireIndex`, which the game keeps current on
 hot-seat swaps. Dropdown contents come from the live datatables, so a game patch or a data mod is picked up
 automatically. Settings persist in `BepInEx/config/angelo.el2.devconsole.cfg`; `UiScale` defaults to auto (×2 at 4K).
