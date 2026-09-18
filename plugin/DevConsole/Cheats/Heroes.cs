@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Amplitude;
 using Amplitude.Mercury.Interop;
+using Amplitude.Framework.Simulation;
 using Amplitude.Mercury.Simulation;
 using HarmonyLib;
 
@@ -54,16 +55,37 @@ namespace DevConsole.Cheats
             return property == null ? 0 : (int)Traverse.Create(property).Property<FixedPoint>("Value").Value;
         }
 
-        /// <summary>Stat increases are PAID FOR out of SkillPoint, so top it up first. EditableProperty.Value is
-        /// settable, which is the only write we do outside the order system.</summary>
+        /// <summary>Stat increases are PAID FOR out of SkillPoint, so top it up first. No order grants points, so
+        /// this is the one direct write we make. EditableProperty is a STRUCT: reading it through reflection hands
+        /// back a boxed copy, so the mutated value has to be written back or the hero keeps its old total.</summary>
         public static void GiveSkillPoints(Entry hero, int points)
         {
-            var property = Traverse.Create(hero.Handle).Field("SkillPoint").GetValue();
-            if (property == null)
+            var field = AccessTools.Field(hero.Handle?.GetType(), "SkillPoint");
+            if (field == null)
+            {
+                Orders.Log.LogWarning($"Hero.SkillPoint not found; cannot give points to {hero.Name}.");
+                return;
+            }
+            var property = (EditableProperty)field.GetValue(hero.Handle);
+            property.Value = (FixedPoint)(hero.SkillPoints + points);
+            field.SetValue(hero.Handle, property);
+            Orders.Log.LogInfo($"{hero.Name}: skill points {hero.SkillPoints} -> {hero.SkillPoints + points}");
+            Refresh(hero);
+        }
+
+        /// <summary>A direct write updates the simulation but the hero panel only repaints when a simulation event
+        /// reaches the presentation layer, so the new total looks missing until something else happens. Posting a
+        /// zero-experience order is the cheapest round-trip that forces that repaint without changing anything.</summary>
+        private static void Refresh(Entry hero)
+        {
+            var unit = Traverse.Create(hero.Handle).Field("HeroUnit").Property("Entity").GetValue();
+            if (unit == null)
             {
                 return;
             }
-            Traverse.Create(property).Property("Value").SetValue((FixedPoint)(hero.SkillPoints + points));
+            var collection = Traverse.Create(unit).Field("UnitCollection").Property("Entity").GetValue();
+            Orders.Post(new OrderChangeUnitsXP(Sim.GuidOf(collection), new[] { Sim.GuidOf(unit) }, new[] { 0 }),
+                        $"refresh {hero.Name}");
         }
 
         public static void IncreaseStatistics(Entry hero, uint[] deltas)

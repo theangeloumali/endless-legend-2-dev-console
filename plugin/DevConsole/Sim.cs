@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Amplitude;
+using Amplitude.Framework;
+using Amplitude.Framework.Localization;
 using Amplitude.Mercury.Interop;
 using Amplitude.Mercury.Simulation;
 using BepInEx.Logging;
@@ -102,7 +104,8 @@ namespace DevConsole
         public static SimulationEntityGUID GuidOf(object entity) =>
             entity == null ? SimulationEntityGUID.Zero : Traverse.Create(entity).Field<SimulationEntityGUID>("GUID").Value;
 
-        /// <summary>EntityNameInfo is public; prefer what the player renamed it to, then the generated name.</summary>
+        /// <summary>EntityNameInfo is public; prefer what the player renamed it to, then the generated name.
+        /// The localization key is a last resort and has to be resolved, or the UI shows "%Hero_..._1Title".</summary>
         public static string NameOf(object entity, string fallback)
         {
             var info = entity == null ? null : Traverse.Create(entity).Field("EntityName").GetValue();
@@ -112,11 +115,27 @@ namespace DevConsole
                 {
                     if (!string.IsNullOrEmpty(candidate))
                     {
-                        return candidate;
+                        return Localize(candidate) ?? candidate;
                     }
                 }
             }
             return fallback;
+        }
+
+        /// <summary>Resolves a "%Key" through the game's localization service. Plain text passes through; an
+        /// unresolvable key returns null so the caller can fall back.</summary>
+        public static string Localize(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return null;
+            }
+            if (text[0] != '%')
+            {
+                return text;
+            }
+            var localized = Services.GetService<ILocalizationService>()?.Localize(text);
+            return string.IsNullOrEmpty(localized) || localized == text ? null : localized;
         }
 
         public static FixedPoint Units(int value) => (FixedPoint)value;  // op_Implicit applies the x1000 fixed point

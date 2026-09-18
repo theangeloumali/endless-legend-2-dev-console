@@ -147,22 +147,9 @@ namespace DevConsole
             }
         }
 
-        /// <summary>Both Title and RawTitle hold a "%Key" localization key — the game resolves it in the widget,
-        /// not on the mapper — so anything %-prefixed goes through the localization service before display.</summary>
-        private static string Title(UIMapper mapper)
-        {
-            var text = string.IsNullOrEmpty(mapper.Title) ? mapper.RawTitle : mapper.Title;
-            if (string.IsNullOrEmpty(text))
-            {
-                return null;
-            }
-            if (text[0] != '%')
-            {
-                return text;
-            }
-            var localized = Services.GetService<ILocalizationService>()?.Localize(text);
-            return string.IsNullOrEmpty(localized) || localized == text ? null : localized;
-        }
+        /// <summary>Both Title and RawTitle hold a "%Key" — the game resolves it in the widget, not on the mapper.</summary>
+        private static string Title(UIMapper mapper) =>
+            Sim.Localize(string.IsNullOrEmpty(mapper.Title) ? mapper.RawTitle : mapper.Title);
 
         public static StaticString Name(string value) => new StaticString(value);
     }

@@ -16,6 +16,8 @@ namespace DevConsole
 
         public static void Initialize(ManualLogSource logger) => log = logger;
 
+        public static ManualLogSource Log => log;
+
         /// <summary>True once a game is running; posting before that only logs on the game's side.</summary>
         public static bool Ready => SandboxManager.IsSandboxAlive && Sim.LocalEmpireIndex >= 0;
 
