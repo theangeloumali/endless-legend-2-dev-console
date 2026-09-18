@@ -99,7 +99,9 @@ namespace DevConsole.Ui
                 var selected = Selected(items);
                 GUILayout.BeginHorizontal();
                 GUILayout.Label(label, Theme.Label, GUILayout.Width(LabelWidth));
-                var current = selected?.Display ?? (items == null || items.Length == 0 ? "not loaded yet" : "select…");
+                var current = selected == null
+                    ? (items == null || items.Length == 0 ? "not loaded yet" : "select…")
+                    : (selected.Tier == null ? selected.Display : $"{selected.Tier}   {selected.Display}");
                 if (GUILayout.Button(current + "   ▼", open ? Theme.TabActive : Theme.Button, GUILayout.Height(27)))
                 {
                     open = !open;
@@ -120,13 +122,27 @@ namespace DevConsole.Ui
                     {
                         continue;
                     }
-                    if (GUILayout.Button(items[i].Display, i == Index ? Theme.TabActive : Theme.Button, GUILayout.Height(25)))
+                    if (Entry(items[i], i == Index))
                     {
                         Index = i;
                         open = false;
                     }
                 }
                 GUILayout.EndScrollView();
+            }
+
+            /// <summary>One row: tier on the left, name tinted by rarity. Colour comes from the game's own mapper,
+            /// so Legendary reads as Legendary without hardcoding a palette.</summary>
+            private static bool Entry(Catalog.Entry entry, bool selected)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Label(entry.Tier ?? string.Empty, Theme.Hint, GUILayout.Width(72));
+                var previous = GUI.contentColor;  // contentColor tints only the text; GUI.color would stain the button too
+                GUI.contentColor = entry.Tint;
+                var clicked = GUILayout.Button(entry.Display, selected ? Theme.TabActive : Theme.Button, GUILayout.Height(25));
+                GUI.contentColor = previous;
+                GUILayout.EndHorizontal();
+                return clicked;
             }
 
             /// <summary>Matches the title or the element name, so a known internal name still finds its entry.</summary>

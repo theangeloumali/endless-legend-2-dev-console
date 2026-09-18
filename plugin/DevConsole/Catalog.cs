@@ -7,6 +7,8 @@ using Amplitude.Framework.Localization;
 using Amplitude.Mercury.Data.Simulation;
 using Amplitude.Mercury.UI;
 using Amplitude.UI;
+using DevConsole.Ui;
+using UnityEngine;
 
 namespace DevConsole
 {
@@ -22,20 +24,60 @@ namespace DevConsole
         {
             public string Name;      // element name, what an order wants
             public string Display;   // localized title, falling back to Name
+            public int Rank;         // higher is better: rarity level, unit tier, era
+            public string Tier;      // the rank as the player knows it ("Legendary", "Era IV")
+            public Color Tint = Theme.Text;
 
             public override string ToString() => Display;
         }
 
         private static readonly Dictionary<Type, Entry[]> Cache = new Dictionary<Type, Entry[]>();
 
-        public static Entry[] Equipment => Entries<HeroEquipmentDefinition, HeroEquipmentUIMapper>();
-        public static Entry[] Heroes => Entries<HeroDefinition, HeroUnitUIMapper>();
-        public static Entry[] Units => Entries<UnitDefinition, UnitUIMapper>();
-        public static Entry[] Technologies => Entries<TechnologyDefinition, TechnologyUIMapper>();
+        public static Entry[] Equipment => Entries<HeroEquipmentDefinition, HeroEquipmentUIMapper>(Rarity);
+        public static Entry[] Heroes => Entries<HeroDefinition, HeroUnitUIMapper>(UnitTier);
+        public static Entry[] Units => Entries<UnitDefinition, UnitUIMapper>(UnitTier);
+        public static Entry[] Technologies => Entries<TechnologyDefinition, TechnologyUIMapper>(Era);
+
+        /// <summary>Rarity drives both the order and the colour, taken from the rarity's own UIMapper so the
+        /// console matches whatever palette the game uses.</summary>
+        private static void Rarity(HeroEquipmentDefinition definition, Entry entry)
+        {
+            var rarity = definition.EquipmentRarity.GetDatatableElement<HeroEquipmentRarityDefinition>();
+            if (rarity == null)
+            {
+                return;
+            }
+            entry.Rank = rarity.RarityLevel;
+            var mapper = Mapper<HeroEquipmentRarityUIMapper>(rarity.Name);
+            entry.Tier = mapper == null ? null : Title(mapper);
+            if (mapper != null)
+            {
+                entry.Tint = mapper.Color;
+            }
+        }
+
+        private static void UnitTier(ConstructibleDefinition definition, Entry entry)
+        {
+            entry.Rank = definition.Level;
+            entry.Tier = definition.Level > 0 ? "Tier " + definition.Level : null;
+        }
+
+        private static void Era(TechnologyDefinition definition, Entry entry)
+        {
+            var era = definition.EraReference.GetDatatableElement<EraDefinition>();
+            if (era == null)
+            {
+                return;
+            }
+            entry.Rank = era.EraIndex;
+            entry.Tier = "Era " + era.EraIndex;
+        }
 
         /// <summary>Built on first use: the databases are not loaded while the plugin is constructed, and an empty
         /// result is never cached so the next call retries.</summary>
-        private static Entry[] Entries<TDefinition, TMapper>()
+        /// <summary>Best first — rarest equipment, highest unit tier, latest era — then alphabetical, which is
+        /// what you want when reaching for something powerful in a list of 177.</summary>
+        private static Entry[] Entries<TDefinition, TMapper>(Action<TDefinition, Entry> rank)
             where TDefinition : class, IDatatableElement
             where TMapper : UIMapper
         {
@@ -47,11 +89,21 @@ namespace DevConsole
             try
             {
                 var definitions = Databases.GetDatabase<TDefinition>(false);
-                entries = definitions == null
-                    ? new Entry[0]
-                    : definitions.Select(definition => Describe<TMapper>(definition.Name))
-                                 .OrderBy(entry => entry.Display, StringComparer.CurrentCultureIgnoreCase)
-                                 .ToArray();
+                entries = definitions == null ? new Entry[0] : definitions.Select(definition =>
+                {
+                    var entry = Describe<TMapper>(definition.Name);
+                    try
+                    {
+                        rank(definition, entry);
+                    }
+                    catch (Exception)
+                    {
+                        // a definition with no rank simply sorts last
+                    }
+                    return entry;
+                }).OrderByDescending(entry => entry.Rank)
+                  .ThenBy(entry => entry.Display, StringComparer.CurrentCultureIgnoreCase)
+                  .ToArray();
             }
             catch (Exception)
             {

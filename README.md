@@ -55,6 +55,11 @@ per-turn income — and since orders are processed asynchronously, a console "+r
 Science multiplier is on. Battle cheats call `BattleDebug.SetCheat` directly with `writeRegistry: false`, so they
 never outlive the session.
 
+Lists are ordered **best first** — Legendary equipment, highest-tier units and heroes, latest-era technologies —
+then alphabetically, because reaching for something powerful is the common case. Each row carries its tier
+("Legendary", "Tier 3", "Era 4") and equipment is tinted with the rarity's own colour, taken from the game's
+rarity mapper rather than a hardcoded palette.
+
 Dropdowns show the game's **real names** — "Scions' Charm", "Heart of Glassteel" — not element ids. Each
 definition is paired with its `UIMapper` by element name (the convention the game's own data uses) and the
 mapper's `%Key` title is resolved through `ILocalizationService`, so the list follows your game language and any
