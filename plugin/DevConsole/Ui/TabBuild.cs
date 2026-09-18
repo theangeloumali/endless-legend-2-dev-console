@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DevConsole.Cheats;
 using UnityEngine;
 
@@ -21,6 +22,9 @@ namespace DevConsole.Ui
             Widgets.Button("Refresh settlements", () => { sites = Build.Sites(); selected = 0; });
             Widgets.Button("Complete EVERY settlement", Build.CompleteEverything, sites.Count > 0);
             GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            GUILayout.Label($"{sites.Count(s => s.Kind == "city")} cities · {sites.Count(s => s.Kind == "camp")} camps", Theme.Value);
+            GUILayout.EndHorizontal();
 
             if (sites.Count == 0)
             {
@@ -28,7 +32,7 @@ namespace DevConsole.Ui
                 return;
             }
 
-            selected = Widgets.Picker("Settlement", sites, selected, site => $"{site.Name} ({site.Queue.Count} queued)");
+            selected = Widgets.Picker("Settlement", sites, selected, site => site.Label);
             var site = sites[selected];
 
             if (site.Queue.Count == 0)

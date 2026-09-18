@@ -15,6 +15,7 @@ namespace DevConsole.Ui
         private Rect rect = new Rect(40, 60, Width, 0f);  // height follows the content
         private Vector2 scroll;
         private int active;
+        private bool open = true;
 
         public Window(State state, ITab[] tabs)
         {
@@ -25,8 +26,10 @@ namespace DevConsole.Ui
 
         /// <summary>IMGUI draws in raw pixels, so the window is scaled up on high-resolution screens. GUI.matrix
         /// scales the mouse position too, so the rect stays in unscaled coordinates.</summary>
-        public void Draw()
+        /// <summary>Returns false once the close button is used, so the caller can hide the window.</summary>
+        public bool Draw()
         {
+            open = true;
             var previousMatrix = GUI.matrix;
             var previousSkin = Theme.Begin();
             var scale = state.EffectiveUiScale;
@@ -36,13 +39,18 @@ namespace DevConsole.Ui
             rect.y = Mathf.Clamp(rect.y, 0f, Screen.height / scale - 40f);
             Theme.End(previousSkin);
             GUI.matrix = previousMatrix;
+            return open;
         }
 
         private void Contents(int id)
         {
             GUILayout.BeginHorizontal();
             GUILayout.Label("DEV CONSOLE", Theme.Header, GUILayout.ExpandWidth(true));
-            GUILayout.Label(state.Hotkey.Value.MainKey + " hides", Theme.Hint, GUILayout.Width(90));
+            GUILayout.Label(state.Hotkey.Value.MainKey + " hides", Theme.Hint, GUILayout.Width(80));
+            if (GUILayout.Button("✕", Theme.Button, GUILayout.Width(34), GUILayout.Height(26)))
+            {
+                open = false;
+            }
             GUILayout.EndHorizontal();
 
             Tabs();

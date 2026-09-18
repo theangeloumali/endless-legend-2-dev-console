@@ -13,11 +13,19 @@ namespace DevConsole
     {
         internal static State State;
 
+        /// <summary>True when every income patch attached; the Yields tab says so rather than failing silently.</summary>
+        internal static bool Applied { get; private set; }
+
+        private static ManualLogSource log;
+        private static bool loggedScale;
+
         private static PropertyInfo settlementEmpireIndex;
 
-        public static void Apply(Harmony harmony, State state, ManualLogSource log)
+        public static void Apply(Harmony harmony, State state, ManualLogSource logger)
         {
             State = state;
+            log = logger;
+            Applied = true;
             settlementEmpireIndex = AccessTools.Property(Sim.Type("Settlement"), "EmpireIndex");
             Patch(harmony, log, "DepartmentOfTheTreasury", "GainMoney", nameof(MoneyPrefix));
             Patch(harmony, log, "DepartmentOfCulture", "GainInfluence", nameof(InfluencePrefix));
@@ -30,6 +38,7 @@ namespace DevConsole
             var original = Sim.Method(type, method, log);
             if (original == null)
             {
+                Applied = false;
                 return;
             }
             var patcher = new HarmonyMethod(typeof(Patches).GetMethod(patch, BindingFlags.Static | BindingFlags.NonPublic));
@@ -38,9 +47,16 @@ namespace DevConsole
 
         private static void ScaleGain(object department, ref FixedPoint gain, int factor)
         {
-            if (factor > 1 && Sim.IsLocal(Sim.EmpireOf(department)))
+            if (factor <= 1 || !Sim.IsLocal(Sim.EmpireOf(department)))
             {
-                gain = Sim.Scale(gain, factor);
+                return;
+            }
+            var before = gain;
+            gain = Sim.Scale(gain, factor);
+            if (!loggedScale)
+            {
+                loggedScale = true;  // once per session: enough to prove the patches fire, without spamming
+                log.LogInfo($"yield multiplier active: {(int)before} -> {(int)gain} (x{factor})");
             }
         }
 

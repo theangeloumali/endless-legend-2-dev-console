@@ -16,20 +16,24 @@ namespace DevConsole.Cheats
         public sealed class Site
         {
             public string Name;
+            public string Kind;      // city or camp
             public SimulationEntityGUID Guid;
             public List<string> Queue;
+
+            public string Label => $"{Name}  ({Kind}, {Queue.Count} queued)";
         }
 
         public static List<Site> Sites()
         {
             var sites = new List<Site>();
-            foreach (var settlement in Sim.Settlements())
+            foreach (var entry in Sim.Settled())
             {
                 sites.Add(new Site
                 {
-                    Name = Sim.NameOf(settlement, "settlement"),
-                    Guid = Sim.GuidOf(settlement),
-                    Queue = QueueOf(settlement),
+                    Name = Sim.NameOf(entry.Value, entry.Key),
+                    Kind = entry.Key,
+                    Guid = Sim.GuidOf(entry.Value),
+                    Queue = QueueOf(entry.Value),
                 });
             }
             return sites;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Amplitude;
 using Amplitude.Framework;
@@ -94,7 +95,24 @@ namespace DevConsole
             }
         }
 
-        public static IEnumerable<object> Settlements() => Collection(LocalEmpire, "Settlements");
+        public static IEnumerable<object> Settlements() => Settled().Select(pair => pair.Value);
+
+        /// <summary>Cities and camps live in separate collections that may overlap with the general one, so all
+        /// three are walked and deduplicated by GUID. Each entry carries the kind it was found under.</summary>
+        public static IEnumerable<KeyValuePair<string, object>> Settled()
+        {
+            var seen = new HashSet<ulong>();
+            foreach (var source in new[] { ("city", "Cities"), ("camp", "Camps"), ("settlement", "Settlements") })
+            {
+                foreach (var settlement in Collection(LocalEmpire, source.Item2))
+                {
+                    if (seen.Add((ulong)GuidOf(settlement)))
+                    {
+                        yield return new KeyValuePair<string, object>(source.Item1, settlement);
+                    }
+                }
+            }
+        }
 
         public static IEnumerable<object> Heroes() => Collection(LocalEmpire, "Heroes");
 

@@ -23,21 +23,29 @@ namespace DevConsole.Ui
             Multiplier("Science", state.ScienceMultiplier);
             Multiplier("Influence", state.InfluenceMultiplier);
 
+            Widgets.Hint(Patches.Applied
+                ? "Income is scaled as it arrives, so a change shows on your NEXT turn."
+                : "These patches did not load on this build, so the multipliers do nothing.");
+
             Widgets.Section("Instant");
             Widgets.Toggle(state.InstantBuild);
             Widgets.Toggle(state.InstantResearch);
             GUILayout.Label("Multipliers apply at the next income tick. For a one-off jump use the Economy tab.", Theme.Hint);
         }
 
+        /// <summary>Drawn as individual buttons rather than a SelectionGrid: the grid marks the active cell with
+        /// the button's onNormal state, which is indistinguishable from normal in this theme.</summary>
         private static void Multiplier(string label, ConfigEntry<int> entry)
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label(label, GUILayout.Width(90));
-            var current = Math.Max(0, Array.IndexOf(State.MultiplierSteps, entry.Value));
-            var chosen = GUILayout.SelectionGrid(current, Labels, Labels.Length);
-            if (chosen != current)
+            GUILayout.Label(label, Theme.Label, GUILayout.Width(Widgets.LabelWidth));
+            for (var i = 0; i < State.MultiplierSteps.Length; i++)
             {
-                entry.Value = State.MultiplierSteps[chosen];
+                var active = entry.Value == State.MultiplierSteps[i];
+                if (GUILayout.Button(Labels[i], active ? Theme.TabActive : Theme.Button, GUILayout.Height(26)))
+                {
+                    entry.Value = State.MultiplierSteps[i];
+                }
             }
             GUILayout.EndHorizontal();
         }

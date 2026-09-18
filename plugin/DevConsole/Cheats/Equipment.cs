@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Amplitude;
 using Amplitude.Mercury.Data.Simulation;
@@ -41,14 +42,20 @@ namespace DevConsole.Cheats
             return items;
         }
 
-        public static void Add(string definitionName) =>
-            Orders.Post(new OrderForceAddEquipment { HeroEquipmentName = new StaticString(definitionName) }, $"add {definitionName}");
+        /// <summary>The order adds a single item, so a quantity is just the order posted that many times.</summary>
+        public static void Add(string definitionName, int quantity = 1)
+        {
+            for (var i = 0; i < Math.Max(1, quantity); i++)
+            {
+                Orders.Post(new OrderForceAddEquipment { HeroEquipmentName = new StaticString(definitionName) }, $"add {definitionName}");
+            }
+        }
 
-        public static void AddAll(IEnumerable<string> definitionNames)
+        public static void AddAll(IEnumerable<string> definitionNames, int quantity = 1)
         {
             foreach (var name in definitionNames)
             {
-                Add(name);
+                Add(name, quantity);
             }
         }
 

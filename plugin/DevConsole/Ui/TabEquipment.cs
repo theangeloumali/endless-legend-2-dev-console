@@ -13,6 +13,7 @@ namespace DevConsole.Ui
         private List<Heroes.Entry> roster = new List<Heroes.Entry>();
         private Vector2 scroll;
         private string filter = string.Empty;
+        private string quantity = "1";
         private int hero;
 
         public string Title => "Equipment";
@@ -37,9 +38,13 @@ namespace DevConsole.Ui
             }
 
             Widgets.Section("Add to stash");
+            GUILayout.BeginHorizontal();
+            Widgets.IntField("Quantity", ref quantity, out var count);
+            GUILayout.Label("copies of whatever you add below", Theme.Hint);
+            GUILayout.EndHorizontal();
             definition.Draw(Catalog.Equipment);
             var chosen = definition.Selected(Catalog.Equipment);
-            Widgets.Button(chosen == null ? "Pick a definition" : "Add " + chosen.Display, () => { Equipment.Add(chosen.Name); Refresh(); }, chosen != null);
+            Widgets.Button(chosen == null ? "Pick a definition" : $"Add {count} x {chosen.Display}", () => { Equipment.Add(chosen.Name, count); Refresh(); }, chosen != null);
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Bulk filter", GUILayout.Width(110));
@@ -48,8 +53,11 @@ namespace DevConsole.Ui
             var matching = filter.Length == 0
                 ? new string[0]
                 : Catalog.Equipment.Where(entry => Widgets.Dropdown.Matches(entry, filter)).Select(entry => entry.Name).ToArray();
-            Widgets.Button($"Add every item matching the filter ({matching.Length})",
-                           () => { Equipment.AddAll(matching); Refresh(); }, matching.Length > 0);
+            Widgets.Button($"Add every item matching the filter ({matching.Length} x {count})",
+                           () => { Equipment.AddAll(matching, count); Refresh(); }, matching.Length > 0);
+            Widgets.Button($"Add EVERY item in the game ({Catalog.Equipment.Length} x {count})",
+                           () => { Equipment.AddAll(Catalog.Equipment.Select(e => e.Name), count); Refresh(); },
+                           Catalog.Equipment.Length > 0);
 
             Widgets.Section("Equipped");
             foreach (var slot in Equipment.Slots)
