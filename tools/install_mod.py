@@ -1,6 +1,7 @@
 """Install the Dev Console mod into the game's Modding directory and verify the load.
 
     python tools/install_mod.py [--source mod/DevConsole] [--park-bepinex | --restore-bepinex] [--verify]
+    python tools/install_mod.py --uninstall     # remove the data mod (the plugin replaces its every-turn dialog)
 
 The game reads `<GameDirectory>/Modding/mod-configuration.json` (a JSON array of mod folder names) at startup
 and logs `[Modification] Modding is enabled with N active modifications.` to Player.log; UI/data errors land in
@@ -37,6 +38,17 @@ def install(source: Path, modding_dir: Path) -> None:
     config.write_text(json.dumps(active, indent=4) + "\n", encoding="utf-8")
     files = sorted(p.relative_to(target).as_posix() for p in target.rglob("*.json"))
     print(f"installed {len(files)} files -> {target}\nmod-configuration.json = {active}")
+
+
+def uninstall(modding_dir: Path) -> None:
+    target = modding_dir / MOD_NAME
+    if target.exists():
+        shutil.rmtree(target)
+    config = modding_dir / "mod-configuration.json"
+    active = json.loads(config.read_text(encoding="utf-8-sig")) if config.exists() else []
+    active = [name for name in active if name != MOD_NAME]
+    config.write_text(json.dumps(active, indent=4) + "\n", encoding="utf-8")
+    print(f"removed {target}\nmod-configuration.json = {active}")
 
 
 def move_plugins(game_dir: Path, park: bool) -> None:
@@ -88,7 +100,12 @@ def main() -> int:
     parser.add_argument("--park-bepinex", action="store_true")
     parser.add_argument("--restore-bepinex", action="store_true")
     parser.add_argument("--verify", action="store_true", help="only check Player.log + Diagnostics, no install")
+    parser.add_argument("--uninstall", action="store_true", help="remove the mod folder and its configuration entry")
     args = parser.parse_args()
+
+    if args.uninstall:
+        uninstall(args.modding_dir)
+        return 0
 
     if args.park_bepinex:
         move_plugins(args.game_dir, park=True)
