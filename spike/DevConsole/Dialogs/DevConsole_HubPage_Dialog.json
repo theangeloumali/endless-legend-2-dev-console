@@ -1,0 +1,842 @@
+{
+    "AMP_SERIALIZATION_HEADER": {
+        "Version": 0,
+        "AssetTypeName": "Amplitude.Mercury.Data.Simulation.DialogDefinition, Amplitude.Mercury.Data, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "SourceElementName": "Common_Tidefall_Event003"
+    },
+    "serializationData": {
+        "SerializedFormat": 2,
+        "SerializedBytes": [],
+        "ReferencedUnityObjects": [],
+        "SerializedBytesString": "",
+        "Prefab": {
+            "instanceID": 0
+        },
+        "PrefabModificationsReferencedUnityObjects": [],
+        "PrefabModifications": [],
+        "SerializationNodes": [
+            {
+                "Name": "Variables",
+                "Entry": 7,
+                "Data": "0|Amplitude.Mercury.Data.Simulation.SimulationEventVariable[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "2"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "1|Amplitude.Mercury.Data.Simulation.NarrativeEventVariable_DialogCharacter, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Name",
+                "Entry": 1,
+                "Data": "Leader"
+            },
+            {
+                "Name": "Usage",
+                "Entry": 3,
+                "Data": "4"
+            },
+            {
+                "Name": "OverrideUsageFlag",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "Optional",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CollectionSelector",
+                "Entry": 3,
+                "Data": "3"
+            },
+            {
+                "Name": "SelectorCount",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "HasCountCondition",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CountConditionOperator",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "CountConditionValue",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "ElementFilters",
+                "Entry": 7,
+                "Data": "2|Amplitude.Mercury.Data.Simulation.SimulationVariableFilter[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SortPropertyName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "SortOrder",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "EmpireID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "DialogCharacterDefinition",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "DialogCharacter_Leader_PerEmpire"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "3|Amplitude.Mercury.Data.Simulation.NarrativeEventVariable_DialogCharacter, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Name",
+                "Entry": 1,
+                "Data": "Heffe"
+            },
+            {
+                "Name": "Usage",
+                "Entry": 3,
+                "Data": "4"
+            },
+            {
+                "Name": "OverrideUsageFlag",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "Optional",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CollectionSelector",
+                "Entry": 3,
+                "Data": "3"
+            },
+            {
+                "Name": "SelectorCount",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "HasCountCondition",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CountConditionOperator",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "CountConditionValue",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "ElementFilters",
+                "Entry": 7,
+                "Data": "4|Amplitude.Mercury.Data.Simulation.SimulationVariableFilter[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SortPropertyName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "SortOrder",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "EmpireID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "DialogCharacterDefinition",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "DialogCharacter_Tidefall_Event003_Heffe"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "OptionalVariables",
+                "Entry": 7,
+                "Data": "5|Amplitude.Mercury.Data.Simulation.SimulationEventVariable[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "3"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "6|Amplitude.Mercury.Data.Simulation.NarrativeEventVariable_DialogCharacter, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Name",
+                "Entry": 1,
+                "Data": "Advisor"
+            },
+            {
+                "Name": "Usage",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "OverrideUsageFlag",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "Optional",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CollectionSelector",
+                "Entry": 3,
+                "Data": "3"
+            },
+            {
+                "Name": "SelectorCount",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "HasCountCondition",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CountConditionOperator",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "CountConditionValue",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "ElementFilters",
+                "Entry": 7,
+                "Data": "7|Amplitude.Mercury.Data.Simulation.SimulationVariableFilter[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "1"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "8|Amplitude.Mercury.Data.Simulation.SimulationVariableFilterEntityHasNarrativeTag, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "IsInverted",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "TagToFind",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "FactionQuest_LastLord_Quest_LeofricArrested"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "TagOwner",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SortPropertyName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "SortOrder",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "EmpireID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "DialogCharacterDefinition",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "DialogCharacter_Advisor_PerEmpire"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "9|Amplitude.Mercury.Data.Simulation.NarrativeEventVariable_DialogCharacter, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Name",
+                "Entry": 1,
+                "Data": "Advisor_Suluzzo"
+            },
+            {
+                "Name": "Usage",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "OverrideUsageFlag",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "Optional",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CollectionSelector",
+                "Entry": 3,
+                "Data": "3"
+            },
+            {
+                "Name": "SelectorCount",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "HasCountCondition",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CountConditionOperator",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "CountConditionValue",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "ElementFilters",
+                "Entry": 7,
+                "Data": "10|Amplitude.Mercury.Data.Simulation.SimulationVariableFilter[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "2"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "11|Amplitude.Mercury.Data.Simulation.SimulationVariableFilterEntityHasNarrativeTag, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "IsInverted",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "TagToFind",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "FactionQuest_LastLord_Quest_LeofricArrested"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "TagOwner",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "12|Amplitude.Mercury.Data.Simulation.SimulationVariableFilterEntityHasNarrativeTag, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "IsInverted",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "TagToFind",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "FactionQuest_LastLord_Quest_LeofricRehabilitated"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "TagOwner",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SortPropertyName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "SortOrder",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "EmpireID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "DialogCharacterDefinition",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "DialogCharacter_LastLord_EduardoDeSuluzzo"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "13|Amplitude.Mercury.Data.Simulation.NarrativeEventVariable_MajorEmpires, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Name",
+                "Entry": 1,
+                "Data": "MukagEmpire"
+            },
+            {
+                "Name": "Usage",
+                "Entry": 3,
+                "Data": "4"
+            },
+            {
+                "Name": "OverrideUsageFlag",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "Optional",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CollectionSelector",
+                "Entry": 3,
+                "Data": "3"
+            },
+            {
+                "Name": "SelectorCount",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "HasCountCondition",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CountConditionOperator",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "CountConditionValue",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "ElementFilters",
+                "Entry": 7,
+                "Data": "14|Amplitude.Mercury.Data.Simulation.SimulationVariableFilter[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "2"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "15|Amplitude.Mercury.Data.Simulation.SimulationVariableFilterEmpireSelf, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "IsInverted",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "16|Amplitude.Mercury.Data.Simulation.SimulationVariableFilterEmpireFactionDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "IsInverted",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "TargetFaction",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "Faction_Mukag"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SortPropertyName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "SortOrder",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Steps",
+                "Entry": 7,
+                "Data": "17|Amplitude.Mercury.Data.Simulation.DialogDefinition_Step[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "2"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "18|Amplitude.Mercury.Data.Simulation.DialogCameraFocus, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Variable",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "19|Amplitude.Mercury.Data.Simulation.DialogChoice, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "LocalizationVariables",
+                "Entry": 7,
+                "Data": "20|System.String[], mscorlib"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "LeftCharacterVariable",
+                "Entry": 1,
+                "Data": "Leader"
+            },
+            {
+                "Name": "RightCharacterVariable",
+                "Entry": 1,
+                "Data": "None"
+            },
+            {
+                "Name": "SpeakerPosition",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "LocalizationKey",
+                "Entry": 1,
+                "Data": "Dev Console - pick an action."
+            },
+            {
+                "Name": "LocalizedChoices",
+                "Entry": 7,
+                "Data": "21|System.String[], mscorlib"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "4"
+            },
+            {
+                "Name": "",
+                "Entry": 1,
+                "Data": "+10,000 Dust"
+            },
+            {
+                "Name": "",
+                "Entry": 1,
+                "Data": "Open test page"
+            },
+            {
+                "Name": "",
+                "Entry": 1,
+                "Data": "+10,000 Influence"
+            },
+            {
+                "Name": "",
+                "Entry": 1,
+                "Data": "Close"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            }
+        ]
+    },
+    "ForbidTileFocus": false,
+    "variableFromNarrativeEventType": "Amplitude.Mercury.Simulation.Councilor, Amplitude.Mercury.Firstpass"
+}

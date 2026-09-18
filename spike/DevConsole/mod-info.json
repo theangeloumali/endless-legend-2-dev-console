@@ -1,0 +1,9 @@
+{
+    "DisplayName": "Dev Console",
+    "Description": "In-game developer console for feature testing.",
+    "Author": "Angelo",
+    "Version": "0.1.0-spike",
+    "GameVersion": "1.0.116",
+    "Guid": "5b0702a7-9767-56dd-9a0e-83b6a5f8f2f7",
+    "SteamWorkshopId": ""
+}

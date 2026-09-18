@@ -1,0 +1,11 @@
+# game export extracted for reference — 31k files, never committed
+export/
+# harness worktrees
+.claude/.worktree/
+# local-only recordings (mp4 kept, raw webm never)
+recordings/*.webm
+# rendered review twins are build artifacts
+docs/plans/*.html
+__pycache__/
+*.pyc
+.pytest_cache/
