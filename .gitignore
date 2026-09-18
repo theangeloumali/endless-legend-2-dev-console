@@ -12,3 +12,6 @@ __pycache__/
 # .NET build output
 plugin/**/bin/
 plugin/**/obj/
+
+# release staging
+dist/

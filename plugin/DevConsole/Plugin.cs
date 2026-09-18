@@ -10,7 +10,7 @@ namespace DevConsole
     public sealed class Plugin : BaseUnityPlugin
     {
         public const string Guid = "angelo.el2.devconsole";
-        public const string Version = "0.2.0";
+        public const string Version = "1.0.0";
 
         private State state;
         private Window window;
