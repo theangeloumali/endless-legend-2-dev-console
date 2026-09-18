@@ -25,6 +25,10 @@ namespace DevConsole
             {
                 new TabEconomy(),
                 new TabBuild(),
+                new TabHeroes(),
+                new TabEquipment(),
+                new TabWorld(),
+                new TabDiplomacy(),
                 new TabBattle(),
                 new TabYields(state),
             });
