@@ -21,26 +21,14 @@ namespace DevConsole
 
         /// <summary>A plain order carries no empire field — it is routed to the department of the target empire,
         /// so it must be posted against our own index rather than the default -1.</summary>
-        public static void Post(Order order, string what)
-        {
-            if (!Guard(order, what))
-            {
-                return;
-            }
-            try
-            {
-                SandboxManager.PostOrder(order, Sim.LocalEmpireIndex);
-                log.LogInfo($"posted {what}");
-            }
-            catch (Exception exception)
-            {
-                log.LogError($"{what} failed: {exception.Message}");
-            }
-        }
+        public static void Post(Order order, string what) =>
+            Send(order, what, () => SandboxManager.PostOrder(order, Sim.LocalEmpireIndex));
 
-        /// <summary>Editor orders run through EditorOrderProcessors.ValidateOrder first, so a rejected one is
-        /// reported here instead of silently doing nothing.</summary>
-        public static void Post(EditorOrder order, string what)
+        /// <summary>Editor orders carry their own empire fields and are validated by EditorOrderProcessors.</summary>
+        public static void Post(EditorOrder order, string what) =>
+            Send(order, what, () => SandboxManager.PostOrder(order));
+
+        private static void Send(object order, string what, Action post)
         {
             if (!Guard(order, what))
             {
@@ -48,7 +36,7 @@ namespace DevConsole
             }
             try
             {
-                SandboxManager.PostOrder(order);
+                post();
                 log.LogInfo($"posted {what}");
             }
             catch (Exception exception)

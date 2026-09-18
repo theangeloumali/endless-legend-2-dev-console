@@ -35,28 +35,17 @@ namespace DevConsole.Cheats
             return sites;
         }
 
-        /// <summary>Construction is an internal struct inside a public ListOfStruct, so the entries are read
-        /// through Traverse and only their definition name is kept.</summary>
+        /// <summary>Construction is an internal struct, so entries are read through the shared walker and only
+        /// their definition name is kept.</summary>
         private static List<string> QueueOf(object settlement)
         {
             var names = new List<string>();
             var queue = Traverse.Create(settlement).Field("ConstructionQueue").Property("Entity").GetValue();
-            var constructions = queue == null ? null : Traverse.Create(queue).Field("Constructions").GetValue();
-            if (constructions == null)
+            foreach (var construction in Sim.Structs(queue, "Constructions"))
             {
-                return names;
-            }
-            var list = Traverse.Create(constructions);
-            var length = list.Field<int>("Length").Value;
-            if (!(list.Field("Data").GetValue() is System.Array data))
-            {
-                return names;
-            }
-            for (var i = 0; i < length && i < data.Length; i++)
-            {
-                var definition = Traverse.Create(data.GetValue(i)).Field("ConstructibleDefinition").GetValue();
+                var definition = Traverse.Create(construction).Field("ConstructibleDefinition").GetValue();
                 var name = definition == null ? null : Traverse.Create(definition).Property("Name").GetValue();
-                names.Add(name?.ToString() ?? $"entry {i}");
+                names.Add(name?.ToString() ?? "construction");
             }
             return names;
         }

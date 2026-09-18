@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Amplitude.Mercury.Data.Simulation;
 using Amplitude.Mercury.Interop;
 
@@ -10,6 +11,7 @@ namespace DevConsole.Cheats
         public static readonly int[] Strategic = { 0, 1, 2, 3, 4, 5 };
         public static readonly int[] Luxury = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
         public static readonly int[] Specials = { 26, 27 };  // ResourceCadaver, ResourceSpirit
+        public static readonly int[] All = Strategic.Concat(Luxury).Concat(Specials).ToArray();
         public const int EraCount = 7;
 
         public static void SetDust(int amount) =>

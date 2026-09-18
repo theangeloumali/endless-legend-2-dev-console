@@ -1,5 +1,4 @@
 using BepInEx;
-using DevConsole.Cheats;
 using DevConsole.Ui;
 using HarmonyLib;
 using UnityEngine;

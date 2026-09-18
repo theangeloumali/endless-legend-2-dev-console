@@ -29,22 +29,14 @@ namespace DevConsole.Ui
             GUILayout.EndHorizontal();
 
             Widgets.Section("Armies");
-            GUILayout.BeginHorizontal();
             Widgets.Button("Refresh armies", () => { armies = World.Armies(); selected = 0; });
             if (armies.Count > 0)
             {
-                selected = Mathf.Clamp(selected, 0, armies.Count - 1);
-                if (GUILayout.Button(armies[selected].Name + "   ▼"))
-                {
-                    selected = (selected + 1) % armies.Count;
-                }
+                selected = Widgets.Picker("Army", armies, selected, army => army.Name);
             }
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-            Widgets.Button("Teleport here", () => World.Teleport(armies[selected], tile), armies.Count > 0 && tile >= 0);
-            var hasSpeed = Widgets.IntField("Speed", ref speed, out var value, 60, 50);
-            Widgets.Button("Set speed", () => World.SetSpeed(armies[selected], value), armies.Count > 0 && hasSpeed);
-            GUILayout.EndHorizontal();
+            Widgets.Button("Teleport selected army here", () => World.Teleport(armies[selected], tile), armies.Count > 0 && tile >= 0);
+            Widgets.ValueButton("God speed", ref speed, "Set speed",
+                                value => World.SetSpeed(armies[selected], value), armies.Count > 0);
 
             Widgets.Section("Map");
             GUILayout.BeginHorizontal();

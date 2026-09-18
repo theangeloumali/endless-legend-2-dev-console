@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DevConsole.Ui
 {
-    /// <summary>The game's own seven battle cheats — no patching involved.</summary>
+    /// <summary>The game's own battle cheats — no patching involved.</summary>
     internal sealed class TabBattle : ITab
     {
         public string Title => "Battle";

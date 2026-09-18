@@ -30,27 +30,17 @@ namespace DevConsole.Ui
 
             if (roster.Count == 0)
             {
-                GUILayout.Label("No heroes loaded — press Refresh while a game is running.", GUI.skin.box);
+                GUILayout.Label("No heroes loaded - press Refresh while a game is running.", GUI.skin.box);
             }
             else
             {
-                GUILayout.BeginHorizontal();
-                GUILayout.Label("Hero", GUILayout.Width(110));
-                selected = Mathf.Clamp(selected, 0, roster.Count - 1);
-                if (GUILayout.Button(roster[selected].Label + "   ▼"))
-                {
-                    selected = (selected + 1) % roster.Count;  // small rosters cycle faster than a list expands
-                }
-                GUILayout.EndHorizontal();
-                GUILayout.Label($"global HeroIndex #{roster[selected].Index}" + (applyToAll ? "  —  ignored while 'apply to all' is on" : ""),
-                                GUI.skin.box);
+                selected = Widgets.Picker("Hero", roster, selected, hero => hero.Label);
+                GUILayout.Label(applyToAll ? "applying to every hero" : $"global HeroIndex #{roster[selected].Index}", GUI.skin.box);
             }
 
             Widgets.Section("Level & points");
-            GUILayout.BeginHorizontal();
-            var hasPoints = Widgets.IntField("Skill points", ref skillPoints, out var points);
-            Widgets.Button("Give", () => ForEachTarget(hero => Heroes.GiveSkillPoints(hero, points)), hasPoints && roster.Count > 0);
-            GUILayout.EndHorizontal();
+            Widgets.ValueButton("Skill points", ref skillPoints, "Give",
+                                points => ForEachTarget(hero => Heroes.GiveSkillPoints(hero, points)), roster.Count > 0);
 
             GUILayout.BeginHorizontal();
             var deltas = new uint[Heroes.StatisticCount];
@@ -66,10 +56,11 @@ namespace DevConsole.Ui
                            () => ForEachTarget(hero => Heroes.IncreaseStatistics(hero, deltas)),
                            statsValid && roster.Count > 0);
 
+            Widgets.ValueButton("Experience", ref experience, "Give XP",
+                                xp => ForEachTarget(hero => Heroes.GiveExperience(hero, xp)), roster.Count > 0);
             GUILayout.BeginHorizontal();
-            var hasXp = Widgets.IntField("Experience", ref experience, out var xp);
-            Widgets.Button("Give XP", () => ForEachTarget(hero => Heroes.GiveExperience(hero, xp)), hasXp && roster.Count > 0);
             Widgets.Button("Heal", () => ForEachTarget(Heroes.Heal), roster.Count > 0);
+            Widgets.Button("Dismiss", () => ForEachTarget(Heroes.Dismiss), roster.Count > 0);
             GUILayout.EndHorizontal();
 
             Widgets.Section("Recruit");

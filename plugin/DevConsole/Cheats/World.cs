@@ -30,8 +30,6 @@ namespace DevConsole.Cheats
         {
             public string Name;
             public SimulationEntityGUID Guid;
-
-            public override string ToString() => Name;
         }
 
         public static List<ArmyEntry> Armies() =>

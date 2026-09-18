@@ -6,10 +6,8 @@ using HarmonyLib;
 namespace DevConsole
 {
     /// <summary>
-    /// Yield multipliers only. Everything else now goes through the game's orders; these stay patched because an
-    /// order can SET a stock but nothing in the order set scales per-turn income. Each patch reads its toggle
-    /// before touching reflection, so with the multipliers off they cost one field read. Note a console "+research"
-    /// is multiplied too: orders are processed asynchronously, so no flag can exempt them.
+    /// Yield multipliers: the one thing no order does, since orders set a stock rather than scaling income.
+    /// A console "+research" is multiplied too — orders apply asynchronously, so no flag can exempt them.
     /// </summary>
     internal static class Patches
     {

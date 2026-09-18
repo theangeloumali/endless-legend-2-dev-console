@@ -17,29 +17,29 @@ namespace DevConsole.Ui
 
         public string Title => "Equipment";
 
+        /// <summary>Orders apply asynchronously, so a just-added item may need one more Refresh to appear.</summary>
+        private void Refresh()
+        {
+            stash = Equipment.Stash();
+            roster = Heroes.Roster();
+        }
+
         public void Draw()
         {
             GUILayout.BeginHorizontal();
-            Widgets.Button("Refresh", () => { stash = Equipment.Stash(); roster = Heroes.Roster(); hero = 0; });
+            Widgets.Button("Refresh", Refresh);
             GUILayout.Label($"{stash.Count} in stash · {Catalog.Equipment.Length} definitions", GUI.skin.box);
             GUILayout.EndHorizontal();
 
             if (roster.Count > 0)
             {
-                GUILayout.BeginHorizontal();
-                GUILayout.Label("Hero", GUILayout.Width(110));
-                hero = Mathf.Clamp(hero, 0, roster.Count - 1);
-                if (GUILayout.Button(roster[hero].Label + "   ▼"))
-                {
-                    hero = (hero + 1) % roster.Count;
-                }
-                GUILayout.EndHorizontal();
+                hero = Widgets.Picker("Hero", roster, hero, entry => entry.Label);
             }
 
             Widgets.Section("Add to stash");
             definition.Draw(Catalog.Equipment);
             var chosen = definition.Selected(Catalog.Equipment);
-            Widgets.Button(chosen == null ? "Pick a definition" : "Add " + chosen, () => Equipment.Add(chosen), chosen != null);
+            Widgets.Button(chosen == null ? "Pick a definition" : "Add " + chosen, () => { Equipment.Add(chosen); Refresh(); }, chosen != null);
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Bulk filter", GUILayout.Width(110));
@@ -47,14 +47,14 @@ namespace DevConsole.Ui
             GUILayout.EndHorizontal();
             var matching = Catalog.Equipment.Where(name => filter.Length > 0 && name.IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0).ToArray();
             Widgets.Button($"Add every definition matching the filter ({matching.Length})",
-                           () => Equipment.AddAll(matching), matching.Length > 0);
+                           () => { Equipment.AddAll(matching); Refresh(); }, matching.Length > 0);
 
             Widgets.Section("Equipped");
             foreach (var slot in Equipment.Slots)
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Label(slot.ToString(), GUILayout.Width(110));
-                Widgets.Button("Unequip", () => Equipment.Unequip(slot, roster[hero]), roster.Count > 0);
+                Widgets.Button("Unequip", () => { Equipment.Unequip(slot, roster[hero]); Refresh(); }, roster.Count > 0);
                 GUILayout.EndHorizontal();
             }
 
@@ -64,11 +64,11 @@ namespace DevConsole.Ui
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Label(item.Definition);
-                Widgets.Button("Equip", () => { Equipment.Equip(item, roster[hero]); }, roster.Count > 0);
+                Widgets.Button("Equip", () => { Equipment.Equip(item, roster[hero]); Refresh(); }, roster.Count > 0);
                 GUILayout.EndHorizontal();
             }
             GUILayout.EndScrollView();
-            Widgets.Button("Clear ALL equipment in the empire", Equipment.ClearAll);
+            Widgets.Button("Clear ALL equipment in the empire", () => { Equipment.ClearAll(); Refresh(); });
         }
     }
 }

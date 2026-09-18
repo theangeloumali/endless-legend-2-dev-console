@@ -91,10 +91,6 @@ namespace DevConsole.Cheats
 
         public static void Dismiss(Entry hero) => Orders.Post(new OrderHeroDismiss { HeroIndex = hero.Index }, $"dismiss {hero.Name}");
 
-        public static void ActivateSkill(Entry hero, int skillIndex) =>
-            Orders.Post(new OrderHeroSkillActivate { HeroIndex = hero.Index, SkillIndex = skillIndex },
-                        $"activate skill {skillIndex} on {hero.Name}");
-
         public static void CreateDraw(int count, int minLevel, int maxLevel) =>
             Orders.Post(new EditorOrderForceCreateHeroDraw
             {

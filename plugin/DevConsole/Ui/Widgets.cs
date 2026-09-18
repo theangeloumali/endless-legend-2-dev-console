@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BepInEx.Configuration;
 using UnityEngine;
 
@@ -13,14 +14,16 @@ namespace DevConsole.Ui
             GUILayout.Label(title, GUI.skin.box);
         }
 
+        /// <summary>Restores the previous GUI.enabled rather than forcing true, so a disabled block stays disabled.</summary>
         public static void Button(string label, Action action, bool enabled = true)
         {
-            GUI.enabled = enabled;
+            var previous = GUI.enabled;
+            GUI.enabled = previous && enabled;
             if (GUILayout.Button(label, GUILayout.Height(26)))
             {
                 action();
             }
-            GUI.enabled = true;
+            GUI.enabled = previous;
         }
 
         public static void Row(params (string Label, Action Action)[] buttons)
@@ -36,7 +39,7 @@ namespace DevConsole.Ui
         public static void Toggle(ConfigEntry<bool> entry) =>
             entry.Value = GUILayout.Toggle(entry.Value, " " + entry.Description.Description);
 
-        /// <summary>A labelled text field that only reports a value when it parses and is positive.</summary>
+        /// <summary>A labelled text field that only reports a value when it parses and is not negative.</summary>
         public static bool IntField(string label, ref string buffer, out int value, int labelWidth = 120, int fieldWidth = 110)
         {
             GUILayout.BeginHorizontal();
@@ -46,8 +49,37 @@ namespace DevConsole.Ui
             return int.TryParse(buffer, out value) && value >= 0;
         }
 
+        /// <summary>A number field and the button that applies it, the shape most controls here need.</summary>
+        public static void ValueButton(string label, ref string buffer, string action, Action<int> apply,
+                                       bool enabled = true, int labelWidth = 120, int fieldWidth = 110)
+        {
+            GUILayout.BeginHorizontal();
+            var parsed = IntField(label, ref buffer, out var value, labelWidth, fieldWidth);
+            Button(action, () => apply(value), parsed && enabled);
+            GUILayout.EndHorizontal();
+        }
+
+        /// <summary>Cycles through a short list in place. Used where a full dropdown would cost more room than the
+        /// handful of entries (heroes, settlements, armies) are worth.</summary>
+        public static int Picker<T>(string label, IList<T> items, int index, Func<T, string> describe)
+        {
+            if (items == null || items.Count == 0)
+            {
+                return 0;
+            }
+            index = Mathf.Clamp(index, 0, items.Count - 1);
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(label, GUILayout.Width(110));
+            if (GUILayout.Button(describe(items[index]) + $"   ({index + 1}/{items.Count})  ▼"))
+            {
+                index = (index + 1) % items.Count;
+            }
+            GUILayout.EndHorizontal();
+            return index;
+        }
+
         /// <summary>IMGUI has no combo box. This draws the current choice as a button that expands into a
-        /// filterable, scrolling list — the only practical shape for catalogues of 177+ entries.</summary>
+        /// filterable, scrolling list — the only practical shape for the larger definition catalogues.</summary>
         public sealed class Dropdown
         {
             private readonly string label;

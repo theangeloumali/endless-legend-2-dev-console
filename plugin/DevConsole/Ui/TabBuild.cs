@@ -27,20 +27,8 @@ namespace DevConsole.Ui
                 return;
             }
 
-            GUILayout.BeginHorizontal();
-            for (var i = 0; i < sites.Count; i++)
-            {
-                var index = i;
-                GUI.enabled = selected != i;
-                if (GUILayout.Button($"{sites[i].Name} ({sites[i].Queue.Count})"))
-                {
-                    selected = index;
-                }
-                GUI.enabled = true;
-            }
-            GUILayout.EndHorizontal();
-
-            var site = sites[Mathf.Clamp(selected, 0, sites.Count - 1)];
+            selected = Widgets.Picker("Settlement", sites, selected, site => $"{site.Name} ({site.Queue.Count} queued)");
+            var site = sites[selected];
             if (site.Queue.Count == 0)
             {
                 GUILayout.Label("Queue is empty.", GUI.skin.box);

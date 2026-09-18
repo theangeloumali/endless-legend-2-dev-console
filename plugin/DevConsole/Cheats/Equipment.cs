@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Amplitude;
 using Amplitude.Mercury.Data.Simulation;
 using Amplitude.Mercury.Interop;
-using HarmonyLib;
 
 namespace DevConsole.Cheats
 {
@@ -22,27 +21,14 @@ namespace DevConsole.Cheats
         {
             public ulong UniqueId;
             public string Definition;
-
-            public override string ToString() => Definition;
         }
 
         public static List<Item> Stash()
         {
             var items = new List<Item>();
-            var stash = Traverse.Create(Sim.LocalEmpire).Field("EquipmentStash").GetValue();
-            if (stash == null)
+            foreach (var entry in Sim.Structs(Sim.LocalEmpire, "EquipmentStash"))
             {
-                return items;
-            }
-            var traverse = Traverse.Create(stash);
-            var length = traverse.Field<int>("Length").Value;
-            if (!(traverse.Field("Data").GetValue() is System.Array data))
-            {
-                return items;
-            }
-            for (var i = 0; i < length && i < data.Length; i++)
-            {
-                if (!(data.GetValue(i) is EquipmentInfo info))
+                if (!(entry is EquipmentInfo info))
                 {
                     continue;
                 }

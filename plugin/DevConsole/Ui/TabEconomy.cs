@@ -1,4 +1,3 @@
-using System.Linq;
 using DevConsole.Cheats;
 using UnityEngine;
 
@@ -19,14 +18,11 @@ namespace DevConsole.Ui
         public void Draw()
         {
             Widgets.Section("Stocks  (the order sets an absolute value)");
-            Stock("Dust", ref dust, Economy.SetDust);
-            Stock("Influence", ref influence, Economy.SetInfluence);
-            Stock("City cap", ref cityCap, Economy.SetCityCap);
+            Widgets.ValueButton("Dust", ref dust, "Set", Economy.SetDust);
+            Widgets.ValueButton("Influence", ref influence, "Set", Economy.SetInfluence);
+            Widgets.ValueButton("City cap", ref cityCap, "Set", Economy.SetCityCap);
 
-            GUILayout.BeginHorizontal();
-            var hasResearch = Widgets.IntField("Research", ref research, out var researchValue);
-            Widgets.Button("Add", () => Economy.AddResearch(researchValue), hasResearch);
-            GUILayout.EndHorizontal();
+            Widgets.ValueButton("Research", ref research, "Add", Economy.AddResearch);
 
             Widgets.Section("Resources");
             GUILayout.BeginHorizontal();
@@ -36,8 +32,7 @@ namespace DevConsole.Ui
             Widgets.Row(("All strategic", () => Economy.AddResources(Economy.Strategic, amount)),
                         ("All luxury", () => Economy.AddResources(Economy.Luxury, amount)),
                         ("Cadavers & Spirits", () => Economy.AddResources(Economy.Specials, amount)));
-            Widgets.Button("Everything", () => Economy.AddResources(
-                Economy.Strategic.Concat(Economy.Luxury).Concat(Economy.Specials), amount), hasAmount);
+            Widgets.Button("Everything", () => Economy.AddResources(Economy.All, amount), hasAmount);
             GUI.enabled = true;
 
             Widgets.Section("Technologies");
@@ -57,13 +52,5 @@ namespace DevConsole.Ui
 
         private static readonly string[] Roman = { "I", "II", "III", "IV", "V", "VI", "VII" };
 
-        private static void Stock(string label, ref string buffer, System.Action<int> apply)
-        {
-            GUILayout.BeginHorizontal();
-            var parsed = Widgets.IntField(label, ref buffer, out var value);
-            var captured = value;
-            Widgets.Button("Set", () => apply(captured), parsed);
-            GUILayout.EndHorizontal();
-        }
     }
 }

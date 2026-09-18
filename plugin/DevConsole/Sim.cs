@@ -47,9 +47,6 @@ namespace DevConsole
 
         private static object Sandbox => CurrentSandbox?.GetValue(null);
 
-        /// <summary>Departments and Armies hang off MajorEmpire as fields (DepartmentOfTheTreasury, DepartmentOfScience, ...).</summary>
-        public static object Department(object empire, string name) => Traverse.Create(empire).Field(name).GetValue();
-
         /// <summary>Agency.Empire is the department's owning empire.</summary>
         public static object EmpireOf(object department) => department == null ? null : AgencyEmpire?.GetValue(department);
 
@@ -71,6 +68,27 @@ namespace DevConsole
                 {
                     yield return item;
                 }
+            }
+        }
+
+        /// <summary>Walk an Amplitude ListOfStruct, whose Length/Data are public but whose element type is not.
+        /// Elements come back boxed, which is fine here: they are read once to build a UI snapshot.</summary>
+        public static IEnumerable<object> Structs(object owner, string fieldName)
+        {
+            var list = owner == null ? null : Traverse.Create(owner).Field(fieldName).GetValue();
+            if (list == null)
+            {
+                yield break;
+            }
+            var traverse = Traverse.Create(list);
+            var length = traverse.Field<int>("Length").Value;
+            if (!(traverse.Field("Data").GetValue() is Array data))
+            {
+                yield break;
+            }
+            for (var i = 0; i < length && i < data.Length; i++)
+            {
+                yield return data.GetValue(i);
             }
         }
 
