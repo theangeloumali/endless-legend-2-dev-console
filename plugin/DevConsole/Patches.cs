@@ -6,8 +6,9 @@ using HarmonyLib;
 namespace DevConsole
 {
     /// <summary>
-    /// Harmony patches that scale the human empire's income and battle damage. Targets are resolved by name
+    /// Harmony patches that scale the local empire's income and battle damage. Targets are resolved by name
     /// (internal types) and patched one by one, so a renamed method disables that toggle instead of the plugin.
+    /// Every patch checks its toggle before touching reflection, so with everything off they cost a field read.
     /// </summary>
     internal static class Patches
     {
@@ -16,75 +17,74 @@ namespace DevConsole
         /// <summary>Set while the console itself calls a Gain* method, so its own +N is not multiplied.</summary>
         internal static bool Suppress;
 
+        private static PropertyInfo settlementEmpireIndex, battleUnitEmpireIndex;
+
         public static void Apply(Harmony harmony, State state, ManualLogSource log)
         {
             State = state;
-            Patch(harmony, log, "DepartmentOfTheTreasury", "GainMoney", nameof(MoneyPrefix), prefix: true);
-            Patch(harmony, log, "DepartmentOfCulture", "GainInfluence", nameof(InfluencePrefix), prefix: true);
-            Patch(harmony, log, "DepartmentOfScience", "GainResearch", nameof(ResearchPrefix), prefix: true);
+            settlementEmpireIndex = AccessTools.Property(Sim.Type("Settlement"), "EmpireIndex");
+            battleUnitEmpireIndex = AccessTools.Property(Sim.Type("BattleUnit"), "EmpireIndex");
+            Patch(harmony, log, "DepartmentOfTheTreasury", "GainMoney", nameof(MoneyPrefix));
+            Patch(harmony, log, "DepartmentOfCulture", "GainInfluence", nameof(InfluencePrefix));
+            Patch(harmony, log, "DepartmentOfScience", "GainResearch", nameof(ResearchPrefix));
             Patch(harmony, log, "DepartmentOfIndustry", "ComputeProductionIncome", nameof(ProductionPostfix), prefix: false);
-            Patch(harmony, log, "BattleUnit", "ApplyDamage", nameof(DamagePrefix), prefix: true);
+            Patch(harmony, log, "BattleUnit", "ApplyDamage", nameof(DamagePrefix));
         }
 
-        private static void Patch(Harmony harmony, ManualLogSource log, string type, string method, string patch, bool prefix)
+        private static void Patch(Harmony harmony, ManualLogSource log, string type, string method, string patch, bool prefix = true)
         {
-            var original = AccessTools.Method(Sim.Type(type), method);
+            var original = Sim.Method(type, method, log);
             if (original == null)
             {
-                log.LogWarning($"{type}.{method} not found; the related toggle does nothing on this build.");
                 return;
             }
             var patcher = new HarmonyMethod(typeof(Patches).GetMethod(patch, BindingFlags.Static | BindingFlags.NonPublic));
             harmony.Patch(original, prefix ? patcher : null, prefix ? null : patcher);
         }
 
-        private static bool HumanDepartment(object department) => !Suppress && Sim.IsHuman(Sim.EmpireOf(department));
-
-        private static void MoneyPrefix(object __instance, ref FixedPoint gain)
+        private static void ScaleGain(object department, ref FixedPoint gain, int factor)
         {
-            if (HumanDepartment(__instance))
+            if (factor > 1 && !Suppress && Sim.IsLocal(Sim.EmpireOf(department)))
             {
-                gain = Sim.Scale(gain, State.DustMultiplier.Value);
+                gain = Sim.Scale(gain, factor);
             }
         }
 
-        private static void InfluencePrefix(object __instance, ref FixedPoint gain)
-        {
-            if (HumanDepartment(__instance))
-            {
-                gain = Sim.Scale(gain, State.InfluenceMultiplier.Value);
-            }
-        }
+        private static void MoneyPrefix(object __instance, ref FixedPoint gain) => ScaleGain(__instance, ref gain, State.DustMultiplier.Value);
 
-        private static void ResearchPrefix(object __instance, ref FixedPoint gain)
-        {
-            if (HumanDepartment(__instance))
-            {
-                gain = Sim.Scale(gain, State.EffectiveScience);
-            }
-        }
+        private static void InfluencePrefix(object __instance, ref FixedPoint gain) => ScaleGain(__instance, ref gain, State.InfluenceMultiplier.Value);
+
+        private static void ResearchPrefix(object __instance, ref FixedPoint gain) => ScaleGain(__instance, ref gain, State.EffectiveScience);
 
         // static ComputeProductionIncome(Settlement): the settlement carries its empire index
         private static void ProductionPostfix(object settlement, ref FixedPoint __result)
         {
-            if (Sim.IsHumanIndex(Sim.EmpireIndexOf(settlement)))
+            var factor = State.EffectiveIndustry;
+            if (factor > 1 && Sim.IsLocal(EmpireIndex(settlementEmpireIndex, settlement)))
             {
-                __result = Sim.Scale(__result, State.EffectiveIndustry);
+                __result = Sim.Scale(__result, factor);
             }
         }
 
         // BattleUnit.ApplyDamage(FixedPoint damage, BattleUnit attackerUnit, bool sendBattleEvent)
         private static void DamagePrefix(object __instance, ref FixedPoint damage, object attackerUnit)
         {
-            var targetIsHuman = Sim.IsHumanIndex(Sim.EmpireIndexOf(__instance));
-            if (State.Invulnerable.Value && targetIsHuman)
+            if (!State.Invulnerable.Value && !State.OneHitKills.Value)
+            {
+                return;
+            }
+            var targetIsLocal = Sim.IsLocal(EmpireIndex(battleUnitEmpireIndex, __instance));
+            if (State.Invulnerable.Value && targetIsLocal)
             {
                 damage = Sim.Units(0);
             }
-            else if (State.OneHitKills.Value && !targetIsHuman && Sim.IsHumanIndex(Sim.EmpireIndexOf(attackerUnit)))
+            else if (State.OneHitKills.Value && !targetIsLocal && Sim.IsLocal(EmpireIndex(battleUnitEmpireIndex, attackerUnit)))
             {
                 damage = Sim.Units(99_999);
             }
         }
+
+        private static int EmpireIndex(PropertyInfo property, object entity) =>
+            entity == null || property == null ? -1 : (int)property.GetValue(entity);
     }
 }

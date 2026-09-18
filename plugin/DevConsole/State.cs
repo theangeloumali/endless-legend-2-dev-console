@@ -28,10 +28,11 @@ namespace DevConsole
             IndustryMultiplier = config.Bind("Yields", "Industry", 1, "Multiplies city production (1 = off).");
             ScienceMultiplier = config.Bind("Yields", "Science", 1, "Multiplies research income (1 = off).");
             InfluenceMultiplier = config.Bind("Yields", "Influence", 1, "Multiplies Influence income (1 = off).");
-            InstantBuild = config.Bind("Instant", "Build", false, "Production x1000: everything completes next turn.");
-            InstantResearch = config.Bind("Instant", "Research", false, "Research x1000: a technology per turn.");
-            Invulnerable = config.Bind("Combat", "Invulnerable", false, "Your units take no damage.");
-            OneHitKills = config.Bind("Combat", "OneHitKills", false, "Your units deal 99,999 damage per hit.");
+            // descriptions double as the window's toggle labels
+            InstantBuild = config.Bind("Instant", "Build", false, "Instant build (production x1000: anything completes next turn)");
+            InstantResearch = config.Bind("Instant", "Research", false, "Instant research (science x1000: a technology per turn)");
+            Invulnerable = config.Bind("Combat", "Invulnerable", false, "Invulnerable (your units take no damage)");
+            OneHitKills = config.Bind("Combat", "OneHitKills", false, "One-hit kills (your units deal 99,999 damage)");
         }
 
         public int EffectiveIndustry => InstantBuild.Value ? InstantFactor : IndustryMultiplier.Value;

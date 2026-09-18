@@ -26,16 +26,21 @@ LOG_ERROR_PATTERNS = ("LoadModificationException", "could not find source elemen
                       "Failed to load modification", "Failed to create modification", "Invalid configuration file")
 
 
+def set_active(modding_dir: Path, enabled: bool) -> list[str]:
+    """Add or drop MOD_NAME in mod-configuration.json (the JSON array the game reads at startup)."""
+    config = modding_dir / "mod-configuration.json"
+    active = json.loads(config.read_text(encoding="utf-8-sig")) if config.exists() else []
+    active = [name for name in active if name != MOD_NAME] + ([MOD_NAME] if enabled else [])
+    config.write_text(json.dumps(active, indent=4) + "\n", encoding="utf-8")
+    return active
+
+
 def install(source: Path, modding_dir: Path) -> None:
     target = modding_dir / MOD_NAME
     if target.exists():
         shutil.rmtree(target)
     shutil.copytree(source, target)
-    config = modding_dir / "mod-configuration.json"
-    active = json.loads(config.read_text(encoding="utf-8-sig")) if config.exists() else []
-    if MOD_NAME not in active:
-        active.append(MOD_NAME)
-    config.write_text(json.dumps(active, indent=4) + "\n", encoding="utf-8")
+    active = set_active(modding_dir, enabled=True)
     files = sorted(p.relative_to(target).as_posix() for p in target.rglob("*.json"))
     print(f"installed {len(files)} files -> {target}\nmod-configuration.json = {active}")
 
@@ -44,19 +49,15 @@ def uninstall(modding_dir: Path) -> None:
     target = modding_dir / MOD_NAME
     if target.exists():
         shutil.rmtree(target)
-    config = modding_dir / "mod-configuration.json"
-    active = json.loads(config.read_text(encoding="utf-8-sig")) if config.exists() else []
-    active = [name for name in active if name != MOD_NAME]
-    config.write_text(json.dumps(active, indent=4) + "\n", encoding="utf-8")
-    print(f"removed {target}\nmod-configuration.json = {active}")
+    print(f"removed {target}\nmod-configuration.json = {set_active(modding_dir, enabled=False)}")
 
 
-def move_plugins(game_dir: Path, park: bool) -> None:
+def move_plugins(game_dir: Path, park: bool, keep: tuple[str, ...] = ()) -> None:
     src, dst = game_dir / "BepInEx" / "plugins", game_dir / "BepInEx" / "plugins.disabled"
     if not park:
         src, dst = dst, src
     dst.mkdir(exist_ok=True)
-    moved = [p.name for p in src.glob("*.dll") if not shutil.move(str(p), dst / p.name) is None]
+    moved = [p.name for p in src.glob("*.dll") if p.name not in keep and shutil.move(str(p), dst / p.name)]
     print(f"{'parked' if park else 'restored'} BepInEx plugins: {moved or 'none'}")
 
 

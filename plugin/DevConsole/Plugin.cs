@@ -5,6 +5,7 @@ using UnityEngine;
 namespace DevConsole
 {
     [BepInPlugin(Guid, "Dev Console", Version)]
+    [BepInIncompatibility("com.yourname.el2resourcemanager")]  // Nexus "EL2 Resource Manager" patches the same Gain* methods
     public sealed class Plugin : BaseUnityPlugin
     {
         public const string Guid = "angelo.el2.devconsole";

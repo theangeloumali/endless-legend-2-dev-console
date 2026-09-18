@@ -1,41 +1,65 @@
 using System;
 using System.Linq;
+using BepInEx.Configuration;
 using UnityEngine;
 
 namespace DevConsole
 {
-    /// <summary>One IMGUI window with every control; each control applies on press.</summary>
+    /// <summary>One IMGUI window with every control; each control applies on press. Rows are built once because
+    /// IMGUI redraws several times per frame.</summary>
     internal sealed class Window
     {
         private const int Id = 0x0DEC0DE;
         private static readonly string[] MultiplierLabels = State.MultiplierSteps.Select(m => m == 1 ? "off" : $"x{m}").ToArray();
+        private static readonly string[] Roman = { "I", "II", "III", "IV", "V", "VI", "VII" };
 
         private readonly State state;
-        private readonly Actions actions;
+        private readonly string title;
+        private readonly Control[] economy, research, resources, technologies, combat;
         private Rect rect = new Rect(40, 80, 560, 720);
         private string amountText;
 
         public Window(State state, Actions actions)
         {
             this.state = state;
-            this.actions = actions;
+            title = "Dev Console  -  " + state.Hotkey.Value.MainKey + " to hide";
             amountText = state.Amount.Value.ToString();
+            economy = new[]
+            {
+                new Control("+10,000 Dust", () => actions.AddDust(10_000), actions.CanGainMoney),
+                new Control("+100,000 Dust", () => actions.AddDust(100_000), actions.CanGainMoney),
+                new Control("+10,000 Influence", () => actions.AddInfluence(10_000), actions.CanGainInfluence),
+                new Control("+100,000 Influence", () => actions.AddInfluence(100_000), actions.CanGainInfluence),
+            };
+            research = new[]
+            {
+                new Control("+10,000 Research", () => actions.AddResearch(10_000), actions.CanGainResearch),
+                new Control("+100,000 Research", () => actions.AddResearch(100_000), actions.CanGainResearch),
+            };
+            resources = new[]  // the amount is read at click time so the field above the row always wins
+            {
+                new Control("All strategic", () => actions.AddResources(Actions.Strategic, state.Amount.Value), actions.CanGiveResources),
+                new Control("All luxury", () => actions.AddResources(Actions.Luxury, state.Amount.Value), actions.CanGiveResources),
+                new Control("Cadavers & Spirits", () => actions.AddResources(Actions.Specials, state.Amount.Value), actions.CanGiveResources),
+                new Control("Everything", () => actions.AddResources(Actions.All, state.Amount.Value), actions.CanGiveResources),
+            };
+            technologies = Enumerable.Range(0, Actions.EraCount)
+                .Select(era => new Control("Era " + Roman[era], () => actions.UnlockEra(era), actions.CanUnlockEras))
+                .Append(new Control("All", actions.UnlockAllEras, actions.CanUnlockEras))
+                .ToArray();
+            combat = new[] { new Control("Heal all armies", actions.HealArmies, actions.CanHeal) };
         }
 
         public void Draw()
         {
-            rect = GUILayout.Window(Id, rect, Contents, "Dev Console  -  " + state.Hotkey.Value.MainKey + " to hide", GUILayout.MinWidth(560));
+            rect = GUILayout.Window(Id, rect, Contents, title, GUILayout.MinWidth(560));
         }
 
         private void Contents(int id)
         {
             Section("Economy");
-            Row(("+10,000 Dust", () => actions.AddDust(10_000), actions.CanGainMoney),
-                ("+100,000 Dust", () => actions.AddDust(100_000), actions.CanGainMoney),
-                ("+10,000 Influence", () => actions.AddInfluence(10_000), actions.CanGainInfluence),
-                ("+100,000 Influence", () => actions.AddInfluence(100_000), actions.CanGainInfluence));
-            Row(("+10,000 Research", () => actions.AddResearch(10_000), actions.CanGainResearch),
-                ("+100,000 Research", () => actions.AddResearch(100_000), actions.CanGainResearch));
+            Row(economy);
+            Row(research);
 
             Section("Resources");
             GUILayout.BeginHorizontal();
@@ -46,21 +70,10 @@ namespace DevConsole
                 state.Amount.Value = amount;
             }
             GUILayout.EndHorizontal();
-            var n = state.Amount.Value;
-            Row(("All strategic", () => actions.AddResources(Actions.Strategic, n), actions.CanGiveResources),
-                ("All luxury", () => actions.AddResources(Actions.Luxury, n), actions.CanGiveResources),
-                ("Cadavers & Spirits", () => actions.AddResources(Actions.Specials, n), actions.CanGiveResources),
-                ("Everything", () => actions.AddResources(Actions.Strategic.Concat(Actions.Luxury).Concat(Actions.Specials), n), actions.CanGiveResources));
+            Row(resources);
 
             Section("Technologies");
-            GUILayout.BeginHorizontal();
-            for (var era = 0; era < Actions.EraCount; era++)
-            {
-                var index = era;
-                Button($"Era {ToRoman(era + 1)}", () => actions.UnlockEra(index), actions.CanUnlockEras);
-            }
-            Button("All", () => { for (var era = 0; era < Actions.EraCount; era++) actions.UnlockEra(era); }, actions.CanUnlockEras);
-            GUILayout.EndHorizontal();
+            Row(technologies);
 
             Section("Yield multipliers (applied to income each turn)");
             Multiplier("Dust", state.DustMultiplier);
@@ -69,25 +82,25 @@ namespace DevConsole
             Multiplier("Influence", state.InfluenceMultiplier);
 
             Section("Instant");
-            state.InstantBuild.Value = GUILayout.Toggle(state.InstantBuild.Value, " Instant build  (production x1000: anything completes next turn)");
-            state.InstantResearch.Value = GUILayout.Toggle(state.InstantResearch.Value, " Instant research  (science x1000: a technology per turn)");
+            Toggle(state.InstantBuild);
+            Toggle(state.InstantResearch);
 
             Section("Combat");
-            state.Invulnerable.Value = GUILayout.Toggle(state.Invulnerable.Value, " Invulnerable  (your units take no damage)");
-            state.OneHitKills.Value = GUILayout.Toggle(state.OneHitKills.Value, " One-hit kills  (your units deal 99,999 damage)");
-            Row(("Heal all armies", actions.HealArmies, actions.CanHeal));
+            Toggle(state.Invulnerable);
+            Toggle(state.OneHitKills);
+            Row(combat);
 
             GUILayout.Space(8);
-            GUILayout.Label("Human empire only. Multipliers apply at the next income tick; buttons apply now.", GUI.skin.box);
+            GUILayout.Label("Your empire only. Multipliers apply at the next income tick; buttons apply now.", GUI.skin.box);
             GUI.DragWindow();
         }
 
-        private void Multiplier(string label, BepInEx.Configuration.ConfigEntry<int> entry)
+        private static void Multiplier(string label, ConfigEntry<int> entry)
         {
             GUILayout.BeginHorizontal();
             GUILayout.Label(label, GUILayout.Width(80));
-            var current = Array.IndexOf(State.MultiplierSteps, entry.Value);
-            var chosen = GUILayout.SelectionGrid(current < 0 ? 0 : current, MultiplierLabels, MultiplierLabels.Length);
+            var current = Math.Max(0, Array.IndexOf(State.MultiplierSteps, entry.Value));
+            var chosen = GUILayout.SelectionGrid(current, MultiplierLabels, MultiplierLabels.Length);
             if (chosen != current)
             {
                 entry.Value = State.MultiplierSteps[chosen];
@@ -95,32 +108,42 @@ namespace DevConsole
             GUILayout.EndHorizontal();
         }
 
+        private static void Toggle(ConfigEntry<bool> entry) =>
+            entry.Value = GUILayout.Toggle(entry.Value, entry.Description.Description);
+
         private static void Section(string title)
         {
             GUILayout.Space(6);
             GUILayout.Label(title, GUI.skin.box);
         }
 
-        private static void Row(params (string label, Action action, bool enabled)[] buttons)
+        private static void Row(Control[] controls)
         {
             GUILayout.BeginHorizontal();
-            foreach (var (label, action, enabled) in buttons)
+            foreach (var control in controls)
             {
-                Button(label, action, enabled);
+                GUI.enabled = control.Enabled;
+                if (GUILayout.Button(control.Label, GUILayout.Height(28)))
+                {
+                    control.Action();
+                }
+                GUI.enabled = true;
             }
             GUILayout.EndHorizontal();
         }
 
-        private static void Button(string label, Action action, bool enabled)
+        private sealed class Control
         {
-            GUI.enabled = enabled;
-            if (GUILayout.Button(label, GUILayout.Height(28)))
-            {
-                action();
-            }
-            GUI.enabled = true;
-        }
+            public readonly string Label;
+            public readonly Action Action;
+            public readonly bool Enabled;  // false when the game member behind the button is missing
 
-        private static string ToRoman(int value) => new[] { "I", "II", "III", "IV", "V", "VI", "VII" }[value - 1];
+            public Control(string label, Action action, bool enabled)
+            {
+                Label = label;
+                Action = action;
+                Enabled = enabled;
+            }
+        }
     }
 }
