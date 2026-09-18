@@ -46,6 +46,15 @@ namespace DevConsole.Ui
             return false;
         }
 
+        /// <summary>Screen-space hit test, used so an armed map click is not swallowed by the window. IMGUI
+        /// coordinates put Y at the top and are pre-scale, so the mouse has to be converted both ways.</summary>
+        public bool ContainsMouse()
+        {
+            var scale = state.EffectiveUiScale;
+            var mouse = new Vector2(Input.mousePosition.x / scale, (Screen.height - Input.mousePosition.y) / scale);
+            return rect.Contains(mouse);
+        }
+
         private void Contents(int id)
         {
             GUILayout.BeginHorizontal();
@@ -59,6 +68,17 @@ namespace DevConsole.Ui
 
             Tabs();
             GUILayout.Label(Status(), Orders.Ready ? Theme.Value : Theme.Hint);
+
+            if (Cheats.World.IsArmed)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Label($"ARMED — {Cheats.World.ArmedLabel}: click the map to place", Theme.Section);
+                if (GUILayout.Button("Cancel", Theme.Danger, GUILayout.Width(90), GUILayout.Height(26)))
+                {
+                    Cheats.World.Disarm();
+                }
+                GUILayout.EndHorizontal();
+            }
 
             // a fixed viewport keeps the window from resizing every time a tab or a dropdown changes
             scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(state.WindowHeight.Value));

@@ -23,6 +23,8 @@ namespace DevConsole.Ui
                             Cheats.World.HasTile ? Theme.Value : Theme.Hint, GUILayout.Width(150));
             Cheats.World.Locked = GUILayout.Toggle(Cheats.World.Locked, Cheats.World.Locked ? " locked" : " follows the mouse", Theme.Toggle);
             GUILayout.EndHorizontal();
+            GUILayout.Label("Press a tile tool to arm it, then click the map as many times as you like. "
+                            + "Right-click or Escape cancels.", Theme.Hint);
         }
 
         public static void Hint(string text) => GUILayout.Label(text, Theme.Hint);
@@ -37,6 +39,37 @@ namespace DevConsole.Ui
                 action();
             }
             GUI.enabled = previous;
+        }
+
+        /// <summary>Arms a tile tool instead of firing once: the armed button stays highlighted and every map
+        /// click places another. Clicking it again cancels.</summary>
+        public static void Plot(string label, Action<int> action, bool enabled = true)
+        {
+            var armed = Cheats.World.IsArmed && Cheats.World.ArmedLabel == label;
+            var previous = GUI.enabled;
+            GUI.enabled = previous && enabled;
+            if (GUILayout.Button(armed ? label + "  ●" : label, armed ? Theme.TabActive : Theme.Button, GUILayout.Height(27)))
+            {
+                if (armed)
+                {
+                    Cheats.World.Disarm();
+                }
+                else
+                {
+                    Cheats.World.Arm(label, action);
+                }
+            }
+            GUI.enabled = previous;
+        }
+
+        public static void PlotRow(params (string Label, Action<int> Action)[] buttons)
+        {
+            GUILayout.BeginHorizontal();
+            foreach (var (label, action) in buttons)
+            {
+                Plot(label, action);
+            }
+            GUILayout.EndHorizontal();
         }
 
         public static void Row(params (string Label, Action Action)[] buttons)

@@ -81,9 +81,8 @@ namespace DevConsole.Ui
             Widgets.Section("District improvement");
             improvement.Draw(Catalog.Improvements, 140f);
             var imp = improvement.Selected(Catalog.Improvements);
-            Widgets.Button(imp == null ? "Pick an improvement"
-                                       : World.HasTile ? $"Place {imp.Display} at tile #{World.TargetTile}" : "Hover a district tile",
-                           () => EmpireCheats.SetImprovement(site, imp.Name, World.TargetTile), imp != null && World.HasTile);
+            Widgets.Plot(imp == null ? "Pick an improvement" : "Place " + imp.Display,
+                         t => EmpireCheats.SetImprovement(site, imp.Name, t), imp != null);
 
             Widgets.Section("Unit limits");
             GUILayout.BeginHorizontal();

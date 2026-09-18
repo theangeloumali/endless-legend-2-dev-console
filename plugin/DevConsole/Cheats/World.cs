@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Amplitude;
@@ -33,6 +34,42 @@ namespace DevConsole.Cheats
         public static bool Locked { get; set; }
 
         public static bool HasTile => TargetTile >= 0;
+
+        /// <summary>The armed tool, if any: press a plot button to arm it, then click the map as often as you
+        /// like. It stays armed until you cancel, which is the whole point — placing ten districts should be ten
+        /// map clicks, not ten trips back to the window.</summary>
+        public static string ArmedLabel { get; private set; }
+
+        private static Action<int> armed;
+
+        public static bool IsArmed => armed != null;
+
+        public static void Arm(string label, Action<int> action)
+        {
+            ArmedLabel = label;
+            armed = action;
+            Orders.Log.LogInfo($"armed: {label} — click the map to place, right-click or Escape to cancel");
+        }
+
+        public static void Disarm()
+        {
+            if (armed == null)
+            {
+                return;
+            }
+            Orders.Log.LogInfo($"disarmed: {ArmedLabel}");
+            ArmedLabel = null;
+            armed = null;
+        }
+
+        /// <summary>Fired by a map click. Stays armed so the next click places another.</summary>
+        public static void PlaceAt(int tileIndex)
+        {
+            if (tileIndex >= 0)
+            {
+                armed?.Invoke(tileIndex);
+            }
+        }
 
         /// <summary>Called once per frame; the last valid hover wins unless the target is locked.</summary>
         public static void Track()

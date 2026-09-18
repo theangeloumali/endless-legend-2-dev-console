@@ -24,13 +24,17 @@ namespace DevConsole.Ui
                         ("Merchant affinity", EmpireCheats.ResetMerchantAffinity));
 
             Widgets.Section("Statuses at the hovered tile");
-            var tile = World.TargetTile;
             Widgets.TileTarget();
             status.Draw(Catalog.Statuses, 150f);
             var chosen = status.Selected(Catalog.Statuses);
-            Widgets.ValueButton("Duration", ref duration, "Add status",
-                                turns => EmpireCheats.AddStatus(chosen.Name, tile, turns), chosen != null && tile >= 0);
-            Widgets.Button("Remove this status", () => EmpireCheats.RemoveStatus(chosen.Name, tile), chosen != null && tile >= 0);
+            GUILayout.BeginHorizontal();
+            Widgets.IntField("Duration", ref duration, out var turns);
+            GUILayout.Label("turns (0 = the definition decides)", Theme.Hint);
+            GUILayout.EndHorizontal();
+            Widgets.Plot(chosen == null ? "Pick a status" : "Add " + chosen.Display,
+                         t => EmpireCheats.AddStatus(chosen.Name, t, turns), chosen != null);
+            Widgets.Plot(chosen == null ? "Pick a status" : "Remove " + chosen.Display,
+                         t => EmpireCheats.RemoveStatus(chosen.Name, t), chosen != null);
             Widgets.Hint("Duration 0 lets the status definition decide how long it lasts.");
 
             Widgets.Section("Quests");
