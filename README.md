@@ -113,6 +113,23 @@ Edit `BepInEx/config/angelo.el2.devconsole.cfg`, or delete it to reset:
 
 ---
 
+## Achievements
+
+**This plugin does not disable achievements** — the game cannot see BepInEx plugins at all. Its modded check
+(`ModificationManager`) only ever looks at the Steam Workshop directory and the `Modding/` folder.
+
+**Any Workshop or data mod does disable them, though.** When `ModdingUtils.IsModdingEnabled` is true,
+`StatisticsReporterAncillary.InitializeOnLoad` returns before registering a single statistic reporter — and EL2
+achievements are statistic-driven, so none can ever fire. Unsubscribe from Workshop mods (and check the content
+folder actually emptied) if you want achievements. `Player.log` tells you which state you are in:
+
+```
+[Modification] Modding is not enabled because no modifications were registered.   ← achievements work
+[Modification] Modding is enabled with N active modifications.                    ← achievements off
+```
+
+---
+
 ## Known limits
 
 - **The Yields multipliers affect console actions too.** Orders are processed asynchronously, so if Science is at
