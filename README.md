@@ -31,11 +31,12 @@ In game press **Insert** (configurable) to open or hide the window:
 | Instant           | Instant build · Instant research                                            | Industry / Science ×1000                                                                                                          |
 | Combat            | Invulnerable · One-hit kills · Heal all armies                              | Harmony prefix on `BattleUnit.ApplyDamage`; `IDamageableEntity.SetHealthRatio(1)`                                                 |
 
-Only the human empire is affected: an empire counts as human when `IsControlledByHuman` is set or its AI brain is
-off (`IsControlledByHuman` is only set through the lobby path, so single-player needs the second check). Toggles and
-the amount persist in `BepInEx/config/angelo.el2.devconsole.cfg`. Every game member is resolved by name and
-null-checked, so a renamed method on a future patch disables that one control (warning in `BepInEx/LogOutput.log`)
-instead of breaking the plugin. Each press logs `<Department>: applied to N human empire(s)`.
+Only your empire is affected: the plugin reads the game's own `Sandbox.LocalEmpireIndex`, which the game keeps
+current on hot-seat swaps, so AI empires never see a cheat. Toggles and the amount persist in
+`BepInEx/config/angelo.el2.devconsole.cfg`. Every game member is resolved by name and null-checked, so a renamed method
+on a future patch disables that one control (warning in `BepInEx/LogOutput.log`) instead of breaking the plugin. Each
+press logs `<Department>: applied to empire #N`. The plugin declares itself incompatible with the Nexus Resource
+Manager (`com.yourname.el2resourcemanager`); BepInEx refuses to load both.
 
 Layout: `Plugin.cs` entry + hotkey · `Window.cs` IMGUI · `Actions.cs` instant actions · `Patches.cs` Harmony patches ·
 `State.cs` config · `Sim.cs` reflection bridge to the internal simulation types.
