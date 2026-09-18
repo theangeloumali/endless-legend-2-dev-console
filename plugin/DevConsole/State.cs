@@ -11,6 +11,7 @@ namespace DevConsole
 
         public readonly ConfigEntry<KeyboardShortcut> Hotkey;
         public readonly ConfigEntry<float> UiScale;
+        public readonly ConfigEntry<bool> NativeOverlay;
         public readonly ConfigEntry<int> Amount;
         public readonly ConfigEntry<int> DustMultiplier;
         public readonly ConfigEntry<int> IndustryMultiplier;
@@ -24,6 +25,7 @@ namespace DevConsole
         public State(ConfigFile config)
         {
             Hotkey = config.Bind("General", "Hotkey", new KeyboardShortcut(KeyCode.Insert), "Shows / hides the console window.");
+            NativeOverlay = config.Bind("General", "NativeOverlay", true, "Unlock the game's own debug overlay (F2). Turn off if it misbehaves; the Insert window is unaffected.");
             UiScale = config.Bind("General", "UiScale", 0f, "Window scale; 0 = auto from screen height (2 at 4K), so the window stays readable at high resolutions.");
             Amount = config.Bind("General", "Amount", 10_000, "Units added per resource button press.");
             DustMultiplier = config.Bind("Yields", "Dust", 1, "Multiplies Dust income (1 = off).");

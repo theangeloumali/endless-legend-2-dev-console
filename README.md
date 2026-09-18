@@ -13,33 +13,58 @@ Both target build **V1.0.116**. Run one or the other — the data mod's every-tu
 
 ```
 python tools/build_plugin.py            # dotnet build (net472) → BepInEx/plugins/DevConsole.dll
-python tools/install_mod.py --uninstall # remove the data mod so its dialog stops appearing
+python tools/install_mod.py --uninstall # remove the data mod so its every-turn dialog stops appearing
 ```
 
 Requires BepInEx 5.4 already installed in the game folder and a .NET SDK (`%USERPROFILE%\.dotnet` or on PATH).
 Installing parks every other plugin DLL into `BepInEx/plugins.disabled/` — the Nexus Resource Manager patches the
 same `Gain*` methods and would double the multipliers.
 
-In game press **Insert** (configurable) to open or hide the window:
+Press **Insert** (configurable) to open or hide the window. Eight tabs, everything applies on press:
 
-| Section           | Controls                                                                    | How it works                                                                                                                      |
-| ----------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Economy           | +10,000 / +100,000 Dust · Influence · Research                              | `DepartmentOfTheTreasury.GainMoney`, `DepartmentOfCulture.GainInfluence`, `DepartmentOfScience.GainResearch`                      |
-| Resources         | amount field · All strategic · All luxury · Cadavers & Spirits · Everything | `DepartmentOfResources.GiveGodAccessToResource` (ignores stock caps)                                                              |
-| Technologies      | Era I–VII · All                                                             | `DepartmentOfScience.UnlockAllTechnologies(era)`                                                                                  |
-| Yield multipliers | off / ×2 / ×10 / ×100 / ×1000 for Dust, Industry, Science, Influence        | Harmony prefix on the `Gain*` methods, postfix on `DepartmentOfIndustry.ComputeProductionIncome`; applied at the next income tick |
-| Instant           | Instant build · Instant research                                            | Industry / Science ×1000                                                                                                          |
-| Combat            | Invulnerable · One-hit kills · Heal all armies                              | Harmony prefix on `BattleUnit.ApplyDamage`; `IDamageableEntity.SetHealthRatio(1)`                                                 |
+| Tab       | What it does                                                                                                                                                                                         |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Economy   | Set Dust / Influence / city cap to a typed value · add research · every strategic, luxury and special resource · unlock an era or a single named technology                                          |
+| Build     | **Instant build and instant recruit** — complete any queued item free and immediately, per settlement or across the empire                                                                           |
+| Heroes    | Roster dropdown with an **apply-to-all** toggle · give skill points · raise stats · give XP · heal · draw N heroes at a chosen level range · recruit them · spawn any named hero at the hovered tile |
+| Equipment | Stash listing · add any of the 177 equipment definitions (filterable, or in bulk) · equip to a hero, unequip per slot · clear everything                                                             |
+| World     | Targets **the tile under your mouse** — spawn any unit, found a city or camp, teleport an army, set god speed, reveal the whole map, collect every curiosity                                         |
+| Diplomacy | Force war / peace / treaties / surrender · war score · meet everybody · pacify minor empires · pick a victory path · **switch which empire you play**                                                |
+| Battle    | Amplitude's own seven cheats — infinite movement, infinite action tokens, infinite battle skills, ignore zone of control / round count / empire playing, line-of-sight debug                         |
+| Yields    | Per-turn multipliers (×2…×1000) for Dust, Industry, Science, Influence, plus instant build/research                                                                                                  |
 
-Only your empire is affected: the plugin reads the game's own `Sandbox.LocalEmpireIndex`, which the game keeps
-current on hot-seat swaps, so AI empires never see a cheat. Toggles and the amount persist in
-`BepInEx/config/angelo.el2.devconsole.cfg`. Every game member is resolved by name and null-checked, so a renamed method
-on a future patch disables that one control (warning in `BepInEx/LogOutput.log`) instead of breaking the plugin. Each
-press logs `<Department>: applied to empire #N`. The plugin declares itself incompatible with the Nexus Resource
-Manager (`com.yourname.el2resourcemanager`); BepInEx refuses to load both.
+### How it works
 
-Layout: `Plugin.cs` entry + hotkey · `Window.cs` IMGUI · `Actions.cs` instant actions · `Patches.cs` Harmony patches ·
-`State.cs` config · `Sim.cs` reflection bridge to the internal simulation types.
+**Writes go through the game's own order system.** Amplitude shipped their in-house editor in the retail build and
+left it `public`: ~110 `EditorOrder*` types plus the god/cheat orders in `Amplitude.Mercury.Interop`, dispatched by
+`SandboxManager.PostOrder`, which enqueues onto a thread-safe queue that the simulation drains and validates. So the
+console is not injecting values behind the game's back — it asks the simulation the same way the developers' editor
+did. `Orders.cs` is the whole dispatch layer.
+
+**Reads still use reflection**, because `Sandbox`, `Empire`, `Hero`, `Settlement` and `Army` are all `internal`.
+`Sim.cs` is that bridge, and every member is resolved by name and null-checked, so a rename on a future patch
+disables one control instead of breaking the plugin.
+
+Two things are _not_ orders. Yield multipliers stay Harmony patches on the `Gain*` methods because no order scales
+per-turn income — and since orders are processed asynchronously, a console "+research" is multiplied too if the
+Science multiplier is on. Battle cheats call `BattleDebug.SetCheat` directly with `writeRegistry: false`, so they
+never outlive the session.
+
+Only your empire is affected: everything targets `Sandbox.LocalEmpireIndex`, which the game keeps current on
+hot-seat swaps. Dropdown contents come from the live datatables, so a game patch or a data mod is picked up
+automatically. Settings persist in `BepInEx/config/angelo.el2.devconsole.cfg`; `UiScale` defaults to auto (×2 at 4K).
+
+### Known gap — the native debug overlay
+
+The game also ships Amplitude's own debug-overlay UI, gated by `DebugOverlayManager.IsEnabled`, which is compiled to
+`return false`. The plugin patches that to `true` (config: `NativeOverlay`), and the patch applies — but **F2 does not
+bring the overlay up on V1.0.116**: `DebugOverlayManager` is a framework `Manager` whose start-up path registers the
+key binding, and it does not appear to run in the retail build. The IMGUI window above is unaffected. Set
+`NativeOverlay = false` to skip the patch entirely.
+
+Layout: `Plugin.cs` entry · `Ui/` window shell, shared widgets and one file per tab · `Cheats/` one file per area ·
+`Orders.cs` dispatch · `Catalog.cs` datatable names · `Sim.cs` reflection reads · `Patches.cs` yield multipliers ·
+`DebugOverlay.cs` the overlay unlock.
 
 ## Data mod
 
@@ -90,7 +115,7 @@ Edit `spec/devconsole.py` (pages → buttons → `(kind, *args)` effects), rebui
 ## Layout
 
 ```
-plugin/DevConsole/         BepInEx plugin (C#, net472)
+plugin/DevConsole/         BepInEx plugin (C#, net472) — Ui/ tabs, Cheats/ one file per area
 tools/build_plugin.py      dotnet build + install into BepInEx/plugins (parks other plugins)
 spec/devconsole.py         the data-mod console, declaratively
 tools/odin.py              Odin SerializationNodes tree model (parse / serialize / re-id) — round-trips the whole export

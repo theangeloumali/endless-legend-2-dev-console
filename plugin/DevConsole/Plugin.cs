@@ -32,7 +32,9 @@ namespace DevConsole
                 new TabBattle(),
                 new TabYields(state),
             });
-            Patches.Apply(new Harmony(Guid), state, Logger);
+            var harmony = new Harmony(Guid);
+            Patches.Apply(harmony, state, Logger);
+            DebugOverlay.Enable(harmony, Logger, state.NativeOverlay.Value);
             Logger.LogInfo($"Dev Console {Version} loaded - press {state.Hotkey.Value.MainKey} in game.");
         }
 
