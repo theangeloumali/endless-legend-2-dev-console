@@ -83,8 +83,8 @@ namespace DevConsole.Ui
             Widgets.Section("Spawn a named hero at the hovered tile");
             definition.Draw(Catalog.Heroes);
             var chosen = definition.Selected(Catalog.Heroes);
-            Widgets.Button(World.HasTile ? $"Spawn at tile #{World.HoveredTile}" : "Hover a map tile first",
-                           () => Heroes.Spawn(chosen.Name, World.HoveredTile), chosen != null && World.HasTile);
+            Widgets.Button(World.HasTile ? $"Spawn at tile #{World.TargetTile}" : "Hover a map tile first",
+                           () => Heroes.Spawn(chosen.Name, World.TargetTile), chosen != null && World.HasTile);
         }
 
         /// <summary>The whole point of the checkbox: one hero, or every hero, from the same controls.</summary>

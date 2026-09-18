@@ -15,7 +15,7 @@ namespace DevConsole.Ui
         private Rect rect = new Rect(40, 60, Width, 0f);  // height follows the content
         private Vector2 scroll;
         private int active;
-        private bool open = true;
+        private bool closeRequested;
 
         public Window(State state, ITab[] tabs)
         {
@@ -29,7 +29,6 @@ namespace DevConsole.Ui
         /// <summary>Returns false once the close button is used, so the caller can hide the window.</summary>
         public bool Draw()
         {
-            open = true;
             var previousMatrix = GUI.matrix;
             var previousSkin = Theme.Begin();
             var scale = state.EffectiveUiScale;
@@ -39,7 +38,12 @@ namespace DevConsole.Ui
             rect.y = Mathf.Clamp(rect.y, 0f, Screen.height / scale - 40f);
             Theme.End(previousSkin);
             GUI.matrix = previousMatrix;
-            return open;
+            if (!closeRequested)
+            {
+                return true;
+            }
+            closeRequested = false;  // IMGUI runs several passes per frame; the request has to outlive them
+            return false;
         }
 
         private void Contents(int id)
@@ -49,7 +53,7 @@ namespace DevConsole.Ui
             GUILayout.Label(state.Hotkey.Value.MainKey + " hides", Theme.Hint, GUILayout.Width(80));
             if (GUILayout.Button("✕", Theme.Button, GUILayout.Width(34), GUILayout.Height(26)))
             {
-                open = false;
+                closeRequested = true;
             }
             GUILayout.EndHorizontal();
 
@@ -61,7 +65,8 @@ namespace DevConsole.Ui
             tabs[active].Draw();
             GUILayout.EndScrollView();
 
-            GUI.DragWindow(new Rect(0, 0, Width, 24));
+            // stops short of the close button: DragWindow swallows clicks inside its rect
+            GUI.DragWindow(new Rect(0, 0, Width - 130f, 24f));
         }
 
         /// <summary>Two rows: eight tabs on one line are unreadably narrow at this width.</summary>

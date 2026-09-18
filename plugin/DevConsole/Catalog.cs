@@ -39,10 +39,43 @@ namespace DevConsole
         public static Entry[] Technologies => Entries<TechnologyDefinition, TechnologyUIMapper>(Era);
         public static Entry[] Districts => Entries<DistrictDefinition, ConstructibleUIMapper>(UnitTier);
         public static Entry[] Improvements => Entries<DistrictImprovementDefinition, ConstructibleUIMapper>(UnitTier);
-        public static Entry[] Wonders => Entries<ArtificialWonderDefinition, UIMapper>(None);
+        public static Entry[] Wonders => Filtered<DistrictDefinition, ConstructibleUIMapper, ArtificialWonderDefinition>();
         public static Entry[] Quests => Entries<QuestDefinition, UIMapper>(None);
         public static Entry[] Populations => Entries<PopulationDefinition, PopulationUIMapper>(None);
         public static Entry[] Statuses => Entries<StatusDefinition, StatusUIMapper>(None);
+
+        /// <summary>Some definitions share a database with their base type — artificial wonders are stored as
+        /// districts — so the list is the database filtered to the concrete type.</summary>
+        private static Entry[] Filtered<TDefinition, TMapper, TWanted>()
+            where TDefinition : class, IDatatableElement
+            where TMapper : UIMapper
+            where TWanted : TDefinition
+        {
+            if (Cache.TryGetValue(typeof(TWanted), out var cached))
+            {
+                return cached;
+            }
+            Entry[] entries;
+            try
+            {
+                var database = Databases.GetDatabase<TDefinition>(false);
+                entries = database == null
+                    ? new Entry[0]
+                    : database.OfType<TWanted>()
+                              .Select(definition => Describe<TMapper>(definition.Name))
+                              .OrderBy(entry => entry.Display, StringComparer.CurrentCultureIgnoreCase)
+                              .ToArray();
+            }
+            catch (Exception)
+            {
+                entries = new Entry[0];
+            }
+            if (entries.Length > 0)
+            {
+                Cache[typeof(TWanted)] = entries;
+            }
+            return entries;
+        }
 
         /// <summary>Catalogues with no meaningful ordering fall back to alphabetical.</summary>
         private static void None<T>(T definition, Entry entry)

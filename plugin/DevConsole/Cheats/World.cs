@@ -14,7 +14,8 @@ namespace DevConsole.Cheats
     /// </summary>
     internal static class World
     {
-        /// <summary>Tile index the mouse is over; -1 when the cursor is off the map.</summary>
+        /// <summary>Tile index the mouse is over right now; -1 when the cursor is off the map — which includes
+        /// every moment the mouse is over the console window.</summary>
         public static int HoveredTile
         {
             get
@@ -24,7 +25,28 @@ namespace DevConsole.Cheats
             }
         }
 
-        public static bool HasTile => HoveredTile >= 0;
+        /// <summary>The tile actions actually use. Reading the live hover at click time never worked: moving the
+        /// mouse onto a button takes it off the map, so the target has to be latched while the map is hovered.
+        /// Locking freezes it so panning or brushing the map cannot move the target out from under you.</summary>
+        public static int TargetTile { get; private set; } = -1;
+
+        public static bool Locked { get; set; }
+
+        public static bool HasTile => TargetTile >= 0;
+
+        /// <summary>Called once per frame; the last valid hover wins unless the target is locked.</summary>
+        public static void Track()
+        {
+            if (Locked)
+            {
+                return;
+            }
+            var hovered = HoveredTile;
+            if (hovered >= 0)
+            {
+                TargetTile = hovered;
+            }
+        }
 
         public sealed class ArmyEntry
         {

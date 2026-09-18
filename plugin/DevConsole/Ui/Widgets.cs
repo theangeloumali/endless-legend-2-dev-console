@@ -13,6 +13,18 @@ namespace DevConsole.Ui
 
         public static void Section(string title) => GUILayout.Label(title.ToUpperInvariant(), Theme.Section);
 
+        /// <summary>The latched map target plus its lock. Every tile action reads this, because the live hover is
+        /// always invalid at the moment you click a button — the mouse is over the window by then.</summary>
+        public static void TileTarget()
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Target tile", Theme.Label, GUILayout.Width(LabelWidth));
+            GUILayout.Label(Cheats.World.HasTile ? $"#{Cheats.World.TargetTile}" : "hover the map once",
+                            Cheats.World.HasTile ? Theme.Value : Theme.Hint, GUILayout.Width(150));
+            Cheats.World.Locked = GUILayout.Toggle(Cheats.World.Locked, Cheats.World.Locked ? " locked" : " follows the mouse", Theme.Toggle);
+            GUILayout.EndHorizontal();
+        }
+
         public static void Hint(string text) => GUILayout.Label(text, Theme.Hint);
 
         /// <summary>Restores the previous GUI.enabled rather than forcing true, so a disabled block stays disabled.</summary>

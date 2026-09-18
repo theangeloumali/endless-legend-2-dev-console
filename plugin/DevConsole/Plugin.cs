@@ -10,7 +10,7 @@ namespace DevConsole
     public sealed class Plugin : BaseUnityPlugin
     {
         public const string Guid = "angelo.el2.devconsole";
-        public const string Version = "1.3.0";
+        public const string Version = "1.3.1";
 
         private State state;
         private Window window;
@@ -44,6 +44,7 @@ namespace DevConsole
             {
                 visible = !visible;
             }
+            Cheats.World.Track();
         }
 
         private void OnGUI()

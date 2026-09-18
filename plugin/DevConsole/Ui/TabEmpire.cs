@@ -24,11 +24,8 @@ namespace DevConsole.Ui
                         ("Merchant affinity", EmpireCheats.ResetMerchantAffinity));
 
             Widgets.Section("Statuses at the hovered tile");
-            var tile = World.HoveredTile;
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Hovered tile", Theme.Label, GUILayout.Width(Widgets.LabelWidth));
-            GUILayout.Label(tile >= 0 ? $"#{tile}" : "move the mouse over the map", tile >= 0 ? Theme.Value : Theme.Hint);
-            GUILayout.EndHorizontal();
+            var tile = World.TargetTile;
+            Widgets.TileTarget();
             status.Draw(Catalog.Statuses, 150f);
             var chosen = status.Selected(Catalog.Statuses);
             Widgets.ValueButton("Duration", ref duration, "Add status",

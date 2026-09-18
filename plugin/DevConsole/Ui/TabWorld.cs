@@ -18,11 +18,8 @@ namespace DevConsole.Ui
 
         public void Draw()
         {
-            var tile = World.HoveredTile;
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Hovered tile", Theme.Label, GUILayout.Width(Widgets.LabelWidth));
-            GUILayout.Label(tile >= 0 ? $"#{tile}" : "move the mouse over the map", tile >= 0 ? Theme.Value : Theme.Hint);
-            GUILayout.EndHorizontal();
+            var tile = World.TargetTile;
+            Widgets.TileTarget();
 
             Widgets.Section("Spawn at the hovered tile");
             unit.Draw(Catalog.Units);
