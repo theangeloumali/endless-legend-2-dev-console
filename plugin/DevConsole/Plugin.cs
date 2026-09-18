@@ -1,4 +1,6 @@
 using BepInEx;
+using DevConsole.Cheats;
+using DevConsole.Ui;
 using HarmonyLib;
 using UnityEngine;
 
@@ -9,18 +11,23 @@ namespace DevConsole
     public sealed class Plugin : BaseUnityPlugin
     {
         public const string Guid = "angelo.el2.devconsole";
-        public const string Version = "0.1.0";
+        public const string Version = "0.2.0";
 
         private State state;
-        private Actions actions;
         private Window window;
         private bool visible;
 
         private void Awake()
         {
             state = new State(Config);
-            actions = new Actions(Logger);
-            window = new Window(state, actions);
+            Orders.Initialize(Logger);
+            window = new Window(state, new ITab[]
+            {
+                new TabEconomy(),
+                new TabBuild(),
+                new TabBattle(),
+                new TabYields(state),
+            });
             Patches.Apply(new Harmony(Guid), state, Logger);
             Logger.LogInfo($"Dev Console {Version} loaded - press {state.Hotkey.Value.MainKey} in game.");
         }

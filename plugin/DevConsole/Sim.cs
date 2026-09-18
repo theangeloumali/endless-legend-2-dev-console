@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Amplitude;
+using Amplitude.Mercury.Interop;
+using Amplitude.Mercury.Simulation;
 using BepInEx.Logging;
 using HarmonyLib;
 
@@ -49,6 +52,54 @@ namespace DevConsole
 
         /// <summary>Agency.Empire is the department's owning empire.</summary>
         public static object EmpireOf(object department) => department == null ? null : AgencyEmpire?.GetValue(department);
+
+        /// <summary>Walk a ReferenceCollection&lt;T&gt; whose element type is internal. The collection type itself is
+        /// public, but naming ReferenceCollection&lt;Settlement&gt; is impossible, so Count/Item go through Traverse.</summary>
+        public static IEnumerable<object> Collection(object owner, string fieldName)
+        {
+            var collection = owner == null ? null : Traverse.Create(owner).Field(fieldName).GetValue();
+            if (collection == null)
+            {
+                yield break;
+            }
+            var traverse = Traverse.Create(collection);
+            var count = traverse.Property<int>("Count").Value;
+            for (var i = 0; i < count; i++)
+            {
+                var item = traverse.Property("Item", new object[] { i }).GetValue();
+                if (item != null)
+                {
+                    yield return item;
+                }
+            }
+        }
+
+        public static IEnumerable<object> Settlements() => Collection(LocalEmpire, "Settlements");
+
+        public static IEnumerable<object> Heroes() => Collection(LocalEmpire, "Heroes");
+
+        public static IEnumerable<object> Armies() => Collection(LocalEmpire, "Armies");
+
+        /// <summary>Every simulation entity carries its GUID on the internal SimulationEntity base.</summary>
+        public static SimulationEntityGUID GuidOf(object entity) =>
+            entity == null ? SimulationEntityGUID.Zero : Traverse.Create(entity).Field<SimulationEntityGUID>("GUID").Value;
+
+        /// <summary>EntityNameInfo is public; prefer what the player renamed it to, then the generated name.</summary>
+        public static string NameOf(object entity, string fallback)
+        {
+            var info = entity == null ? null : Traverse.Create(entity).Field("EntityName").GetValue();
+            if (info is EntityNameInfo name)
+            {
+                foreach (var candidate in new[] { name.UserDefinedName, name.UniqueName, name.LocalizationKey })
+                {
+                    if (!string.IsNullOrEmpty(candidate))
+                    {
+                        return candidate;
+                    }
+                }
+            }
+            return fallback;
+        }
 
         public static FixedPoint Units(int value) => (FixedPoint)value;  // op_Implicit applies the x1000 fixed point
 

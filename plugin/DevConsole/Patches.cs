@@ -6,29 +6,25 @@ using HarmonyLib;
 namespace DevConsole
 {
     /// <summary>
-    /// Harmony patches that scale the local empire's income and battle damage. Targets are resolved by name
-    /// (internal types) and patched one by one, so a renamed method disables that toggle instead of the plugin.
-    /// Every patch checks its toggle before touching reflection, so with everything off they cost a field read.
+    /// Yield multipliers only. Everything else now goes through the game's orders; these stay patched because an
+    /// order can SET a stock but nothing in the order set scales per-turn income. Each patch reads its toggle
+    /// before touching reflection, so with the multipliers off they cost one field read. Note a console "+research"
+    /// is multiplied too: orders are processed asynchronously, so no flag can exempt them.
     /// </summary>
     internal static class Patches
     {
         internal static State State;
 
-        /// <summary>Set while the console itself calls a Gain* method, so its own +N is not multiplied.</summary>
-        internal static bool Suppress;
-
-        private static PropertyInfo settlementEmpireIndex, battleUnitEmpireIndex;
+        private static PropertyInfo settlementEmpireIndex;
 
         public static void Apply(Harmony harmony, State state, ManualLogSource log)
         {
             State = state;
             settlementEmpireIndex = AccessTools.Property(Sim.Type("Settlement"), "EmpireIndex");
-            battleUnitEmpireIndex = AccessTools.Property(Sim.Type("BattleUnit"), "EmpireIndex");
             Patch(harmony, log, "DepartmentOfTheTreasury", "GainMoney", nameof(MoneyPrefix));
             Patch(harmony, log, "DepartmentOfCulture", "GainInfluence", nameof(InfluencePrefix));
             Patch(harmony, log, "DepartmentOfScience", "GainResearch", nameof(ResearchPrefix));
             Patch(harmony, log, "DepartmentOfIndustry", "ComputeProductionIncome", nameof(ProductionPostfix), prefix: false);
-            Patch(harmony, log, "BattleUnit", "ApplyDamage", nameof(DamagePrefix));
         }
 
         private static void Patch(Harmony harmony, ManualLogSource log, string type, string method, string patch, bool prefix = true)
@@ -44,7 +40,7 @@ namespace DevConsole
 
         private static void ScaleGain(object department, ref FixedPoint gain, int factor)
         {
-            if (factor > 1 && !Suppress && Sim.IsLocal(Sim.EmpireOf(department)))
+            if (factor > 1 && Sim.IsLocal(Sim.EmpireOf(department)))
             {
                 gain = Sim.Scale(gain, factor);
             }
@@ -60,31 +56,11 @@ namespace DevConsole
         private static void ProductionPostfix(object settlement, ref FixedPoint __result)
         {
             var factor = State.EffectiveIndustry;
-            if (factor > 1 && Sim.IsLocal(EmpireIndex(settlementEmpireIndex, settlement)))
+            if (factor > 1 && settlement != null && settlementEmpireIndex != null
+                && Sim.IsLocal((int)settlementEmpireIndex.GetValue(settlement)))
             {
                 __result = Sim.Scale(__result, factor);
             }
         }
-
-        // BattleUnit.ApplyDamage(FixedPoint damage, BattleUnit attackerUnit, bool sendBattleEvent)
-        private static void DamagePrefix(object __instance, ref FixedPoint damage, object attackerUnit)
-        {
-            if (!State.Invulnerable.Value && !State.OneHitKills.Value)
-            {
-                return;
-            }
-            var targetIsLocal = Sim.IsLocal(EmpireIndex(battleUnitEmpireIndex, __instance));
-            if (State.Invulnerable.Value && targetIsLocal)
-            {
-                damage = Sim.Units(0);
-            }
-            else if (State.OneHitKills.Value && !targetIsLocal && Sim.IsLocal(EmpireIndex(battleUnitEmpireIndex, attackerUnit)))
-            {
-                damage = Sim.Units(99_999);
-            }
-        }
-
-        private static int EmpireIndex(PropertyInfo property, object entity) =>
-            entity == null || property == null ? -1 : (int)property.GetValue(entity);
     }
 }

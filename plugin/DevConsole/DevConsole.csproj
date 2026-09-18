@@ -23,8 +23,14 @@
     <Reference Include="UnityEngine.CoreModule" HintPath="$(Managed)\UnityEngine.CoreModule.dll" Private="false" />
     <Reference Include="UnityEngine.IMGUIModule" HintPath="$(Managed)\UnityEngine.IMGUIModule.dll" Private="false" />
     <Reference Include="UnityEngine.InputLegacyModule" HintPath="$(Managed)\UnityEngine.InputLegacyModule.dll" Private="false" />
+    <Reference Include="Amplitude" HintPath="$(Managed)\Amplitude.dll" Private="false" />
     <Reference Include="Amplitude.Framework" HintPath="$(Managed)\Amplitude.Framework.dll" Private="false" />
     <Reference Include="Amplitude.Mercury.Data" HintPath="$(Managed)\Amplitude.Mercury.Data.dll" Private="false" />
+    <!-- Definitions derive from Odin's SerializedScriptableObject; naming one makes the compiler walk that chain. -->
+    <Reference Include="Sirenix.Serialization" HintPath="$(Managed)\Sirenix.Serialization.dll" Private="false" />
+    <!-- The order DTOs and SandboxManager.PostOrder are public here; the simulation entities are not. -->
+    <Reference Include="Amplitude.Mercury.Firstpass" HintPath="$(Managed)\Amplitude.Mercury.Firstpass.dll" Private="false" />
+    <Reference Include="Assembly-CSharp" HintPath="$(Managed)\Assembly-CSharp.dll" Private="false" />
   </ItemGroup>
 
 </Project>
