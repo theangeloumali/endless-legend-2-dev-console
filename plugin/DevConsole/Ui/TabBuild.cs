@@ -9,6 +9,7 @@ namespace DevConsole.Ui
     {
         private List<Build.Site> sites = new List<Build.Site>();
         private Vector2 scroll;
+        private string approval = "100";
         private int selected;
 
         public string Title => "Build";
@@ -29,22 +30,34 @@ namespace DevConsole.Ui
 
             selected = Widgets.Picker("Settlement", sites, selected, site => $"{site.Name} ({site.Queue.Count} queued)");
             var site = sites[selected];
+
             if (site.Queue.Count == 0)
             {
                 GUILayout.Label("Queue is empty.", Theme.Hint);
-                return;
             }
-            scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(180));
-            for (var i = 0; i < site.Queue.Count; i++)
+            else
             {
-                var index = i;
-                GUILayout.BeginHorizontal();
-                GUILayout.Label($"{i + 1}.  {site.Queue[i]}");
-                Widgets.Button("Complete", () => { Build.Complete(site, index); sites = Build.Sites(); });
-                GUILayout.EndHorizontal();
+                scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(180));
+                for (var i = 0; i < site.Queue.Count; i++)
+                {
+                    var index = i;
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label($"{i + 1}.  {site.Queue[i]}");
+                    Widgets.Button("Complete", () => { Build.Complete(site, index); sites = Build.Sites(); });
+                    GUILayout.EndHorizontal();
+                }
+                GUILayout.EndScrollView();
+                Widgets.Button("Complete this whole queue", () => { Build.CompleteQueue(site); sites = Build.Sites(); });
             }
-            GUILayout.EndScrollView();
-            Widgets.Button("Complete this whole queue", () => { Build.CompleteQueue(site); sites = Build.Sites(); });
+
+            Widgets.Section("Approval");
+            Widgets.ValueButton("Approval", ref approval, "Add to this city", amount => Build.AddApproval(site, amount));
+            GUILayout.BeginHorizontal();
+            Widgets.Button("Add to every city", () => { int.TryParse(approval, out var amount); Build.AddApprovalEverywhere(amount); });
+            Widgets.Button("Clear this city", () => Build.ClearApproval(site));
+            Widgets.Button("Clear every city", Build.ClearApprovalEverywhere);
+            GUILayout.EndHorizontal();
+            Widgets.Hint("Adds to the city's approval each press; Clear resets the bonus back to zero.");
         }
     }
 }

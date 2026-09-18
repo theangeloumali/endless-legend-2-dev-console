@@ -63,6 +63,32 @@ namespace DevConsole.Cheats
             }
         }
 
+        /// <summary>Approval is a per-settlement cheat field the developers left in: the order ADDS to
+        /// GodApprovalDelta rather than setting it, and clearing resets that delta to zero.</summary>
+        public static void AddApproval(Site site, int amount) =>
+            Orders.Post(new OrderChangeGodApproval { SettlementGUID = site.Guid, GiveGodApproval = true, ApprovalDiff = amount },
+                        $"{site.Name}: approval {amount:+#;-#;0}");
+
+        public static void ClearApproval(Site site) =>
+            Orders.Post(new OrderChangeGodApproval { SettlementGUID = site.Guid, GiveGodApproval = false, ApprovalDiff = 0 },
+                        $"{site.Name}: approval cheat cleared");
+
+        public static void AddApprovalEverywhere(int amount)
+        {
+            foreach (var site in Sites())
+            {
+                AddApproval(site, amount);
+            }
+        }
+
+        public static void ClearApprovalEverywhere()
+        {
+            foreach (var site in Sites())
+            {
+                ClearApproval(site);
+            }
+        }
+
         public static void CompleteEverything()
         {
             foreach (var site in Sites().Where(site => site.Queue.Count > 0))
