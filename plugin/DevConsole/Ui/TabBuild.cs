@@ -23,7 +23,7 @@ namespace DevConsole.Ui
 
             if (sites.Count == 0)
             {
-                GUILayout.Label("No settlements loaded — press Refresh while a game is running.", GUI.skin.box);
+                GUILayout.Label("No settlements loaded — press Refresh while a game is running.", Theme.Hint);
                 return;
             }
 
@@ -31,7 +31,7 @@ namespace DevConsole.Ui
             var site = sites[selected];
             if (site.Queue.Count == 0)
             {
-                GUILayout.Label("Queue is empty.", GUI.skin.box);
+                GUILayout.Label("Queue is empty.", Theme.Hint);
                 return;
             }
             scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(180));

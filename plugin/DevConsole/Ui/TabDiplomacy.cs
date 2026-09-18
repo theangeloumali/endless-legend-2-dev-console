@@ -21,7 +21,9 @@ namespace DevConsole.Ui
         public void Draw()
         {
             Widgets.Section("Target empire");
+            GUILayout.BeginHorizontal();
             var hasTarget = Widgets.IntField("Empire index", ref target, out var other);
+            GUILayout.EndHorizontal();
             GUI.enabled = hasTarget;
             Widgets.Row(("Declare war", () => Diplomacy.DeclareWar(other)),
                         ("Force peace", () => Diplomacy.ForcePeace(other)),
@@ -44,7 +46,7 @@ namespace DevConsole.Ui
 
             Widgets.Section("Play as another empire");
             Widgets.ValueButton("Empire index", ref playAs, "Switch local empire", Diplomacy.PlayAs);
-            GUILayout.Label("Switching hands you that empire; the console retargets automatically.", GUI.skin.box);
+            GUILayout.Label("Switching hands you that empire; the console retargets automatically.", Theme.Hint);
         }
     }
 }

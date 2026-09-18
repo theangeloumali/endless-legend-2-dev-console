@@ -17,7 +17,10 @@ namespace DevConsole.Ui
         public void Draw()
         {
             var tile = World.HoveredTile;
-            GUILayout.Label(tile >= 0 ? $"Hovered tile  #{tile}" : "Hover a tile on the map to target it", GUI.skin.box);
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Hovered tile", Theme.Label, GUILayout.Width(Widgets.LabelWidth));
+            GUILayout.Label(tile >= 0 ? $"#{tile}" : "move the mouse over the map", tile >= 0 ? Theme.Value : Theme.Hint);
+            GUILayout.EndHorizontal();
 
             Widgets.Section("Spawn at the hovered tile");
             unit.Draw(Catalog.Units);

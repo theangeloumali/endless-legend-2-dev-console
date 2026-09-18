@@ -30,12 +30,12 @@ namespace DevConsole.Ui
 
             if (roster.Count == 0)
             {
-                GUILayout.Label("No heroes loaded - press Refresh while a game is running.", GUI.skin.box);
+                GUILayout.Label("No heroes loaded - press Refresh while a game is running.", Theme.Hint);
             }
             else
             {
                 selected = Widgets.Picker("Hero", roster, selected, hero => hero.Label);
-                GUILayout.Label(applyToAll ? "applying to every hero" : $"global HeroIndex #{roster[selected].Index}", GUI.skin.box);
+                GUILayout.Label(applyToAll ? $"applying to all {roster.Count} heroes" : $"HeroIndex #{roster[selected].Index}", Theme.Value);
             }
 
             Widgets.Section("Level & points");

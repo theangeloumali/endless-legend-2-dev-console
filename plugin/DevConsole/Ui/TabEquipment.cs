@@ -28,7 +28,7 @@ namespace DevConsole.Ui
         {
             GUILayout.BeginHorizontal();
             Widgets.Button("Refresh", Refresh);
-            GUILayout.Label($"{stash.Count} in stash · {Catalog.Equipment.Length} definitions", GUI.skin.box);
+            GUILayout.Label($"{stash.Count} in stash  ·  {Catalog.Equipment.Length} items exist", Theme.Value);
             GUILayout.EndHorizontal();
 
             if (roster.Count > 0)

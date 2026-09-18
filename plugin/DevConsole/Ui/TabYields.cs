@@ -26,7 +26,7 @@ namespace DevConsole.Ui
             Widgets.Section("Instant");
             Widgets.Toggle(state.InstantBuild);
             Widgets.Toggle(state.InstantResearch);
-            GUILayout.Label("Multipliers apply at the next income tick. For a one-off jump use the Economy tab.", GUI.skin.box);
+            GUILayout.Label("Multipliers apply at the next income tick. For a one-off jump use the Economy tab.", Theme.Hint);
         }
 
         private static void Multiplier(string label, ConfigEntry<int> entry)

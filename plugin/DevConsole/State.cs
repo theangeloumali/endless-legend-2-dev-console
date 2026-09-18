@@ -12,6 +12,7 @@ namespace DevConsole
         public readonly ConfigEntry<KeyboardShortcut> Hotkey;
         public readonly ConfigEntry<float> UiScale;
         public readonly ConfigEntry<bool> NativeOverlay;
+        public readonly ConfigEntry<int> WindowHeight;
         public readonly ConfigEntry<int> DustMultiplier;
         public readonly ConfigEntry<int> IndustryMultiplier;
         public readonly ConfigEntry<int> ScienceMultiplier;
@@ -23,6 +24,7 @@ namespace DevConsole
         {
             Hotkey = config.Bind("General", "Hotkey", new KeyboardShortcut(KeyCode.Insert), "Shows / hides the console window.");
             NativeOverlay = config.Bind("General", "NativeOverlay", true, "Unlock the game's own debug overlay (F2). Turn off if it misbehaves; the Insert window is unaffected.");
+            WindowHeight = config.Bind("General", "WindowHeight", 520, "Height of the scrolling area, before UI scaling.");
             UiScale = config.Bind("General", "UiScale", 0f, "Window scale; 0 = auto from screen height (2 at 4K), so the window stays readable at high resolutions.");
             DustMultiplier = config.Bind("Yields", "Dust", 1, "Multiplies Dust income (1 = off).");
             IndustryMultiplier = config.Bind("Yields", "Industry", 1, "Multiplies city production (1 = off).");

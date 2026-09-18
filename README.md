@@ -33,6 +33,11 @@ Press **Insert** (configurable) to open or hide the window. Eight tabs, everythi
 | Battle    | Amplitude's own seven cheats — infinite movement, infinite action tokens, infinite battle skills, ignore zone of control / round count / empire playing, line-of-sight debug                         |
 | Yields    | Per-turn multipliers (×2…×1000) for Dust, Industry, Science, Influence, plus instant build/research                                                                                                  |
 
+The window is styled to sit with the game rather than look like a debug overlay: opaque slate panels, teal
+section headers, amber values, a two-row tab bar and one shared label column so every field and button lines up.
+`Ui/Theme.cs` builds the whole skin from generated textures, so there are no art assets to ship. `WindowHeight`
+and `UiScale` in the config control the size.
+
 ### How it works
 
 **Writes go through the game's own order system.** Amplitude shipped their in-house editor in the retail build and

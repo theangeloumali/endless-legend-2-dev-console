@@ -22,7 +22,7 @@ namespace DevConsole.Ui
             }
             GUILayout.Space(6);
             Widgets.Button("Clear all battle cheats", Battle.ClearAll, Battle.AnyEnabled);
-            GUILayout.Label("These live only for this session — restarting the game clears them.", GUI.skin.box);
+            GUILayout.Label("These live only for this session — restarting the game clears them.", Theme.Hint);
         }
     }
 }

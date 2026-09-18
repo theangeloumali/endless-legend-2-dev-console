@@ -8,18 +8,19 @@ namespace DevConsole.Ui
     /// <summary>IMGUI helpers shared by every tab. Kept free of game types so tabs stay readable.</summary>
     internal static class Widgets
     {
-        public static void Section(string title)
-        {
-            GUILayout.Space(6);
-            GUILayout.Label(title, GUI.skin.box);
-        }
+        /// <summary>One label column width everywhere, so fields and buttons line up across every tab.</summary>
+        public const int LabelWidth = 130;
+
+        public static void Section(string title) => GUILayout.Label(title.ToUpperInvariant(), Theme.Section);
+
+        public static void Hint(string text) => GUILayout.Label(text, Theme.Hint);
 
         /// <summary>Restores the previous GUI.enabled rather than forcing true, so a disabled block stays disabled.</summary>
         public static void Button(string label, Action action, bool enabled = true)
         {
             var previous = GUI.enabled;
             GUI.enabled = previous && enabled;
-            if (GUILayout.Button(label, GUILayout.Height(26)))
+            if (GUILayout.Button(label, Theme.Button, GUILayout.Height(27)))
             {
                 action();
             }
@@ -37,21 +38,19 @@ namespace DevConsole.Ui
         }
 
         public static void Toggle(ConfigEntry<bool> entry) =>
-            entry.Value = GUILayout.Toggle(entry.Value, " " + entry.Description.Description);
+            entry.Value = GUILayout.Toggle(entry.Value, entry.Description.Description, Theme.Toggle);
 
         /// <summary>A labelled text field that only reports a value when it parses and is not negative.</summary>
-        public static bool IntField(string label, ref string buffer, out int value, int labelWidth = 120, int fieldWidth = 110)
+        public static bool IntField(string label, ref string buffer, out int value, int labelWidth = LabelWidth, int fieldWidth = 120)
         {
-            GUILayout.BeginHorizontal();
-            GUILayout.Label(label, GUILayout.Width(labelWidth));
-            buffer = GUILayout.TextField(buffer ?? string.Empty, GUILayout.Width(fieldWidth));
-            GUILayout.EndHorizontal();
+            GUILayout.Label(label, Theme.Label, GUILayout.Width(labelWidth));
+            buffer = GUILayout.TextField(buffer ?? string.Empty, Theme.Field, GUILayout.Width(fieldWidth));
             return int.TryParse(buffer, out value) && value >= 0;
         }
 
         /// <summary>A number field and the button that applies it, the shape most controls here need.</summary>
         public static void ValueButton(string label, ref string buffer, string action, Action<int> apply,
-                                       bool enabled = true, int labelWidth = 120, int fieldWidth = 110)
+                                       bool enabled = true, int labelWidth = LabelWidth, int fieldWidth = 120)
         {
             GUILayout.BeginHorizontal();
             var parsed = IntField(label, ref buffer, out var value, labelWidth, fieldWidth);
@@ -69,8 +68,8 @@ namespace DevConsole.Ui
             }
             index = Mathf.Clamp(index, 0, items.Count - 1);
             GUILayout.BeginHorizontal();
-            GUILayout.Label(label, GUILayout.Width(110));
-            if (GUILayout.Button(describe(items[index]) + $"   ({index + 1}/{items.Count})  ▼"))
+            GUILayout.Label(label, Theme.Label, GUILayout.Width(LabelWidth));
+            if (GUILayout.Button($"{describe(items[index])}    {index + 1}/{items.Count}  ▼", Theme.Button, GUILayout.Height(27)))
             {
                 index = (index + 1) % items.Count;
             }
@@ -99,9 +98,9 @@ namespace DevConsole.Ui
             {
                 var selected = Selected(items);
                 GUILayout.BeginHorizontal();
-                GUILayout.Label(label, GUILayout.Width(110));
-                var current = selected?.Display ?? (items == null || items.Length == 0 ? "(none loaded)" : "(select)");
-                if (GUILayout.Button(current + "   ▼"))
+                GUILayout.Label(label, Theme.Label, GUILayout.Width(LabelWidth));
+                var current = selected?.Display ?? (items == null || items.Length == 0 ? "not loaded yet" : "select…");
+                if (GUILayout.Button(current + "   ▼", open ? Theme.TabActive : Theme.Button, GUILayout.Height(27)))
                 {
                     open = !open;
                 }
@@ -111,8 +110,8 @@ namespace DevConsole.Ui
                     return;
                 }
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("filter", GUILayout.Width(110));
-                filter = GUILayout.TextField(filter);
+                GUILayout.Label("Filter", Theme.Label, GUILayout.Width(LabelWidth));
+                filter = GUILayout.TextField(filter, Theme.Field);
                 GUILayout.EndHorizontal();
                 scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(listHeight));
                 for (var i = 0; i < items.Length; i++)
@@ -121,7 +120,7 @@ namespace DevConsole.Ui
                     {
                         continue;
                     }
-                    if (GUILayout.Button(items[i].Display))
+                    if (GUILayout.Button(items[i].Display, i == Index ? Theme.TabActive : Theme.Button, GUILayout.Height(25)))
                     {
                         Index = i;
                         open = false;
