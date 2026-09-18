@@ -58,6 +58,15 @@ namespace DevConsole.Ui
             Widgets.Button("Clear every city", Build.ClearApprovalEverywhere);
             GUILayout.EndHorizontal();
             Widgets.Hint("Adds to the city's approval each press; Clear resets the bonus back to zero.");
+
+            Widgets.Section("Unit limits");
+            GUILayout.BeginHorizontal();
+            Widgets.Button("Lift unique-unit limits", Limits.Lift, !Limits.Lifted);
+            Widgets.Button("Restore limits", Limits.Restore, Limits.Lifted);
+            GUILayout.EndHorizontal();
+            Widgets.Hint(Limits.Lifted
+                ? $"Lifted on {Limits.Affected} unit definitions — units capped at 0/1 can be recruited repeatedly."
+                : "Clears the one-per-empire cap on unique units, so the recruit button stops greying out. Lasts for this session.");
         }
     }
 }
