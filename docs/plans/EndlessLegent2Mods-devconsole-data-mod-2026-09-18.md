@@ -1,7 +1,7 @@
 # EndlessLegent2Mods — Dev Console data mod — 2026-09-18
 
 > Whole-feature plan (every phase in this one document). After approval it is copied to
-> `C:\Users\Angelo\Desktop\Work\EndlessLegent2Mods\docs\plans\EndlessLegent2Mods-devconsole-data-mod-2026-09-18.md`
+> `docs/plans/EndlessLegent2Mods-devconsole-data-mod-2026-09-18.md`
 > and rendered with `plan-to-html.sh` (plan mode allows writing only this file).
 > Reviewed by a 3-agent read-only critique (architect · data-format · gameplay lenses, 44 findings); every
 > blocker and major is folded in below.
@@ -91,7 +91,7 @@ flowchart TD
 If the spike shows ≥ 5 buttons render, the hub goes flat (`[Economy][Resources][Toggles][Unlocks][Combat]`) and
 the **More** page is dropped.
 
-### Repository layout (`C:\Users\Angelo\Desktop\Work\EndlessLegent2Mods`)
+### Repository layout (repository root)
 
 ```
 .gitignore                       # export/, .claude/.worktree/, recordings/*.webm, docs/plans/*.html

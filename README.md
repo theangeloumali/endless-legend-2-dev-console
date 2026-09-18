@@ -1,146 +1,202 @@
-# Dev Console — ENDLESS Legend 2
+# Dev Console — ENDLESS LEGEND 2
 
-An in-game developer console for feature testing. Two variants share this repo:
+An in-game developer console for **ENDLESS LEGEND 2**. Press **Insert**, get a window with eight tabs: set your
+Dust to whatever you like, finish anything in a build queue instantly, hand your heroes levels and Legendary gear,
+spawn armies on the tile you're pointing at, force a war, or switch to playing another empire entirely.
 
-| Variant                                  | What it is                                                                                                       | Use it when                                                      |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| **Plugin** (`plugin/`)                   | BepInEx + Harmony plugin: press **Insert**, one window with every cheat, buttons apply on click, toggles persist | you want the WeMod-style console                                 |
-| **Data mod** (`mod/`, `spec/`, `tools/`) | Official JSON modding path only (`ModdingGuide_EL2_1.1.pdf`): every-turn event dialogs with up to 4 buttons      | you need something shareable on the Workshop / no code injection |
+It works by using **the game's own developer tools**. Amplitude shipped their in-house map editor in the retail
+build — about 110 editor commands — and left it public. The console asks the simulation to do things the same way
+their editor did, instead of writing values into memory behind the game's back.
 
-Both target build **V1.0.116**. Run one or the other — the data mod's every-turn dialog is redundant once the plugin is in.
+> Unofficial and not affiliated with Amplitude Studios or SEGA. Single-player testing tool — don't use it in
+> multiplayer against people who haven't agreed to it.
 
-## Plugin
+![Game](https://img.shields.io/badge/game-V1.0.116-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+
+---
+
+## Install
+
+1. **Install BepInEx 5** (x64, Mono) if you don't already have it — [download it here](https://github.com/BepInEx/BepInEx/releases).
+   Extract it into the game folder, the one containing `Endless Legend 2.exe`:
+   ```
+   .../steamapps/common/ENDLESS Legend 2/
+   ```
+2. **Run the game once, then quit.** This makes BepInEx create its folders.
+3. **Download `DevConsole.zip`** from the [latest release](../../releases/latest).
+4. **Extract `DevConsole.dll`** into:
+   ```
+   .../ENDLESS Legend 2/BepInEx/plugins/
+   ```
+5. Start the game, load a save, and press **Insert**.
+
+If the window doesn't appear, open `BepInEx/LogOutput.log` and look for `Dev Console` — it logs a line on load and
+a line for every action, which is the fastest way to see what happened.
+
+> **Remove any other EL2 cheat plugin first.** The Nexus "EL2 Resource Manager" patches the same income methods and
+> running both doubles your multipliers. This plugin refuses to load alongside it.
+
+---
+
+## Using it
+
+**Insert** opens and closes the window. Drag it by the title bar. Everything applies the moment you click — there
+is no confirm step.
+
+### Economy
+
+Type a number and press **Set**. These set an absolute value rather than adding, so `1000000` in the Dust box means
+you end up with exactly one million.
+
+Resources give you every strategic, luxury, Cadaver and Spirit in one press. Technologies unlock a whole era, or
+search for a single one by name.
+
+### Build — instant build and instant recruit
+
+Press **Refresh settlements**, pick one, and complete anything in its queue **free and immediately**. Units are
+constructions in EL2, so this is how you instantly recruit an army. There is also a button to clear every
+settlement's queue at once.
+
+### Heroes
+
+Press **Refresh roster** first. Pick a hero from the selector, or tick **apply to all** to hit your whole roster
+with the same action.
+
+- **Skill points → Give** tops them up (stat increases spend them, so do this first)
+- Fill in the four stat boxes and press **Apply stats**
+- **Give XP** to level them, plus **Heal** and **Dismiss**
+- **Create draw** generates any number of new heroes at a level range you choose, then **Recruit all in draw**
+- **Spawn** any named hero in the game onto the tile your mouse is over
+
+### Equipment
+
+All 177 items, **sorted rarest first** and coloured by rarity. Add one to your stash, or use the bulk filter to add
+everything matching a word. Then equip it to the selected hero, or clear the empire's equipment out.
+
+### World
+
+This tab targets **the tile your mouse is hovering over** — the tile number updates live as you move across the
+map. Spawn any unit there, found a city or camp, teleport a selected army to it, give an army absurd movement,
+reveal the entire map, or collect every curiosity on it.
+
+### Diplomacy
+
+Declare war, force peace, force all treaties, make an empire offer surrender, change war score, meet everybody, and
+pick your victory path. **Switch local empire** hands you control of another empire — the console follows you, so
+it is a genuine way to inspect what the AI is sitting on.
+
+### Battle
+
+The game's own seven battle cheats: infinite movement, infinite action tokens, infinite battle skills, ignore zone
+of control, ignore round count, ignore empire playing, and line-of-sight debug. They last only for the session —
+restarting the game clears them.
+
+### Yields
+
+Per-turn multipliers (×2 to ×1000) for Dust, Industry, Science and Influence, plus instant build and instant
+research. Unlike everything else these are applied as income arrives, so they show up on your **next turn**, not
+immediately. For a one-off jump use the Economy tab.
+
+---
+
+## Settings
+
+Edit `BepInEx/config/angelo.el2.devconsole.cfg`, or delete it to reset:
+
+| Setting         | Default  | What it does                                                                          |
+| --------------- | -------- | ------------------------------------------------------------------------------------- |
+| `Hotkey`        | `Insert` | Key that opens and closes the window                                                  |
+| `UiScale`       | `0`      | Window scale. `0` picks one from your resolution (×2 at 4K); set a number to override |
+| `WindowHeight`  | `520`    | Height of the scrolling area                                                          |
+| `NativeOverlay` | `true`   | Unlocks the game's built-in debug overlay (see Known limits)                          |
+| `Yields`        | `1`      | The four per-turn multipliers, also on the Yields tab                                 |
+
+---
+
+## Known limits
+
+- **The Yields multipliers affect console actions too.** Orders are processed asynchronously, so if Science is at
+  ×1000 a console "+10,000 research" gets multiplied as well. Set the multipliers to `off` when you want exact
+  numbers.
+- **Everything caps around 2,147,483.** The simulation uses 32-bit fixed-point maths, so stocks and multiplied
+  yields cannot exceed that without overflowing.
+- **No item icons.** The game keeps them in a streamed virtual-texture atlas only its own UI shader can draw. Names,
+  rarities and rarity colours all work.
+- **The native debug overlay does not open.** The plugin unlocks Amplitude's own overlay — `DebugOverlayManager`
+  reports itself disabled in retail and the plugin flips that — but **F2 still does not raise it** on V1.0.116,
+  because the manager that registers the key never starts. Set `NativeOverlay = false` to skip the patch. The
+  Insert window is unaffected either way.
+- **Built against V1.0.116.** Every game member is resolved by name and null-checked, so a future patch that renames
+  something disables that one control and logs a warning instead of breaking the plugin.
+- Cadavers and Spirits exist only for the factions that use them; those buttons are harmless elsewhere.
+
+---
+
+## Building from source
+
+Requires the [.NET SDK](https://dotnet.microsoft.com/download) and a copy of the game — it references the game's
+assemblies at compile time, and none of them are redistributed here.
+
+```bash
+python tools/build_plugin.py                 # build and install into BepInEx/plugins
+python tools/build_plugin.py --no-install    # build only
+```
+
+If the game is not at the default path:
+
+```bash
+python tools/build_plugin.py --game-dir "D:/SteamLibrary/steamapps/common/ENDLESS Legend 2"
+```
+
+### How it is put together
+
+**Writes go through the game's order system.** `Amplitude.Mercury.Interop` holds ~110 public `EditorOrder*` types
+plus the god/cheat orders, and `SandboxManager.PostOrder` enqueues them onto a thread-safe queue the simulation
+drains and validates. That is the whole of `Orders.cs`.
+
+**Reads use reflection**, because `Sandbox`, `Empire`, `Hero`, `Settlement` and `Army` are all `internal`. `Sim.cs`
+is that bridge.
+
+Two things are not orders. The yield multipliers are Harmony patches on the `Gain*` methods, because no order scales
+per-turn income. The battle cheats call `BattleDebug.SetCheat` directly with `writeRegistry: false`.
+
+Names and rarities come from the live datatables: each definition is paired with its `UIMapper` by element name and
+the mapper's `%Key` title resolved through `ILocalizationService`, so lists follow your language and pick up
+anything a data mod adds.
 
 ```
-python tools/build_plugin.py            # dotnet build (net472) → BepInEx/plugins/DevConsole.dll
-python tools/install_mod.py --uninstall # remove the data mod so its every-turn dialog stops appearing
+plugin/DevConsole/
+  Plugin.cs        entry point, hotkey
+  Orders.cs        order dispatch          Sim.cs      reflection reads
+  Catalog.cs       names, rarities, sort   Patches.cs  yield multipliers
+  DebugOverlay.cs  native overlay unlock
+  Cheats/          one file per tab's actions
+  Ui/              Theme.cs, Widgets.cs, Window.cs, one Tab*.cs per tab
+tools/             build and install scripts
+mod/DevConsole/    a separate data-only mod (see below)
+docs/plans/        design notes and the research behind it
 ```
 
-Requires BepInEx 5.4 already installed in the game folder and a .NET SDK (`%USERPROFILE%\.dotnet` or on PATH).
-Installing parks every other plugin DLL into `BepInEx/plugins.disabled/` — the Nexus Resource Manager patches the
-same `Gain*` methods and would double the multipliers.
+---
 
-Press **Insert** (configurable) to open or hide the window. Eight tabs, everything applies on press:
+## The data-mod variant
 
-| Tab       | What it does                                                                                                                                                                                         |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Economy   | Set Dust / Influence / city cap to a typed value · add research · every strategic, luxury and special resource · unlock an era or a single named technology                                          |
-| Build     | **Instant build and instant recruit** — complete any queued item free and immediately, per settlement or across the empire                                                                           |
-| Heroes    | Roster dropdown with an **apply-to-all** toggle · give skill points · raise stats · give XP · heal · draw N heroes at a chosen level range · recruit them · spawn any named hero at the hovered tile |
-| Equipment | Stash listing · add any of the 177 equipment definitions (filterable, or in bulk) · equip to a hero, unequip per slot · clear everything                                                             |
-| World     | Targets **the tile under your mouse** — spawn any unit, found a city or camp, teleport an army, set god speed, reveal the whole map, collect every curiosity                                         |
-| Diplomacy | Force war / peace / treaties / surrender · war score · meet everybody · pacify minor empires · pick a victory path · **switch which empire you play**                                                |
-| Battle    | Amplitude's own seven cheats — infinite movement, infinite action tokens, infinite battle skills, ignore zone of control / round count / empire playing, line-of-sight debug                         |
-| Yields    | Per-turn multipliers (×2…×1000) for Dust, Industry, Science, Influence, plus instant build/research                                                                                                  |
+`mod/DevConsole/` is a **separate** version built only from the official JSON modding path — no code injection, so
+it could be shared on the Steam Workshop. It is far more limited: the console appears as an every-turn event dialog
+with at most four buttons per page, and each action needs a confirm click.
 
-The window is styled to sit with the game rather than look like a debug overlay: opaque slate panels, teal
-section headers, amber values, a two-row tab bar and one shared label column so every field and button lines up.
-`Ui/Theme.cs` builds the whole skin from generated textures, so there are no art assets to ship. `WindowHeight`
-and `UiScale` in the config control the size.
+The plugin replaces it. Use this only if you specifically need a no-injection mod:
 
-### How it works
-
-**Writes go through the game's own order system.** Amplitude shipped their in-house editor in the retail build and
-left it `public`: ~110 `EditorOrder*` types plus the god/cheat orders in `Amplitude.Mercury.Interop`, dispatched by
-`SandboxManager.PostOrder`, which enqueues onto a thread-safe queue that the simulation drains and validates. So the
-console is not injecting values behind the game's back — it asks the simulation the same way the developers' editor
-did. `Orders.cs` is the whole dispatch layer.
-
-**Reads still use reflection**, because `Sandbox`, `Empire`, `Hero`, `Settlement` and `Army` are all `internal`.
-`Sim.cs` is that bridge, and every member is resolved by name and null-checked, so a rename on a future patch
-disables one control instead of breaking the plugin.
-
-Two things are _not_ orders. Yield multipliers stay Harmony patches on the `Gain*` methods because no order scales
-per-turn income — and since orders are processed asynchronously, a console "+research" is multiplied too if the
-Science multiplier is on. Battle cheats call `BattleDebug.SetCheat` directly with `writeRegistry: false`, so they
-never outlive the session.
-
-Lists are ordered **best first** — Legendary equipment, highest-tier units and heroes, latest-era technologies —
-then alphabetically, because reaching for something powerful is the common case. Each row carries its tier
-("Legendary", "Tier 3", "Era 4") and equipment is tinted with the rarity's own colour, taken from the game's
-rarity mapper rather than a hardcoded palette.
-
-Dropdowns show the game's **real names** — "Scions' Charm", "Heart of Glassteel" — not element ids. Each
-definition is paired with its `UIMapper` by element name (the convention the game's own data uses) and the
-mapper's `%Key` title is resolved through `ILocalizationService`, so the list follows your game language and any
-data mod. Filtering matches both the display name and the element id. Icons are deliberately absent: the mappers
-reference Amplitude virtual textures sampled by their own UI shader, which `GUI.DrawTextureWithTexCoords` renders
-as blank white.
-
-Only your empire is affected: everything targets `Sandbox.LocalEmpireIndex`, which the game keeps current on
-hot-seat swaps. Dropdown contents come from the live datatables, so a game patch or a data mod is picked up
-automatically. Settings persist in `BepInEx/config/angelo.el2.devconsole.cfg`; `UiScale` defaults to auto (×2 at 4K).
-
-### Known gap — the native debug overlay
-
-The game also ships Amplitude's own debug-overlay UI, gated by `DebugOverlayManager.IsEnabled`, which is compiled to
-`return false`. The plugin patches that to `true` (config: `NativeOverlay`), and the patch applies — but **F2 does not
-bring the overlay up on V1.0.116**: `DebugOverlayManager` is a framework `Manager` whose start-up path registers the
-key binding, and it does not appear to run in the retail build. The IMGUI window above is unaffected. Set
-`NativeOverlay = false` to skip the patch entirely.
-
-Layout: `Plugin.cs` entry · `Ui/` window shell, shared widgets and one file per tab · `Cheats/` one file per area ·
-`Orders.cs` dispatch · `Catalog.cs` datatable names · `Sim.cs` reflection reads · `Patches.cs` yield multipliers ·
-`DebugOverlay.cs` the overlay unlock.
-
-## Data mod
-
-Six console pages appear **every turn** for human empires (AI never sees them). Each page is an event dialog
-with up to 4 buttons; one action per page per turn. Pick a button → **Confirm Path** → close the summary.
-
-| Page      | Buttons                                                                                                                  |
-| --------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Economy   | +10,000 Dust · +100,000 Dust · +10,000 Influence · +100,000 Influence                                                    |
-| Research  | +10,000 Research · +100,000 Research · Unlock Era I–III techs · Unlock Era IV–VII techs                                  |
-| Resources | +10,000 all Strategic · +10,000 all Luxury · +10,000 Cadavers & Spirits · +1,000 of everything (stock caps lifted first) |
-| Yields    | Yields ×10 · ×100 · ×1000 · ×1 (off) — Dust, Industry, Science, Influence, Food in every city                            |
-| Instant   | Instant build ON/OFF (Industry ×1000) · Instant research ON/OFF (Science ×1000)                                          |
-| Combat    | Invulnerable (10 turns) · One-hit kills (10 turns) · Both · +10,000 Dust                                                 |
-
-### Install
-
-```
-python tools/build_devconsole.py <export-dir>      # regenerate mod/DevConsole from spec/devconsole.py
-python tools/validate_mod.py  <export-dir>         # static checks against the game export
-python tools/install_mod.py --source mod/DevConsole [--park-bepinex]
-python tools/install_mod.py --uninstall            # remove it again
+```bash
+python tools/install_mod.py --source mod/DevConsole    # install
+python tools/install_mod.py --uninstall                # remove
 ```
 
-`<export-dir>` is the extracted `Public\ModdableAssets\assets_data.zip` (31k JSON files). The installer copies the
-mod to `%localappdata%\Amplitude Studios\Endless Legend 2\Modding\DevConsole` and writes `mod-configuration.json`.
-Start a **new game** after installing, updating or removing: saves keep references to mod elements, and a renamed or
-removed element crashes the loaded game. `--park-bepinex` moves any BepInEx plugin out of the way so it cannot
-confound numbers; `--restore-bepinex` puts it back.
+Start a **new game** after installing or removing it — saves keep references to its elements.
 
-### Adding a button
+---
 
-Edit `spec/devconsole.py` (pages → buttons → `(kind, *args)` effects), rebuild, validate, install. Kinds:
-`money`, `influence`, `research`, `unlock_era`, `resources`, `lift_caps`, `yields`, `yields_off`, `apply_status`,
-`remove_status`, `apply_status_on_units`. Max 4 buttons per page; every RawValue must stay below 2^31.
+## License
 
-### Known limits (all inherited from the data-only path)
-
-- The Select → **Confirm Path** two-step is the game's event UI; data cannot make a button apply on first click.
-- One action per page per turn. Pages that re-open in the same turn were tried three ways (consequence events
-  auto-confirm their first button; bus-triggered events never fired mid-turn); see `spike/`.
-- Multipliers stop at ×1000: the simulation uses Int32 fixed-point (×1000), so a stock or yield above 2,147,483
-  overflows. Dust/Influence stock caps at ≈2.1 M for the same reason. The plugin has the same ceiling.
-- Console statuses are hidden (no icon): the game refuses to start when a visible `StatusDefinition` has no
-  `StatusUIMapper` it can find, and mod-added mappers are not found by that check.
-- Cadavers/Spirits only exist for their factions; the buttons are harmless elsewhere.
-
-## Layout
-
-```
-plugin/DevConsole/         BepInEx plugin (C#, net472) — Ui/ tabs, Cheats/ one file per area
-tools/build_plugin.py      dotnet build + install into BepInEx/plugins (parks other plugins)
-spec/devconsole.py         the data-mod console, declaratively
-tools/odin.py              Odin SerializationNodes tree model (parse / serialize / re-id) — round-trips the whole export
-tools/el2mod/              exemplar loader, effect builders, asset builders
-tools/build_devconsole.py  spec -> mod/DevConsole
-tools/validate_mod.py      static checks
-tools/install_mod.py       install / uninstall / verify / park BepInEx
-mod/DevConsole/            generated data mod (committed: inspectable and uploadable as-is)
-spike/                     the hand-shaped experiments that established the mechanics (reference only)
-docs/plans/                plan of record
-```
+MIT — see [LICENSE](LICENSE). Unofficial; ENDLESS LEGEND is a trademark of Amplitude Studios / SEGA. No game assets
+are redistributed in this repository.
