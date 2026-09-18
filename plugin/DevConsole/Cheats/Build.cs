@@ -17,6 +17,7 @@ namespace DevConsole.Cheats
         {
             public string Name;
             public string Kind;      // city or camp
+            public int TileIndex;
             public SimulationEntityGUID Guid;
             public List<string> Queue;
 
@@ -32,6 +33,7 @@ namespace DevConsole.Cheats
                 {
                     Name = Sim.NameOf(entry.Value, entry.Key),
                     Kind = entry.Key,
+                    TileIndex = Traverse.Create(entry.Value).Field<int>("WorldPosition").Value,
                     Guid = Sim.GuidOf(entry.Value),
                     Queue = QueueOf(entry.Value),
                 });

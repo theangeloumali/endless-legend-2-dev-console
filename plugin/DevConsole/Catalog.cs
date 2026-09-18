@@ -37,6 +37,17 @@ namespace DevConsole
         public static Entry[] Heroes => Entries<HeroDefinition, HeroUnitUIMapper>(UnitTier);
         public static Entry[] Units => Entries<UnitDefinition, UnitUIMapper>(UnitTier);
         public static Entry[] Technologies => Entries<TechnologyDefinition, TechnologyUIMapper>(Era);
+        public static Entry[] Districts => Entries<DistrictDefinition, ConstructibleUIMapper>(UnitTier);
+        public static Entry[] Improvements => Entries<DistrictImprovementDefinition, ConstructibleUIMapper>(UnitTier);
+        public static Entry[] Wonders => Entries<ArtificialWonderDefinition, UIMapper>(None);
+        public static Entry[] Quests => Entries<QuestDefinition, UIMapper>(None);
+        public static Entry[] Populations => Entries<PopulationDefinition, PopulationUIMapper>(None);
+        public static Entry[] Statuses => Entries<StatusDefinition, StatusUIMapper>(None);
+
+        /// <summary>Catalogues with no meaningful ordering fall back to alphabetical.</summary>
+        private static void None<T>(T definition, Entry entry)
+        {
+        }
 
         /// <summary>Rarity drives both the order and the colour, taken from the rarity's own UIMapper so the
         /// console matches whatever palette the game uses.</summary>

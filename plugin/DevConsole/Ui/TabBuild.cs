@@ -10,7 +10,10 @@ namespace DevConsole.Ui
     {
         private List<Build.Site> sites = new List<Build.Site>();
         private Vector2 scroll;
+        private readonly Widgets.Dropdown population2 = new Widgets.Dropdown("Kind");
+        private readonly Widgets.Dropdown improvement = new Widgets.Dropdown("Improvement");
         private string approval = "100";
+        private string population = "5";
         private int selected;
 
         public string Title => "Build";
@@ -62,6 +65,25 @@ namespace DevConsole.Ui
             Widgets.Button("Clear every city", Build.ClearApprovalEverywhere);
             GUILayout.EndHorizontal();
             Widgets.Hint("Adds to the city's approval each press; Clear resets the bonus back to zero.");
+
+            Widgets.Section("Population");
+            Widgets.ValueButton("Population", ref population, "Add to this city",
+                                amount => EmpireCheats.AddPopulation(site, site.TileIndex, amount));
+            population2.Draw(Catalog.Populations, 140f);
+            var pop = population2.Selected(Catalog.Populations);
+            GUILayout.BeginHorizontal();
+            Widgets.Button(pop == null ? "Pick a population" : "Add " + pop.Display,
+                           () => EmpireCheats.AddSpecificPopulation(site, pop.Name), pop != null);
+            Widgets.Button("Buy with money", () => EmpireCheats.BuyPopulationWithMoney(site, pop.Name), pop != null);
+            Widgets.Button("Buy with cadavers", () => EmpireCheats.BuyPopulationWithCadavers(site));
+            GUILayout.EndHorizontal();
+
+            Widgets.Section("District improvement");
+            improvement.Draw(Catalog.Improvements, 140f);
+            var imp = improvement.Selected(Catalog.Improvements);
+            Widgets.Button(imp == null ? "Pick an improvement"
+                                       : World.HasTile ? $"Place {imp.Display} at tile #{World.HoveredTile}" : "Hover a district tile",
+                           () => EmpireCheats.SetImprovement(site, imp.Name, World.HoveredTile), imp != null && World.HasTile);
 
             Widgets.Section("Unit limits");
             GUILayout.BeginHorizontal();

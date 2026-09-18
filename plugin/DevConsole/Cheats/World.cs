@@ -58,6 +58,49 @@ namespace DevConsole.Cheats
         public static void SetSpeed(ArmyEntry army, int speed) =>
             Orders.Post(new EditorOrderSetGodSpeed { ArmyGUID = army.Guid, Speed = speed }, $"{army.Name} speed = {speed}");
 
+        public static void CreateDistrict(string definitionName, int tileIndex) =>
+            Orders.Post(new EditorOrderCreateDistrictAt { DistrictDefinitionName = new StaticString(definitionName), TileIndex = tileIndex },
+                        $"district {definitionName} at tile {tileIndex}");
+
+        public static void CreateWonder(string definitionName, int tileIndex) =>
+            Orders.Post(new EditorOrderCreateArtificialWonderAt { ArtificialWonderDefinitionName = new StaticString(definitionName), TileIndex = tileIndex },
+                        $"wonder {definitionName} at tile {tileIndex}");
+
+        public static void PlantForest(int tileIndex) =>
+            Orders.Post(new EditorOrderPlantForest { DestinationTileIndex = tileIndex }, $"plant forest at tile {tileIndex}");
+
+        public static void CutForest(int tileIndex) =>
+            Orders.Post(new EditorOrderCutForest { DestinationTileIndex = tileIndex, EmpireIndex = Sim.LocalEmpireIndex },
+                        $"cut forest at tile {tileIndex}");
+
+        public static void ClearMountain(int tileIndex) =>
+            Orders.Post(new EditorOrderClearMountain { DestinationTileIndex = tileIndex }, $"clear mountain at tile {tileIndex}");
+
+        public static void BuildBridge(int tileIndex) =>
+            Orders.Post(new EditorOrderBuildBridge { DestinationTileIndex = tileIndex, EmpireIndex = Sim.LocalEmpireIndex },
+                        $"bridge at tile {tileIndex}");
+
+        public static void BuildDam(int tileIndex) =>
+            Orders.Post(new EditorOrderBuildDam { DestinationTileIndex = tileIndex, EmpireIndex = Sim.LocalEmpireIndex },
+                        $"dam at tile {tileIndex}");
+
+        public static void RaiseSandRuin(int tileIndex) =>
+            Orders.Post(new EditorOrderRaiseSandRuinAt { EmpireIndex = Sim.LocalEmpireIndex, TileIndex = tileIndex },
+                        $"raise sand ruin at tile {tileIndex}");
+
+        public static void CreateVillage(int tileIndex) =>
+            Orders.Post(new EditorOrderCreateVillageAt { TileIndex = tileIndex }, $"village at tile {tileIndex}");
+
+        public static void DestroyVillage(int tileIndex) =>
+            Orders.Post(new EditorOrderDestroyVillageAt { TileIndex = tileIndex }, $"destroy village at tile {tileIndex}");
+
+        public static void PacifyVillage(int tileIndex) =>
+            Orders.Post(new EditorOrderPacifyVillageAt { MajorEmpireIndex = Sim.LocalEmpireIndex, TileIndex = tileIndex },
+                        $"pacify village at tile {tileIndex}");
+
+        public static void SpawnFromVillage(int tileIndex) =>
+            Orders.Post(new EditorOrderSpawnFromVillage { VillageTileIndex = tileIndex }, $"spawn from village at tile {tileIndex}");
+
         public static void CollectCuriosities() =>
             Orders.Post(new EditorOrderCollectAllCuriosities { MajorEmpireIndex = Sim.LocalEmpireIndex }, "collect all curiosities");
 

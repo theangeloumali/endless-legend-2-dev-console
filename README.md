@@ -51,13 +51,19 @@ you end up with exactly one million.
 Resources give you every strategic, luxury, Cadaver and Spirit in one press. Technologies unlock a whole era, or
 search for a single one by name.
 
-### Build — instant build, instant recruit, approval
+### Build — instant build, instant recruit, approval, population
 
 Press **Refresh settlements**, pick one, and complete anything in its queue **free and immediately**. Units are
 constructions in EL2, so this is how you instantly recruit an army. There is also a button to clear every
 settlement's queue at once.
 
-**Approval** sits at the bottom of the tab. Each press _adds_ to the city's approval (the game's own
+Cities **and camps** both appear here, labelled and counted.
+
+**Population** adds people to the selected settlement, or a specific population kind — with buy-with-money and
+buy-with-cadavers shortcuts. **District improvement** places a chosen improvement on the tile you are hovering.
+**Unit limits** lifts the one-per-world cap on unique units (the Chosen), and puts it back.
+
+**Approval** sits in the middle of the tab. Each press _adds_ to the city's approval (the game's own
 `GodApprovalDelta` cheat field, so it stacks), for the selected city or every city at once. **Clear** resets that
 bonus to zero. Unlike the rest of the console this one refreshes the city panel by itself.
 

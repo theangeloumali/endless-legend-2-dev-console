@@ -10,7 +10,7 @@ namespace DevConsole
     public sealed class Plugin : BaseUnityPlugin
     {
         public const string Guid = "angelo.el2.devconsole";
-        public const string Version = "1.2.0";
+        public const string Version = "1.3.0";
 
         private State state;
         private Window window;
@@ -28,6 +28,7 @@ namespace DevConsole
                 new TabEquipment(),
                 new TabWorld(),
                 new TabDiplomacy(),
+                new TabEmpire(),
                 new TabBattle(),
                 new TabYields(state),
             });
