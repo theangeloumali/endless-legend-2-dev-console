@@ -50,9 +50,17 @@ namespace DevConsole
             combat = new[] { new Control("Heal all armies", actions.HealArmies, actions.CanHeal) };
         }
 
+        /// <summary>IMGUI draws in raw pixels, so the window is scaled up on high-resolution screens. GUI.matrix
+        /// scales the mouse position too, so the rect stays in unscaled coordinates.</summary>
         public void Draw()
         {
+            var previous = GUI.matrix;
+            var scale = state.EffectiveUiScale;
+            GUI.matrix = Matrix4x4.Scale(new Vector3(scale, scale, 1f));
             rect = GUILayout.Window(Id, rect, Contents, title, GUILayout.MinWidth(560));
+            rect.x = Mathf.Clamp(rect.x, 0f, Screen.width / scale - 80f);
+            rect.y = Mathf.Clamp(rect.y, 0f, Screen.height / scale - 40f);
+            GUI.matrix = previous;
         }
 
         private void Contents(int id)

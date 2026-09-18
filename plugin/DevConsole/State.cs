@@ -10,6 +10,7 @@ namespace DevConsole
         public static readonly int[] MultiplierSteps = { 1, 2, 10, 100, 1000 };
 
         public readonly ConfigEntry<KeyboardShortcut> Hotkey;
+        public readonly ConfigEntry<float> UiScale;
         public readonly ConfigEntry<int> Amount;
         public readonly ConfigEntry<int> DustMultiplier;
         public readonly ConfigEntry<int> IndustryMultiplier;
@@ -23,6 +24,7 @@ namespace DevConsole
         public State(ConfigFile config)
         {
             Hotkey = config.Bind("General", "Hotkey", new KeyboardShortcut(KeyCode.Insert), "Shows / hides the console window.");
+            UiScale = config.Bind("General", "UiScale", 0f, "Window scale; 0 = auto from screen height (2 at 4K), so the window stays readable at high resolutions.");
             Amount = config.Bind("General", "Amount", 10_000, "Units added per resource button press.");
             DustMultiplier = config.Bind("Yields", "Dust", 1, "Multiplies Dust income (1 = off).");
             IndustryMultiplier = config.Bind("Yields", "Industry", 1, "Multiplies city production (1 = off).");
@@ -37,5 +39,9 @@ namespace DevConsole
 
         public int EffectiveIndustry => InstantBuild.Value ? InstantFactor : IndustryMultiplier.Value;
         public int EffectiveScience => InstantResearch.Value ? InstantFactor : ScienceMultiplier.Value;
+
+        /// <summary>Configured scale, or an auto value from screen height (1 at 1080p, ~2 at 4K) when set to 0.</summary>
+        public float EffectiveUiScale =>
+            UiScale.Value > 0f ? UiScale.Value : Mathf.Clamp(Mathf.Round(Screen.height / 1080f), 1f, 3f);
     }
 }
