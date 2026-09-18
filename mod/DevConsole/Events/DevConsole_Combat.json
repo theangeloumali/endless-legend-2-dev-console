@@ -153,7 +153,7 @@
             {
                 "Name": "",
                 "Entry": 12,
-                "Data": "3"
+                "Data": "4"
             },
             {
                 "Name": "",
@@ -208,12 +208,12 @@
             {
                 "Name": "Title",
                 "Entry": 1,
-                "Data": "+10,000 Dust"
+                "Data": "Invulnerable (10 turns)"
             },
             {
                 "Name": "Description",
                 "Entry": 1,
-                "Data": "Adds 10,000 Dust. [hub]"
+                "Data": "All your units get x1000 health for 10 turns."
             },
             {
                 "Name": "ChoiceDialog",
@@ -263,12 +263,12 @@
             {
                 "Name": "",
                 "Entry": 12,
-                "Data": "2"
+                "Data": "1"
             },
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "10|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveMoney, Amplitude.Mercury.Data"
+                "Data": "10|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyStatusOnEmpireArmiesUnits, Amplitude.Mercury.Data"
             },
             {
                 "Name": "SimulationEffectDescriptionOverride",
@@ -296,96 +296,6 @@
                 "Data": "Empire"
             },
             {
-                "Name": "Amount",
-                "Entry": 7,
-                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
-            },
-            {
-                "Name": "Constant",
-                "Entry": 7,
-                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
-            },
-            {
-                "Name": "RawValue",
-                "Entry": 3,
-                "Data": "10000000"
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "RpnDefinitionReference",
-                "Entry": 7,
-                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
-            },
-            {
-                "Name": "serializableElementName",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "SourceID",
-                "Entry": 1,
-                "Data": "Empire"
-            },
-            {
-                "Name": "TargetID",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "ShowTargets",
-                "Entry": 5,
-                "Data": "true"
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 7,
-                "Data": "11|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyStatus, Amplitude.Mercury.Data"
-            },
-            {
-                "Name": "SimulationEffectDescriptionOverride",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "UIMapperOverride",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "Hidden",
-                "Entry": 5,
-                "Data": "true"
-            },
-            {
-                "Name": "GainValues",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "TargetID",
-                "Entry": 1,
-                "Data": "Empire"
-            },
-            {
                 "Name": "StatusDefinition",
                 "Entry": 7,
                 "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
@@ -393,7 +303,7 @@
             {
                 "Name": "serializableElementName",
                 "Entry": 1,
-                "Data": "Status_Dev_Flag_Console"
+                "Data": "Status_Dev_Invulnerable"
             },
             {
                 "Name": "",
@@ -408,7 +318,7 @@
             {
                 "Name": "InitiatorType",
                 "Entry": 3,
-                "Data": "7"
+                "Data": "0"
             },
             {
                 "Name": "",
@@ -438,7 +348,7 @@
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "12|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
+                "Data": "11|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
             },
             {
                 "Name": "Image",
@@ -488,12 +398,12 @@
             {
                 "Name": "Title",
                 "Entry": 1,
-                "Data": "+10,000 Influence"
+                "Data": "One-hit kills (10 turns)"
             },
             {
                 "Name": "Description",
                 "Entry": 1,
-                "Data": "Adds 10,000 Influence. [hub]"
+                "Data": "All your units deal +9,999 damage for 10 turns."
             },
             {
                 "Name": "ChoiceDialog",
@@ -518,7 +428,7 @@
             {
                 "Name": "Prerequisites",
                 "Entry": 7,
-                "Data": "13|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
+                "Data": "12|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
@@ -538,287 +448,7 @@
             {
                 "Name": "SimulationEventEffects",
                 "Entry": 7,
-                "Data": "14|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
-            },
-            {
-                "Name": "",
-                "Entry": 12,
-                "Data": "2"
-            },
-            {
-                "Name": "",
-                "Entry": 7,
-                "Data": "15|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveInfluence, Amplitude.Mercury.Data"
-            },
-            {
-                "Name": "SimulationEffectDescriptionOverride",
-                "Entry": 1,
-                "Data": ""
-            },
-            {
-                "Name": "UIMapperOverride",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "Hidden",
-                "Entry": 5,
-                "Data": "false"
-            },
-            {
-                "Name": "GainValues",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "TargetID",
-                "Entry": 1,
-                "Data": "Empire"
-            },
-            {
-                "Name": "Amount",
-                "Entry": 7,
-                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
-            },
-            {
-                "Name": "Constant",
-                "Entry": 7,
-                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
-            },
-            {
-                "Name": "RawValue",
-                "Entry": 3,
-                "Data": "10000000"
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "RpnDefinitionReference",
-                "Entry": 7,
-                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
-            },
-            {
-                "Name": "serializableElementName",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "SourceID",
-                "Entry": 1,
-                "Data": "Empire"
-            },
-            {
-                "Name": "TargetID",
-                "Entry": 1,
-                "Data": "Empire"
-            },
-            {
-                "Name": "ShowTargets",
-                "Entry": 5,
-                "Data": "true"
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 7,
-                "Data": "16|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyStatus, Amplitude.Mercury.Data"
-            },
-            {
-                "Name": "SimulationEffectDescriptionOverride",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "UIMapperOverride",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "Hidden",
-                "Entry": 5,
-                "Data": "true"
-            },
-            {
-                "Name": "GainValues",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "TargetID",
-                "Entry": 1,
-                "Data": "Empire"
-            },
-            {
-                "Name": "StatusDefinition",
-                "Entry": 7,
-                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
-            },
-            {
-                "Name": "serializableElementName",
-                "Entry": 1,
-                "Data": "Status_Dev_Flag_Console"
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "Duration",
-                "Entry": 3,
-                "Data": "-1"
-            },
-            {
-                "Name": "InitiatorType",
-                "Entry": 3,
-                "Data": "7"
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 13,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "Notes",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 7,
-                "Data": "17|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
-            },
-            {
-                "Name": "Image",
-                "Entry": 7,
-                "Data": "Amplitude.UI.UITexture, Amplitude.UI"
-            },
-            {
-                "Name": "guid",
-                "Entry": 7,
-                "Data": "Amplitude.Framework.Guid, Amplitude.Framework"
-            },
-            {
-                "Name": "a",
-                "Entry": 3,
-                "Data": "0"
-            },
-            {
-                "Name": "b",
-                "Entry": 3,
-                "Data": "0"
-            },
-            {
-                "Name": "c",
-                "Entry": 3,
-                "Data": "0"
-            },
-            {
-                "Name": "d",
-                "Entry": 3,
-                "Data": "0"
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "virtualTextureKeyHash",
-                "Entry": 3,
-                "Data": "0"
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "Title",
-                "Entry": 1,
-                "Data": "Close"
-            },
-            {
-                "Name": "Description",
-                "Entry": 1,
-                "Data": "Closes the console until next turn."
-            },
-            {
-                "Name": "ChoiceDialog",
-                "Entry": 7,
-                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
-            },
-            {
-                "Name": "serializableElementName",
-                "Entry": 6,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "Instant",
-                "Entry": 5,
-                "Data": "true"
-            },
-            {
-                "Name": "Prerequisites",
-                "Entry": 7,
-                "Data": "18|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
-            },
-            {
-                "Name": "",
-                "Entry": 12,
-                "Data": "0"
-            },
-            {
-                "Name": "",
-                "Entry": 13,
-                "Data": ""
-            },
-            {
-                "Name": "",
-                "Entry": 8,
-                "Data": ""
-            },
-            {
-                "Name": "SimulationEventEffects",
-                "Entry": 7,
-                "Data": "19|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
+                "Data": "13|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
@@ -828,7 +458,7 @@
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "20|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_RemoveStatus, Amplitude.Mercury.Data"
+                "Data": "14|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyStatusOnEmpireArmiesUnits, Amplitude.Mercury.Data"
             },
             {
                 "Name": "SimulationEffectDescriptionOverride",
@@ -843,7 +473,7 @@
             {
                 "Name": "Hidden",
                 "Entry": 5,
-                "Data": "true"
+                "Data": "false"
             },
             {
                 "Name": "GainValues",
@@ -863,7 +493,487 @@
             {
                 "Name": "serializableElementName",
                 "Entry": 1,
-                "Data": "Status_Dev_Flag_Console"
+                "Data": "Status_Dev_OneHit"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Duration",
+                "Entry": 3,
+                "Data": "-1"
+            },
+            {
+                "Name": "InitiatorType",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Notes",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "15|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Image",
+                "Entry": 7,
+                "Data": "Amplitude.UI.UITexture, Amplitude.UI"
+            },
+            {
+                "Name": "guid",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.Guid, Amplitude.Framework"
+            },
+            {
+                "Name": "a",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "b",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "c",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "d",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "virtualTextureKeyHash",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Title",
+                "Entry": 1,
+                "Data": "Both (10 turns)"
+            },
+            {
+                "Name": "Description",
+                "Entry": 1,
+                "Data": "Invulnerable and one-hit kills for 10 turns."
+            },
+            {
+                "Name": "ChoiceDialog",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Instant",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "Prerequisites",
+                "Entry": 7,
+                "Data": "16|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SimulationEventEffects",
+                "Entry": 7,
+                "Data": "17|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "2"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "18|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyStatusOnEmpireArmiesUnits, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "StatusDefinition",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "Status_Dev_Invulnerable"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Duration",
+                "Entry": 3,
+                "Data": "-1"
+            },
+            {
+                "Name": "InitiatorType",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "19|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyStatusOnEmpireArmiesUnits, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "StatusDefinition",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "Status_Dev_OneHit"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Duration",
+                "Entry": 3,
+                "Data": "-1"
+            },
+            {
+                "Name": "InitiatorType",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Notes",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "20|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Image",
+                "Entry": 7,
+                "Data": "Amplitude.UI.UITexture, Amplitude.UI"
+            },
+            {
+                "Name": "guid",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.Guid, Amplitude.Framework"
+            },
+            {
+                "Name": "a",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "b",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "c",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "d",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "virtualTextureKeyHash",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Title",
+                "Entry": 1,
+                "Data": "+10,000 Dust"
+            },
+            {
+                "Name": "Description",
+                "Entry": 1,
+                "Data": "Adds 10,000 Dust to the treasury."
+            },
+            {
+                "Name": "ChoiceDialog",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Instant",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "Prerequisites",
+                "Entry": 7,
+                "Data": "21|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SimulationEventEffects",
+                "Entry": 7,
+                "Data": "22|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "1"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "23|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveMoney, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
             },
             {
                 "Name": "",
@@ -912,10 +1022,10 @@
         "DownloadableContent": 0
     },
     "Category": {
-        "serializableElementName": "NarrativeEventCategory_DevConsole_Hub"
+        "serializableElementName": "NarrativeEventCategory_DevConsole_Combat"
     },
     "EventDialog": {
-        "serializableElementName": "DevConsole_Hub_Dialog"
+        "serializableElementName": "DevConsole_Combat_Dialog"
     },
     "IsKeyNarrativeBeat": false,
     "IsNarrativeVictoryPathChoiceEvent": false,
@@ -929,7 +1039,7 @@
         },
         "virtualTextureKeyHash": 0
     },
-    "Title": "Dev Console",
-    "Description": "Dev Console - pick an action.",
+    "Title": "Dev Console: Combat",
+    "Description": "Combat cheats - 10 turns each.",
     "GeoLocalizationID": "Empire"
 }

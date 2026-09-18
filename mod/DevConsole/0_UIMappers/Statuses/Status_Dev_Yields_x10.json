@@ -1,0 +1,52 @@
+{
+    "AMP_SERIALIZATION_HEADER": {
+        "Version": 0,
+        "AssetTypeName": "Amplitude.Mercury.UI.StatusUIMapper, Amplitude.Mercury.Data, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "SourceElementName": "Status_Empire_Approval_High"
+    },
+    "RawTitle": "Dev Console: yields x10",
+    "Description": "",
+    "Lore": "",
+    "Images": [
+        {
+            "Value": {
+                "guid": {
+                    "a": -167055044,
+                    "b": 1236182671,
+                    "c": -1757729644,
+                    "d": -1574098656
+                },
+                "virtualTextureKeyHash": 0
+            },
+            "serializableKey": "Picto"
+        }
+    ],
+    "UIColor": {
+        "paletteGuid": {
+            "a": 370195983,
+            "b": 1084969878,
+            "c": -597340508,
+            "d": -1402406107
+        },
+        "colorGuid": {
+            "a": 276605842,
+            "b": 1284452941,
+            "c": 405408701,
+            "d": -412735930
+        },
+        "freeColor": {
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 0.0
+        },
+        "modifierHolder": {
+            "isEnabled": false,
+            "alpha": 0.0
+        }
+    },
+    "Symbol": "[PublicOrderColored]",
+    "OptionalTag": "",
+    "SortPriority": 0,
+    "LocalizationLines": []
+}

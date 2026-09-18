@@ -1,0 +1,37 @@
+{
+    "AMP_SERIALIZATION_HEADER": {
+        "Version": 0,
+        "AssetTypeName": "Amplitude.Mercury.Data.Simulation.StatusDefinition, Amplitude.Mercury.Data, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "SourceElementName": "Status_Unit_Map_Damage_Gain01"
+    },
+    "OnlyUsedByCode": false,
+    "StatusPriority": 1,
+    "Hidden": true,
+    "ShouldBeShownInBattleUI": false,
+    "ShouldBeShownOnParent": false,
+    "BattlePriority": 0,
+    "CityBaseLayerAudioEvent": {
+        "guid": {
+            "a": 0,
+            "b": 0,
+            "c": 0,
+            "d": 0
+        }
+    },
+    "CityMutedAudioLayers": 0,
+    "Group": {
+        "serializableElementName": "UnitStatusBonus"
+    },
+    "Descriptor": {
+        "serializableElementName": "Descriptor_Dev_Invulnerable"
+    },
+    "CostModifier": {
+        "serializableElementName": ""
+    },
+    "StartingType": "Amplitude.Mercury.Simulation.Unit, Amplitude.Mercury.Firstpass",
+    "InhibitedByStatus": [],
+    "CancelOnApplyStatus": [],
+    "DefaultDuration": 10,
+    "IgnoreGameSpeed": true,
+    "AIUnitAbility": 0
+}

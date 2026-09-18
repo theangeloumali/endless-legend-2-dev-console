@@ -1,0 +1,34 @@
+{
+    "AMP_SERIALIZATION_HEADER": {
+        "Version": 0,
+        "AssetTypeName": "Amplitude.Framework.Simulation.Description.Descriptor, Amplitude.Framework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "SourceElementName": "StatusDescriptor_Unit_Map_Damage_Gain01"
+    },
+    "Effects": [
+        {
+            "ApplyEffectOnSource": false,
+            "Path": {
+                "PropertyToFollow": [],
+                "Validations": [],
+                "specificTargetType": ""
+            },
+            "PropertyEffects": [
+                {
+                    "Note": "",
+                    "TargetProperty": "DamageBonusFlat",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 9999000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                }
+            ],
+            "IgnorePropertyEffectLoopCheck": false
+        }
+    ],
+    "serializableCategory": "",
+    "startingType": "Amplitude.Mercury.Simulation.Unit, Amplitude.Mercury.Firstpass"
+}

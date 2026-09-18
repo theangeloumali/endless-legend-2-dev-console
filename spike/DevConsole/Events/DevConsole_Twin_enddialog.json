@@ -28,7 +28,7 @@
             {
                 "Name": "PreventEventRemoval",
                 "Entry": 5,
-                "Data": "false"
+                "Data": "true"
             },
             {
                 "Name": "SimulationEventTrigger",
@@ -43,7 +43,7 @@
             {
                 "Name": "SimulationEvent",
                 "Entry": 1,
-                "Data": "Amplitude.Mercury.Simulation.SimulationEvent_TurnBegin, Amplitude.Mercury.Firstpass"
+                "Data": "Amplitude.Mercury.Simulation.SimulationEvent_EndDialogue, Amplitude.Mercury.Firstpass"
             },
             {
                 "Name": "Signature",
@@ -88,12 +88,47 @@
             {
                 "Name": "Filter",
                 "Entry": 7,
-                "Data": "4|Amplitude.Mercury.Data.Simulation.SimulationVariableFilterEmpireIsPlayedByAI, Amplitude.Mercury.Data"
+                "Data": "4|Amplitude.Mercury.Data.Simulation.SimulationVariableFilterEntityDescriptor, Amplitude.Mercury.Data"
             },
             {
                 "Name": "IsInverted",
                 "Entry": 5,
-                "Data": "true"
+                "Data": "false"
+            },
+            {
+                "Name": "MustHaveOneOfDescriptors",
+                "Entry": 7,
+                "Data": "5|Amplitude.Framework.DatatableElementReference[], Amplitude.Framework"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "1"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "Descriptor_Dev_Flag_Console"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
             },
             {
                 "Name": "",
@@ -118,7 +153,7 @@
             {
                 "Name": "Variables",
                 "Entry": 7,
-                "Data": "5|Amplitude.Mercury.Data.Simulation.SimulationEventVariable[], Amplitude.Mercury.Data"
+                "Data": "6|Amplitude.Mercury.Data.Simulation.SimulationEventVariable[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
@@ -148,7 +183,7 @@
             {
                 "Name": "Choices",
                 "Entry": 7,
-                "Data": "6|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice[], Amplitude.Mercury.Data"
+                "Data": "7|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
@@ -158,7 +193,7 @@
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "7|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
+                "Data": "8|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
             },
             {
                 "Name": "Image",
@@ -213,7 +248,7 @@
             {
                 "Name": "Description",
                 "Entry": 1,
-                "Data": "Adds 10,000 Dust. [hub]"
+                "Data": "Adds 10,000 Dust. [enddialog]"
             },
             {
                 "Name": "ChoiceDialog",
@@ -238,7 +273,7 @@
             {
                 "Name": "Prerequisites",
                 "Entry": 7,
-                "Data": "8|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
+                "Data": "9|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
@@ -258,7 +293,7 @@
             {
                 "Name": "SimulationEventEffects",
                 "Entry": 7,
-                "Data": "9|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
+                "Data": "10|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
@@ -268,7 +303,7 @@
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "10|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveMoney, Amplitude.Mercury.Data"
+                "Data": "11|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveMoney, Amplitude.Mercury.Data"
             },
             {
                 "Name": "SimulationEffectDescriptionOverride",
@@ -358,7 +393,7 @@
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "11|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyStatus, Amplitude.Mercury.Data"
+                "Data": "12|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyStatus, Amplitude.Mercury.Data"
             },
             {
                 "Name": "SimulationEffectDescriptionOverride",
@@ -438,7 +473,7 @@
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "12|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
+                "Data": "13|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
             },
             {
                 "Name": "Image",
@@ -493,7 +528,7 @@
             {
                 "Name": "Description",
                 "Entry": 1,
-                "Data": "Adds 10,000 Influence. [hub]"
+                "Data": "Adds 10,000 Influence. [enddialog]"
             },
             {
                 "Name": "ChoiceDialog",
@@ -518,7 +553,7 @@
             {
                 "Name": "Prerequisites",
                 "Entry": 7,
-                "Data": "13|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
+                "Data": "14|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
@@ -538,7 +573,7 @@
             {
                 "Name": "SimulationEventEffects",
                 "Entry": 7,
-                "Data": "14|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
+                "Data": "15|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
@@ -548,7 +583,7 @@
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "15|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveInfluence, Amplitude.Mercury.Data"
+                "Data": "16|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveInfluence, Amplitude.Mercury.Data"
             },
             {
                 "Name": "SimulationEffectDescriptionOverride",
@@ -638,7 +673,7 @@
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "16|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyStatus, Amplitude.Mercury.Data"
+                "Data": "17|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyStatus, Amplitude.Mercury.Data"
             },
             {
                 "Name": "SimulationEffectDescriptionOverride",
@@ -718,7 +753,7 @@
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "17|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
+                "Data": "18|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
             },
             {
                 "Name": "Image",
@@ -798,7 +833,7 @@
             {
                 "Name": "Prerequisites",
                 "Entry": 7,
-                "Data": "18|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
+                "Data": "19|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
@@ -818,7 +853,7 @@
             {
                 "Name": "SimulationEventEffects",
                 "Entry": 7,
-                "Data": "19|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
+                "Data": "20|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
@@ -828,7 +863,7 @@
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "20|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_RemoveStatus, Amplitude.Mercury.Data"
+                "Data": "21|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_RemoveStatus, Amplitude.Mercury.Data"
             },
             {
                 "Name": "SimulationEffectDescriptionOverride",
@@ -912,10 +947,10 @@
         "DownloadableContent": 0
     },
     "Category": {
-        "serializableElementName": "NarrativeEventCategory_DevConsole_Hub"
+        "serializableElementName": "NarrativeEventCategory_DevConsole_Twin_enddialog"
     },
     "EventDialog": {
-        "serializableElementName": "DevConsole_Hub_Dialog"
+        "serializableElementName": "DevConsole_Twin_enddialog_Dialog"
     },
     "IsKeyNarrativeBeat": false,
     "IsNarrativeVictoryPathChoiceEvent": false,
@@ -929,7 +964,7 @@
         },
         "virtualTextureKeyHash": 0
     },
-    "Title": "Dev Console",
-    "Description": "Dev Console - pick an action.",
+    "Title": "Dev Console [enddialog]",
+    "Description": "Re-opened by enddialog.",
     "GeoLocalizationID": "Empire"
 }

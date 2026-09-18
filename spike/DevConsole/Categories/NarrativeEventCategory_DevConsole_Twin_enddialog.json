@@ -1,0 +1,29 @@
+{
+    "AMP_SERIALIZATION_HEADER": {
+        "Version": 0,
+        "AssetTypeName": "Amplitude.Mercury.Data.Simulation.NarrativeEventCategoryDefinition, Amplitude.Mercury.Data, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "SourceElementName": "NarrativeEventCategory_Collectible"
+    },
+    "IsObsolete": false,
+    "Priority": 100,
+    "Global": false,
+    "IsMandatorySkippable": false,
+    "IsOptional": false,
+    "NarrativeEventDefinitionDistribution": 1,
+    "NeedManualTrigger": false,
+    "RefillPoolWhenEmpty": true,
+    "MonsoonPrerequisite": 0,
+    "NumberOfTurnsInDeadZoneAfterTrigger": 0,
+    "DeadZoneAffectedByGameSpeed": false,
+    "InhibitedNarrativeEventCategories": [],
+    "NoUI": false,
+    "Picto": {
+        "guid": {
+            "a": 0,
+            "b": 0,
+            "c": 0,
+            "d": 0
+        },
+        "virtualTextureKeyHash": 0
+    }
+}

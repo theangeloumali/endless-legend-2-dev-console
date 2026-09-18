@@ -2,7 +2,7 @@
     "AMP_SERIALIZATION_HEADER": {
         "Version": 0,
         "AssetTypeName": "Amplitude.Mercury.Data.Simulation.DialogDefinition, Amplitude.Mercury.Data, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "SourceElementName": "Dialog_NarrativeEvent_Placeholder"
+        "SourceElementName": "Common_Tidefall_Event003"
     },
     "serializationData": {
         "SerializedFormat": 2,
@@ -23,7 +23,7 @@
             {
                 "Name": "",
                 "Entry": 12,
-                "Data": "1"
+                "Data": "2"
             },
             {
                 "Name": "",
@@ -38,7 +38,7 @@
             {
                 "Name": "Usage",
                 "Entry": 3,
-                "Data": "0"
+                "Data": "4"
             },
             {
                 "Name": "OverrideUsageFlag",
@@ -53,7 +53,7 @@
             {
                 "Name": "CollectionSelector",
                 "Entry": 3,
-                "Data": "1"
+                "Data": "3"
             },
             {
                 "Name": "SelectorCount",
@@ -132,6 +132,111 @@
             },
             {
                 "Name": "",
+                "Entry": 7,
+                "Data": "3|Amplitude.Mercury.Data.Simulation.NarrativeEventVariable_DialogCharacter, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Name",
+                "Entry": 1,
+                "Data": "Heffe"
+            },
+            {
+                "Name": "Usage",
+                "Entry": 3,
+                "Data": "4"
+            },
+            {
+                "Name": "OverrideUsageFlag",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "Optional",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CollectionSelector",
+                "Entry": 3,
+                "Data": "3"
+            },
+            {
+                "Name": "SelectorCount",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "HasCountCondition",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "CountConditionOperator",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "CountConditionValue",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "ElementFilters",
+                "Entry": 7,
+                "Data": "4|Amplitude.Mercury.Data.Simulation.SimulationVariableFilter[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SortPropertyName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "SortOrder",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "EmpireID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "DialogCharacterDefinition",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "DialogCharacter_Tidefall_Event003_Heffe"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
                 "Entry": 13,
                 "Data": ""
             },
@@ -143,7 +248,7 @@
             {
                 "Name": "OptionalVariables",
                 "Entry": 7,
-                "Data": "3|Amplitude.Mercury.Data.Simulation.SimulationEventVariable[], Amplitude.Mercury.Data"
+                "Data": "5|Amplitude.Mercury.Data.Simulation.SimulationEventVariable[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
@@ -163,22 +268,37 @@
             {
                 "Name": "Steps",
                 "Entry": 7,
-                "Data": "4|Amplitude.Mercury.Data.Simulation.DialogDefinition_Step[], Amplitude.Mercury.Data"
+                "Data": "6|Amplitude.Mercury.Data.Simulation.DialogDefinition_Step[], Amplitude.Mercury.Data"
             },
             {
                 "Name": "",
                 "Entry": 12,
-                "Data": "1"
+                "Data": "2"
             },
             {
                 "Name": "",
                 "Entry": 7,
-                "Data": "5|Amplitude.Mercury.Data.Simulation.DialogLine, Amplitude.Mercury.Data"
+                "Data": "7|Amplitude.Mercury.Data.Simulation.DialogCameraFocus, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Variable",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "8|Amplitude.Mercury.Data.Simulation.DialogChoice, Amplitude.Mercury.Data"
             },
             {
                 "Name": "LocalizationVariables",
                 "Entry": 7,
-                "Data": "6|System.String[], mscorlib"
+                "Data": "9|System.String[], mscorlib"
             },
             {
                 "Name": "",
@@ -198,7 +318,7 @@
             {
                 "Name": "LeftCharacterVariable",
                 "Entry": 1,
-                "Data": "None"
+                "Data": "Leader"
             },
             {
                 "Name": "RightCharacterVariable",
@@ -213,7 +333,47 @@
             {
                 "Name": "LocalizationKey",
                 "Entry": 1,
-                "Data": "Applied."
+                "Data": "Resources - pick an action."
+            },
+            {
+                "Name": "LocalizedChoices",
+                "Entry": 7,
+                "Data": "10|System.String[], mscorlib"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "4"
+            },
+            {
+                "Name": "",
+                "Entry": 1,
+                "Data": "+10,000 all Strategic"
+            },
+            {
+                "Name": "",
+                "Entry": 1,
+                "Data": "+10,000 all Luxury"
+            },
+            {
+                "Name": "",
+                "Entry": 1,
+                "Data": "+10,000 Cadavers & Spirits"
+            },
+            {
+                "Name": "",
+                "Entry": 1,
+                "Data": "+1,000 of everything"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
             },
             {
                 "Name": "",

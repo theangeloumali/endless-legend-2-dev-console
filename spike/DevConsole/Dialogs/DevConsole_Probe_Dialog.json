@@ -333,7 +333,7 @@
             {
                 "Name": "LocalizationKey",
                 "Entry": 1,
-                "Data": "Dev Console - pick an action."
+                "Data": "Flag is set - the trait mechanism works."
             },
             {
                 "Name": "LocalizedChoices",
@@ -343,22 +343,12 @@
             {
                 "Name": "",
                 "Entry": 12,
-                "Data": "3"
+                "Data": "1"
             },
             {
                 "Name": "",
                 "Entry": 1,
-                "Data": "+10,000 Dust"
-            },
-            {
-                "Name": "",
-                "Entry": 1,
-                "Data": "+10,000 Influence"
-            },
-            {
-                "Name": "",
-                "Entry": 1,
-                "Data": "Close"
+                "Data": "OK"
             },
             {
                 "Name": "",

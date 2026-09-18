@@ -1,0 +1,37 @@
+{
+    "AMP_SERIALIZATION_HEADER": {
+        "Version": 0,
+        "AssetTypeName": "Amplitude.Mercury.Data.Simulation.StatusDefinition, Amplitude.Mercury.Data, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "SourceElementName": "Status_Empire_Approval_High"
+    },
+    "OnlyUsedByCode": false,
+    "StatusPriority": 0,
+    "Hidden": true,
+    "ShouldBeShownInBattleUI": false,
+    "ShouldBeShownOnParent": false,
+    "BattlePriority": 0,
+    "CityBaseLayerAudioEvent": {
+        "guid": {
+            "a": 0,
+            "b": 0,
+            "c": 0,
+            "d": 0
+        }
+    },
+    "CityMutedAudioLayers": 0,
+    "Group": {
+        "serializableElementName": "EmpireStatusBonus"
+    },
+    "Descriptor": {
+        "serializableElementName": "Descriptor_Dev_InstantResearch"
+    },
+    "CostModifier": {
+        "serializableElementName": ""
+    },
+    "StartingType": "Amplitude.Mercury.Simulation.MajorEmpire, Amplitude.Mercury.Firstpass",
+    "InhibitedByStatus": [],
+    "CancelOnApplyStatus": [],
+    "DefaultDuration": 2147483647,
+    "IgnoreGameSpeed": true,
+    "AIUnitAbility": 0
+}

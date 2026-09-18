@@ -1,0 +1,36 @@
+{
+    "AMP_SERIALIZATION_HEADER": {
+        "Version": 0,
+        "AssetTypeName": "Amplitude.Framework.Simulation.Description.Descriptor, Amplitude.Framework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "SourceElementName": "Effect_Status_Empire_DustLossPerCouncilor"
+    },
+    "Effects": [
+        {
+            "ApplyEffectOnSource": false,
+            "Path": {
+                "PropertyToFollow": [
+                    "Cities"
+                ],
+                "Validations": [],
+                "specificTargetType": ""
+            },
+            "PropertyEffects": [
+                {
+                    "Note": "",
+                    "TargetProperty": "ScienceGain",
+                    "ToTargetOperation": 4,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 999000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                }
+            ],
+            "IgnorePropertyEffectLoopCheck": false
+        }
+    ],
+    "serializableCategory": "Status",
+    "startingType": "Amplitude.Mercury.Simulation.MajorEmpire, Amplitude.Mercury.Firstpass"
+}

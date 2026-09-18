@@ -1,0 +1,298 @@
+{
+    "AMP_SERIALIZATION_HEADER": {
+        "Version": 0,
+        "AssetTypeName": "Amplitude.Framework.Simulation.Description.Descriptor, Amplitude.Framework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "SourceElementName": "Effect_Status_Empire_CurioLootImprove_High"
+    },
+    "Effects": [
+        {
+            "ApplyEffectOnSource": false,
+            "Path": {
+                "PropertyToFollow": [],
+                "Validations": [],
+                "specificTargetType": ""
+            },
+            "PropertyEffects": [
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource01MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource02MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource03MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource04MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource05MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource06MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource11MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource12MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource13MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource14MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource15MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource16MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource17MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource18MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource19MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource20MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource21MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource22MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource23MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource24MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource25MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource26MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                },
+                {
+                    "Note": "",
+                    "TargetProperty": "Resource28MaxStock",
+                    "ToTargetOperation": 0,
+                    "RpnOperationStack": [],
+                    "ConstantStack": [
+                        {
+                            "RawValue": 1000000000
+                        }
+                    ],
+                    "PropertyLocalName": []
+                }
+            ],
+            "IgnorePropertyEffectLoopCheck": false
+        }
+    ],
+    "serializableCategory": "Status",
+    "startingType": "Amplitude.Mercury.Simulation.MajorEmpire, Amplitude.Mercury.Firstpass"
+}

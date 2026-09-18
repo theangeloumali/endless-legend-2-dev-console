@@ -1,0 +1,62 @@
+{
+    "AMP_SERIALIZATION_HEADER": {
+        "Version": 0,
+        "AssetTypeName": "Amplitude.UI.UIMapper, Amplitude.UI, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "SourceElementName": "Effect_LastLord_NoRebellion"
+    },
+    "RawTitle": "Dev Console: one-hit kills",
+    "Description": "",
+    "Lore": "",
+    "Images": [
+        {
+            "Value": {
+                "guid": {
+                    "a": 1255629589,
+                    "b": 1341626172,
+                    "c": -175111507,
+                    "d": -1662543613
+                },
+                "virtualTextureKeyHash": 0
+            },
+            "serializableKey": "Picto"
+        },
+        {
+            "Value": {
+                "guid": {
+                    "a": 1255629589,
+                    "b": 1341626172,
+                    "c": -175111507,
+                    "d": -1662543613
+                },
+                "virtualTextureKeyHash": 0
+            },
+            "serializableKey": "Small"
+        }
+    ],
+    "UIColor": {
+        "paletteGuid": {
+            "a": 0,
+            "b": 0,
+            "c": 0,
+            "d": 0
+        },
+        "colorGuid": {
+            "a": 0,
+            "b": 0,
+            "c": 0,
+            "d": 0
+        },
+        "freeColor": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+        },
+        "modifierHolder": {
+            "isEnabled": false,
+            "alpha": 0.0
+        }
+    },
+    "Symbol": "",
+    "OptionalTag": ""
+}

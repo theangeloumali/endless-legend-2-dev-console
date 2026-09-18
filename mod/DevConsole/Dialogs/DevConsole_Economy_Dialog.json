@@ -333,7 +333,7 @@
             {
                 "Name": "LocalizationKey",
                 "Entry": 1,
-                "Data": "Dev Console - pick an action."
+                "Data": "Economy - pick an action."
             },
             {
                 "Name": "LocalizedChoices",
@@ -343,7 +343,7 @@
             {
                 "Name": "",
                 "Entry": 12,
-                "Data": "3"
+                "Data": "4"
             },
             {
                 "Name": "",
@@ -353,12 +353,17 @@
             {
                 "Name": "",
                 "Entry": 1,
+                "Data": "+100,000 Dust"
+            },
+            {
+                "Name": "",
+                "Entry": 1,
                 "Data": "+10,000 Influence"
             },
             {
                 "Name": "",
                 "Entry": 1,
-                "Data": "Close"
+                "Data": "+100,000 Influence"
             },
             {
                 "Name": "",

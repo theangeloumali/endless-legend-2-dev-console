@@ -10,7 +10,7 @@
     "IsMandatorySkippable": false,
     "IsOptional": false,
     "NarrativeEventDefinitionDistribution": 1,
-    "NeedManualTrigger": true,
+    "NeedManualTrigger": false,
     "RefillPoolWhenEmpty": true,
     "MonsoonPrerequisite": 0,
     "NumberOfTurnsInDeadZoneAfterTrigger": 0,

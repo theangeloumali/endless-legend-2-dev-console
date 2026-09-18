@@ -1,0 +1,5475 @@
+{
+    "AMP_SERIALIZATION_HEADER": {
+        "Version": 0,
+        "AssetTypeName": "Amplitude.Mercury.Data.Simulation.NarrativeEventDefinition, Amplitude.Mercury.Data, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "SourceElementName": "Council_CityManagement_Event001"
+    },
+    "serializationData": {
+        "SerializedFormat": 2,
+        "SerializedBytes": [],
+        "ReferencedUnityObjects": [],
+        "SerializedBytesString": "",
+        "Prefab": {
+            "instanceID": 0
+        },
+        "PrefabModificationsReferencedUnityObjects": [],
+        "PrefabModifications": [],
+        "SerializationNodes": [
+            {
+                "Name": "Trigger",
+                "Entry": 7,
+                "Data": "0|Amplitude.Mercury.Data.Simulation.NarrativeEventTrigger, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "ConsumeEventUponTrigger",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "PreventEventRemoval",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "SimulationEventTrigger",
+                "Entry": 7,
+                "Data": "1|Amplitude.Mercury.Data.Simulation.SimulationEventTrigger, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "IsNarrativeConsequence",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "SimulationEvent",
+                "Entry": 1,
+                "Data": "Amplitude.Mercury.Simulation.SimulationEvent_TurnBegin, Amplitude.Mercury.Firstpass"
+            },
+            {
+                "Name": "Signature",
+                "Entry": 7,
+                "Data": "2|System.Collections.Generic.List`1[[Amplitude.Mercury.Data.Simulation.NarrativeEventConsequenceVariableDeclaration, Amplitude.Mercury.Data]], mscorlib"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Prerequisites",
+                "Entry": 7,
+                "Data": "3|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "1"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "EntityID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Filter",
+                "Entry": 7,
+                "Data": "4|Amplitude.Mercury.Data.Simulation.SimulationVariableFilterEmpireIsPlayedByAI, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "IsInverted",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Variables",
+                "Entry": 7,
+                "Data": "5|Amplitude.Mercury.Data.Simulation.SimulationEventVariable[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Choices",
+                "Entry": 7,
+                "Data": "6|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "4"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "7|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Image",
+                "Entry": 7,
+                "Data": "Amplitude.UI.UITexture, Amplitude.UI"
+            },
+            {
+                "Name": "guid",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.Guid, Amplitude.Framework"
+            },
+            {
+                "Name": "a",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "b",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "c",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "d",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "virtualTextureKeyHash",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Title",
+                "Entry": 1,
+                "Data": "+10,000 all Strategic"
+            },
+            {
+                "Name": "Description",
+                "Entry": 1,
+                "Data": "Lifts stock caps and adds 10,000 of each strategic resource."
+            },
+            {
+                "Name": "ChoiceDialog",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Instant",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "Prerequisites",
+                "Entry": 7,
+                "Data": "8|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SimulationEventEffects",
+                "Entry": 7,
+                "Data": "9|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "7"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "10|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyDescriptor, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Descriptor",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "Descriptor_Dev_ResourceCap"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "11|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "12|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "13|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "2"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "14|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "3"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "15|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "4"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "16|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "5"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Notes",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "17|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Image",
+                "Entry": 7,
+                "Data": "Amplitude.UI.UITexture, Amplitude.UI"
+            },
+            {
+                "Name": "guid",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.Guid, Amplitude.Framework"
+            },
+            {
+                "Name": "a",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "b",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "c",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "d",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "virtualTextureKeyHash",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Title",
+                "Entry": 1,
+                "Data": "+10,000 all Luxury"
+            },
+            {
+                "Name": "Description",
+                "Entry": 1,
+                "Data": "Lifts stock caps and adds 10,000 of each luxury resource."
+            },
+            {
+                "Name": "ChoiceDialog",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Instant",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "Prerequisites",
+                "Entry": 7,
+                "Data": "18|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SimulationEventEffects",
+                "Entry": 7,
+                "Data": "19|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "17"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "20|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyDescriptor, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Descriptor",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "Descriptor_Dev_ResourceCap"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "21|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "10"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "22|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "11"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "23|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "12"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "24|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "13"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "25|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "14"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "26|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "15"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "27|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "16"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "28|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "17"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "29|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "18"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "30|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "19"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "31|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "20"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "32|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "21"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "33|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "22"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "34|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "23"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "35|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "24"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "36|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "25"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Notes",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "37|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Image",
+                "Entry": 7,
+                "Data": "Amplitude.UI.UITexture, Amplitude.UI"
+            },
+            {
+                "Name": "guid",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.Guid, Amplitude.Framework"
+            },
+            {
+                "Name": "a",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "b",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "c",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "d",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "virtualTextureKeyHash",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Title",
+                "Entry": 1,
+                "Data": "+10,000 Cadavers & Spirits"
+            },
+            {
+                "Name": "Description",
+                "Entry": 1,
+                "Data": "Adds 10,000 of each faction-specific resource."
+            },
+            {
+                "Name": "ChoiceDialog",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Instant",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "Prerequisites",
+                "Entry": 7,
+                "Data": "38|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SimulationEventEffects",
+                "Entry": 7,
+                "Data": "39|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "3"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "40|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyDescriptor, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Descriptor",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "Descriptor_Dev_ResourceCap"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "41|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "26"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "42|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "10000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "27"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Notes",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "43|Amplitude.Mercury.Data.Simulation.NarrativeEventChoice, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Image",
+                "Entry": 7,
+                "Data": "Amplitude.UI.UITexture, Amplitude.UI"
+            },
+            {
+                "Name": "guid",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.Guid, Amplitude.Framework"
+            },
+            {
+                "Name": "a",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "b",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "c",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "d",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "virtualTextureKeyHash",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Title",
+                "Entry": 1,
+                "Data": "+1,000 of everything"
+            },
+            {
+                "Name": "Description",
+                "Entry": 1,
+                "Data": "Lifts stock caps and adds 1,000 of every resource."
+            },
+            {
+                "Name": "ChoiceDialog",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Instant",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "Prerequisites",
+                "Entry": 7,
+                "Data": "44|Amplitude.Mercury.Data.Simulation.NarrativeEventPrerequisite[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SimulationEventEffects",
+                "Entry": 7,
+                "Data": "45|Amplitude.Mercury.Data.Simulation.SimulationEventEffect[], Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "",
+                "Entry": 12,
+                "Data": "25"
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "46|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_ApplyDescriptor, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Descriptor",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 1,
+                "Data": "Descriptor_Dev_ResourceCap"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "47|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "0"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "48|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "1"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "49|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "2"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "50|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "3"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "51|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "4"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "52|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "5"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "53|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "10"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "54|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "11"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "55|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "12"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "56|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "13"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "57|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "14"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "58|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "15"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "59|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "16"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "60|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "17"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "61|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "18"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "62|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "19"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "63|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "20"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "64|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "21"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "65|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "22"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "66|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "23"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "67|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "24"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "68|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "25"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "69|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "26"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 7,
+                "Data": "70|Amplitude.Mercury.Data.Simulation.SimulationEventEffect_AddOrRemoveResource, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "SimulationEffectDescriptionOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "UIMapperOverride",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "Hidden",
+                "Entry": 5,
+                "Data": "false"
+            },
+            {
+                "Name": "GainValues",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "Amount",
+                "Entry": 7,
+                "Data": "Amplitude.Mercury.Data.Simulation.CostDefinition, Amplitude.Mercury.Data"
+            },
+            {
+                "Name": "Constant",
+                "Entry": 7,
+                "Data": "Amplitude.FixedPoint, Amplitude.Framework"
+            },
+            {
+                "Name": "RawValue",
+                "Entry": 3,
+                "Data": "1000000"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "RpnDefinitionReference",
+                "Entry": 7,
+                "Data": "Amplitude.Framework.DatatableElementReference, Amplitude.Framework"
+            },
+            {
+                "Name": "serializableElementName",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "SourceID",
+                "Entry": 1,
+                "Data": "Empire"
+            },
+            {
+                "Name": "TargetID",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "ShowTargets",
+                "Entry": 5,
+                "Data": "true"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Resource",
+                "Entry": 3,
+                "Data": "27"
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "Notes",
+                "Entry": 6,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 13,
+                "Data": ""
+            },
+            {
+                "Name": "",
+                "Entry": 8,
+                "Data": ""
+            }
+        ]
+    },
+    "IsObsolete": false,
+    "DlcPrerequisite": {
+        "DownloadableContent": 0
+    },
+    "Category": {
+        "serializableElementName": "NarrativeEventCategory_DevConsole_Resources"
+    },
+    "EventDialog": {
+        "serializableElementName": "DevConsole_Resources_Dialog"
+    },
+    "IsKeyNarrativeBeat": false,
+    "IsNarrativeVictoryPathChoiceEvent": false,
+    "Notes": "",
+    "Image": {
+        "guid": {
+            "a": 0,
+            "b": 0,
+            "c": 0,
+            "d": 0
+        },
+        "virtualTextureKeyHash": 0
+    },
+    "Title": "Dev Console: Resources",
+    "Description": "Resources - pick an action.",
+    "GeoLocalizationID": "Empire"
+}

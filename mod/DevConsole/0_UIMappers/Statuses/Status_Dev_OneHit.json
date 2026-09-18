@@ -1,0 +1,52 @@
+{
+    "AMP_SERIALIZATION_HEADER": {
+        "Version": 0,
+        "AssetTypeName": "Amplitude.Mercury.UI.StatusUIMapper, Amplitude.Mercury.Data, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "SourceElementName": "Status_Unit_Map_Damage_Gain01"
+    },
+    "RawTitle": "Dev Console: one-hit kills",
+    "Description": "",
+    "Lore": "",
+    "Images": [
+        {
+            "Value": {
+                "guid": {
+                    "a": -1802866692,
+                    "b": 1291678959,
+                    "c": 1873033634,
+                    "d": 855858760
+                },
+                "virtualTextureKeyHash": 0
+            },
+            "serializableKey": "Picto"
+        }
+    ],
+    "UIColor": {
+        "paletteGuid": {
+            "a": 0,
+            "b": 0,
+            "c": 0,
+            "d": 0
+        },
+        "colorGuid": {
+            "a": 0,
+            "b": 0,
+            "c": 0,
+            "d": 0
+        },
+        "freeColor": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+        },
+        "modifierHolder": {
+            "isEnabled": false,
+            "alpha": 0.0
+        }
+    },
+    "Symbol": "[Status_Unit_Map_Damage_Gain01]",
+    "OptionalTag": "",
+    "SortPriority": 0,
+    "LocalizationLines": []
+}

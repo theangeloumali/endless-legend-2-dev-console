@@ -1,0 +1,9 @@
+{
+    "DisplayName": "Dev Console",
+    "Description": "In-game developer console for feature testing: add Dust, Influence, Research and every resource on demand; toggle yield multipliers, instant build and instant research; unlock eras; combat cheats. Human empires only. Data-only mod (official modding path).",
+    "Author": "Angelo",
+    "Version": "0.3.0",
+    "GameVersion": "1.0.116",
+    "Guid": "f2e01f3d-3281-5c71-b4af-e19d618eba16",
+    "SteamWorkshopId": ""
+}

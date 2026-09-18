@@ -333,7 +333,7 @@
             {
                 "Name": "LocalizationKey",
                 "Entry": 1,
-                "Data": "Dev Console - pick an action."
+                "Data": "Yield multiplier - pick a level."
             },
             {
                 "Name": "LocalizedChoices",
@@ -343,22 +343,27 @@
             {
                 "Name": "",
                 "Entry": 12,
-                "Data": "3"
+                "Data": "4"
             },
             {
                 "Name": "",
                 "Entry": 1,
-                "Data": "+10,000 Dust"
+                "Data": "Yields x10"
             },
             {
                 "Name": "",
                 "Entry": 1,
-                "Data": "+10,000 Influence"
+                "Data": "Yields x100"
             },
             {
                 "Name": "",
                 "Entry": 1,
-                "Data": "Close"
+                "Data": "Yields x1000"
+            },
+            {
+                "Name": "",
+                "Entry": 1,
+                "Data": "Yields x1 (off)"
             },
             {
                 "Name": "",
