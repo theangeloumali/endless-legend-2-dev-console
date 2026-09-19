@@ -124,28 +124,9 @@ namespace DevConsole.Ui
             GUILayout.EndHorizontal();
         }
 
-        /// <summary>Cycles through a short list in place. Used where a full dropdown would cost more room than the
-        /// handful of entries (heroes, settlements, armies) are worth.</summary>
-        public static int Picker<T>(string label, IList<T> items, int index, Func<T, string> describe)
-        {
-            if (items == null || items.Count == 0)
-            {
-                return 0;
-            }
-            index = Mathf.Clamp(index, 0, items.Count - 1);
-            GUILayout.BeginHorizontal();
-            GUILayout.Label(label, Theme.Label, GUILayout.Width(LabelWidth));
-            if (GUILayout.Button($"{describe(items[index])}    {index + 1}/{items.Count}  ▼", Theme.Button, GUILayout.Height(27)))
-            {
-                index = (index + 1) % items.Count;
-            }
-            GUILayout.EndHorizontal();
-            return index;
-        }
-
         /// <summary>IMGUI has no combo box. This draws the current choice as a button that expands into a
-        /// filterable, scrolling list — the only practical shape for the larger definition catalogues.
-        /// Rows show the player-facing title and icon; the caller reads Name for the order.</summary>
+        /// filterable, scrolling list — the only shape that works for both a 4-hero roster and 177 items.
+        /// Catalogue rows carry a tier and a rarity tint; a plain list supplies just a label.</summary>
         public sealed class Dropdown
         {
             private readonly string label;
@@ -162,39 +143,77 @@ namespace DevConsole.Ui
 
             public void Draw(Catalog.Entry[] items, float listHeight = 200f)
             {
+                var count = items == null ? 0 : items.Length;
                 var selected = Selected(items);
+                var current = selected == null
+                    ? (count == 0 ? "not loaded yet" : "select…")
+                    : (selected.Tier == null ? selected.Display : $"{selected.Tier}   {selected.Display}");
+                var picked = Expand(current, Index, count, listHeight,
+                                    i => items[i].Display + " " + items[i].Name,
+                                    (i, on) => Entry(items[i], on));
+                if (picked >= 0)
+                {
+                    Index = picked;
+                }
+            }
+
+            /// <summary>The same list over any collection — heroes, settlements, armies. The index stays with the
+            /// caller because those lists are rebuilt by Refresh, which resets the selection.</summary>
+            public int Draw<T>(IList<T> items, int index, Func<T, string> describe, float listHeight = 170f)
+            {
+                var count = items == null ? 0 : items.Count;
+                if (count == 0)
+                {
+                    Expand("none loaded", 0, 0, listHeight, i => string.Empty, (i, on) => false);
+                    return 0;
+                }
+                index = Mathf.Clamp(index, 0, count - 1);
+                var picked = Expand($"{describe(items[index])}     {index + 1}/{count}", index, count, listHeight,
+                                    i => describe(items[i]),
+                                    (i, on) => GUILayout.Button(describe(items[i]), on ? Theme.TabActive : Theme.Button,
+                                                                GUILayout.Height(25)));
+                return picked >= 0 ? picked : index;
+            }
+
+            /// <summary>Header button, filter box, scrolling rows. Returns the row clicked this frame, else -1.
+            /// Both Draw overloads share it, so a list can only ever expand — never cycle.</summary>
+            private int Expand(string current, int index, int count, float listHeight,
+                               Func<int, string> searchable, Func<int, bool, bool> row)
+            {
                 GUILayout.BeginHorizontal();
                 GUILayout.Label(label, Theme.Label, GUILayout.Width(LabelWidth));
-                var current = selected == null
-                    ? (items == null || items.Length == 0 ? "not loaded yet" : "select…")
-                    : (selected.Tier == null ? selected.Display : $"{selected.Tier}   {selected.Display}");
                 if (GUILayout.Button(current + "   ▼", open ? Theme.TabActive : Theme.Button, GUILayout.Height(27)))
                 {
                     open = !open;
                 }
                 GUILayout.EndHorizontal();
-                if (!open || items == null || items.Length == 0)
+                if (!open || count == 0)
                 {
-                    return;
+                    return -1;
                 }
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Filter", Theme.Label, GUILayout.Width(LabelWidth));
                 filter = GUILayout.TextField(filter, Theme.Field);
                 GUILayout.EndHorizontal();
+                var picked = -1;
                 scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(listHeight));
-                for (var i = 0; i < items.Length; i++)
+                for (var i = 0; i < count; i++)
                 {
-                    if (!Matches(items[i], filter))
+                    if (filter.Length > 0 && searchable(i).IndexOf(filter, StringComparison.OrdinalIgnoreCase) < 0)
                     {
                         continue;
                     }
-                    if (Entry(items[i], i == Index))
+                    if (row(i, i == index))
                     {
-                        Index = i;
-                        open = false;
+                        picked = i;
                     }
                 }
                 GUILayout.EndScrollView();
+                if (picked >= 0)
+                {
+                    open = false;  // collapse on choice, the behaviour a dropdown is expected to have
+                }
+                return picked;
             }
 
             /// <summary>One row: tier on the left, name tinted by rarity. Colour comes from the game's own mapper,

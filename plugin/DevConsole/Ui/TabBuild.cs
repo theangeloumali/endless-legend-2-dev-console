@@ -12,6 +12,7 @@ namespace DevConsole.Ui
         private Vector2 scroll;
         private readonly Widgets.Dropdown population2 = new Widgets.Dropdown("Kind");
         private readonly Widgets.Dropdown improvement = new Widgets.Dropdown("Improvement");
+        private readonly Widgets.Dropdown picker = new Widgets.Dropdown("Settlement");
         private string approval = "100";
         private string population = "5";
         private int selected;
@@ -35,7 +36,7 @@ namespace DevConsole.Ui
                 return;
             }
 
-            selected = Widgets.Picker("Settlement", sites, selected, site => site.Label);
+            selected = picker.Draw(sites, selected, site => site.Label);
             var site = sites[selected];
 
             if (site.Queue.Count == 0)

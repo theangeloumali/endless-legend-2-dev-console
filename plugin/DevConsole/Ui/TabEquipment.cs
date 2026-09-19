@@ -9,6 +9,7 @@ namespace DevConsole.Ui
     internal sealed class TabEquipment : ITab
     {
         private readonly Widgets.Dropdown definition = new Widgets.Dropdown("Equipment");
+        private readonly Widgets.Dropdown picker = new Widgets.Dropdown("Hero");
         private List<Equipment.Item> stash = new List<Equipment.Item>();
         private List<Heroes.Entry> roster = new List<Heroes.Entry>();
         private Vector2 scroll;
@@ -34,7 +35,7 @@ namespace DevConsole.Ui
 
             if (roster.Count > 0)
             {
-                hero = Widgets.Picker("Hero", roster, hero, entry => entry.Label);
+                hero = picker.Draw(roster, hero, entry => entry.Label);
             }
 
             Widgets.Section("Add to stash");

@@ -10,6 +10,7 @@ namespace DevConsole.Ui
         private readonly Widgets.Dropdown unit = new Widgets.Dropdown("Unit");
         private readonly Widgets.Dropdown district = new Widgets.Dropdown("District");
         private readonly Widgets.Dropdown wonder = new Widgets.Dropdown("Wonder");
+        private readonly Widgets.Dropdown picker = new Widgets.Dropdown("Army");
         private List<World.ArmyEntry> armies = new List<World.ArmyEntry>();
         private string speed = "99";
         private int selected;
@@ -51,7 +52,7 @@ namespace DevConsole.Ui
             Widgets.Button("Refresh armies", () => { armies = World.Armies(); selected = 0; });
             if (armies.Count > 0)
             {
-                selected = Widgets.Picker("Army", armies, selected, army => army.Name);
+                selected = picker.Draw(armies, selected, army => army.Name);
             }
             Widgets.Plot("Teleport selected army", t => World.Teleport(armies[selected], t), armies.Count > 0);
             Widgets.ValueButton("God speed", ref speed, "Set speed",

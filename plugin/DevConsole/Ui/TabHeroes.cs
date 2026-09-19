@@ -8,9 +8,10 @@ namespace DevConsole.Ui
     /// <summary>Hero screen: pick one hero, or tick "apply to all" to hit the whole roster.</summary>
     internal sealed class TabHeroes : ITab
     {
-        private readonly Widgets.Dropdown definition = new Widgets.Dropdown("Hero");
+        private readonly Widgets.Dropdown picker = new Widgets.Dropdown("Hero");
+        private readonly Widgets.Dropdown definition = new Widgets.Dropdown("Any hero");
         private List<Heroes.Entry> roster = new List<Heroes.Entry>();
-        private readonly string[] statBuffers = { "5", "5", "5", "5" };
+        private readonly string[] statBuffers = { "99", "99", "99", "99" };
         private string skillPoints = "10";
         private string experience = "10000";
         private string drawCount = "5";
@@ -34,7 +35,7 @@ namespace DevConsole.Ui
             }
             else
             {
-                selected = Widgets.Picker("Hero", roster, selected, hero => hero.Label);
+                selected = picker.Draw(roster, selected, hero => hero.Label);
                 GUILayout.Label(applyToAll ? $"applying to all {roster.Count} heroes" : $"HeroIndex #{roster[selected].Index}", Theme.Value);
             }
 
@@ -62,6 +63,8 @@ namespace DevConsole.Ui
             Widgets.Button("Heal", () => ForEachTarget(Heroes.Heal), roster.Count > 0);
             Widgets.Button("Dismiss", () => ForEachTarget(Heroes.Dismiss), roster.Count > 0);
             GUILayout.EndHorizontal();
+            Widgets.Hint("Heal is the game's paid recovery and it only accepts a hero reading WOUNDED — every row "
+                         + "above shows its state. A refusal is now named in the log instead of being swallowed.");
 
             Widgets.Section("Recruit");
             GUILayout.BeginHorizontal();
