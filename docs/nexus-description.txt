@@ -13,7 +13,7 @@ GeloDGreat Dev Console
 -------------------------------------------------------------------------------
  SUMMARY  (the short description field, shown in search results)
 -------------------------------------------------------------------------------
-An in-game developer console built on ENDLESS LEGEND 2's own editor commands. Press Insert for nine tabs: set Dust and Influence to any value, finish any build queue instantly, level heroes and hand them Legendary gear, click the map to place districts, armies and terrain, force wars, and switch which empire you play.
+An in-game developer console built on ENDLESS LEGEND 2's own editor commands. Press Insert for ten tabs: set Dust and Influence to any value, finish any build queue instantly, level heroes and hand them Legendary gear, click the map to place districts, armies and terrain, force wars, and switch which empire you play.
 
 
 -------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ An in-game developer console built on ENDLESS LEGEND 2's own editor commands. Pr
 
 [size=5][b]GeloDGreat Dev Console[/b][/size]
 
-An in-game developer console for [b]ENDLESS LEGEND 2[/b]. Press [b]Insert[/b] and you get a window with nine tabs — set your Dust to whatever you like, finish anything in a build queue instantly, hand your heroes levels and Legendary gear, click the map to plant forests or drop armies, force a war, or switch to playing another empire entirely.
+An in-game developer console for [b]ENDLESS LEGEND 2[/b]. Press [b]Insert[/b] and you get a window with ten tabs — set your Dust to whatever you like, finish anything in a build queue instantly, hand your heroes levels and Legendary gear, click the map to plant forests or drop armies, force a war, or switch to playing another empire entirely.
 
 [size=4][b]It uses the game's own developer tools[/b][/size]
 
