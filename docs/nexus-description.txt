@@ -34,6 +34,8 @@ That has a practical benefit: when the game [i]refuses[/i] something, the consol
 
 [size=4][b]What's in it[/b][/size]
 
+[b]Quick[/b] — the first tab, holding the switches you flip mid-game: infinite movement, infinite battle points, infinite battle skills, infinite battle (rounds never run out), instant construction and instant research. Large ON/OFF switches, a one-press turn-everything-on, and the immediate actions too — finish every build queue, unlock every era, add research now.
+
 [b]Economy[/b] — set Dust, Influence and city cap to an exact value. Every strategic, luxury and special resource in one press. Unlock a whole era or a single named technology.
 
 [b]Build[/b] — complete anything in a settlement's queue [b]free and immediately[/b]. Units are constructions in EL2, so this is instant recruit. Works on cities [i]and[/i] camps. Also approval, population, district improvements, and lifting the one-per-world cap on unique units.

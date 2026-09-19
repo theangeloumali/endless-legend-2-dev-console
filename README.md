@@ -47,6 +47,18 @@ a line for every action, which is the fastest way to see what happened.
 **Insert** opens and closes the window. Drag it by the title bar. Everything applies the moment you click — there
 is no confirm step.
 
+### Quick
+
+The first tab, and where the switches you flip mid-game live: **infinite movement**, **infinite battle points**,
+**infinite battle skills**, **infinite battle** (rounds never run out), plus **instant construction** and **instant
+research**. Large ON/OFF switches rather than checkboxes, a one-press _turn everything on/off_, and a count of
+what is currently live.
+
+It also gathers the genuinely immediate actions — finish every build queue, unlock every era, add research now —
+because the two instant _toggles_ only bite on your next turn, while these apply the moment you press them.
+Nothing here is exclusive to this tab; it is a shortcut to controls that also live on Battle, Yields, Build and
+Economy.
+
 ### Economy
 
 Type a number and press **Set**. These set an absolute value rather than adding, so `1000000` in the Dust box means

@@ -11,7 +11,7 @@ namespace DevConsole
     {
         public const string Guid = "angelo.el2.devconsole";  // unchanged: it names the config file
         public const string Name = "GeloDGreat Dev Console";
-        public const string Version = "1.6.0";
+        public const string Version = "1.7.0";
 
         private State state;
         private Window window;
@@ -24,6 +24,7 @@ namespace DevConsole
             Orders.Initialize(Logger);
             window = new Window(state, new ITab[]
             {
+                new TabQuick(state),
                 new TabEconomy(),
                 new TabBuild(),
                 new TabHeroes(),

@@ -7,7 +7,7 @@
     <AssemblyName>DevConsole</AssemblyName>
     <Product>GeloDGreat Dev Console</Product>
     <RootNamespace>DevConsole</RootNamespace>
-    <Version>1.6.0</Version>
+    <Version>1.7.0</Version>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

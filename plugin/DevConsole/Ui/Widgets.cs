@@ -82,6 +82,27 @@ namespace DevConsole.Ui
             GUILayout.EndHorizontal();
         }
 
+        /// <summary>A full-width switch that reads as on or off from across the room. The stock IMGUI checkbox is
+        /// a 12px square, which is the wrong affordance for the handful of toggles people flip constantly.</summary>
+        public static void BigToggle(string label, bool value, Action<bool> set, string note = null)
+        {
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button(value ? "  ON " : "  OFF", value ? Theme.TabActive : Theme.Button,
+                                 GUILayout.Width(70), GUILayout.Height(34)))
+            {
+                set(!value);
+            }
+            if (GUILayout.Button(label, value ? Theme.TabActive : Theme.Button, GUILayout.Height(34)))
+            {
+                set(!value);
+            }
+            GUILayout.EndHorizontal();
+            if (!string.IsNullOrEmpty(note))
+            {
+                GUILayout.Label(note, Theme.Hint);
+            }
+        }
+
         public static void Toggle(ConfigEntry<bool> entry) =>
             entry.Value = GUILayout.Toggle(entry.Value, entry.Description.Description, Theme.Toggle);
 
