@@ -11,7 +11,9 @@ their editor did, instead of writing values into memory behind the game's back.
 > Unofficial and not affiliated with Amplitude Studios or SEGA. Single-player testing tool — don't use it in
 > multiplayer against people who haven't agreed to it.
 
-![Game](https://img.shields.io/badge/game-V1.0.116-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+![Game](https://img.shields.io/badge/game-V1.0.116-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)
+
+**[Download the latest release](../../releases/latest)** · free and open source, MIT licensed · [report an issue](../../issues)
 
 ![The GeloDGreat Dev Console running in ENDLESS LEGEND 2](docs/images/console.png)
 

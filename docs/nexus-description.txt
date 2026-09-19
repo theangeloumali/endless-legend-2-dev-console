@@ -1,0 +1,131 @@
+===============================================================================
+ NEXUS MODS LISTING — GeloDGreat Dev Console
+ Nexus uses BBCode, not Markdown. Copy each block into the matching field.
+===============================================================================
+
+
+-------------------------------------------------------------------------------
+ MOD NAME
+-------------------------------------------------------------------------------
+GeloDGreat Dev Console
+
+
+-------------------------------------------------------------------------------
+ SUMMARY  (the short description field, shown in search results)
+-------------------------------------------------------------------------------
+An in-game developer console built on ENDLESS LEGEND 2's own editor commands. Press Insert for nine tabs: set Dust and Influence to any value, finish any build queue instantly, level heroes and hand them Legendary gear, click the map to place districts, armies and terrain, force wars, and switch which empire you play.
+
+
+-------------------------------------------------------------------------------
+ DESCRIPTION  (paste into the description editor with BBCode enabled)
+-------------------------------------------------------------------------------
+
+[size=5][b]GeloDGreat Dev Console[/b][/size]
+
+An in-game developer console for [b]ENDLESS LEGEND 2[/b]. Press [b]Insert[/b] and you get a window with nine tabs — set your Dust to whatever you like, finish anything in a build queue instantly, hand your heroes levels and Legendary gear, click the map to plant forests or drop armies, force a war, or switch to playing another empire entirely.
+
+[size=4][b]It uses the game's own developer tools[/b][/size]
+
+Amplitude shipped their in-house map editor inside the retail build — roughly [b]110 editor commands[/b] — and left it public. Every action here is posted through the same queue their editor used, so the simulation validates it and runs it on its own thread. Nothing is written into memory behind the game's back.
+
+That has a practical benefit: when the game [i]refuses[/i] something, the console tells you why in the log instead of looking broken.
+
+[line]
+
+[size=4][b]What's in it[/b][/size]
+
+[b]Economy[/b] — set Dust, Influence and city cap to an exact value. Every strategic, luxury and special resource in one press. Unlock a whole era or a single named technology.
+
+[b]Build[/b] — complete anything in a settlement's queue [b]free and immediately[/b]. Units are constructions in EL2, so this is instant recruit. Works on cities [i]and[/i] camps. Also approval, population, district improvements, and lifting the one-per-world cap on unique units.
+
+[b]Heroes[/b] — give skill points, raise stats, grant XP, heal, dismiss. Draw any number of new heroes at a level range you choose and recruit them all. Spawn any named hero in the game. Everything targets one hero or your whole roster from the same controls.
+
+[b]Equipment[/b] — all [b]177 items[/b], sorted rarest first and coloured by rarity. Add one, add a quantity, bulk-add by filter, or add every item in the game. Equip to any hero, per slot.
+
+[b]World[/b] — [b]arm a tool, then click the map[/b] as many times as you like. Districts, wonders, unit spawns, cities, camps, terraforming (plant and cut forest, clear mountain, bridge, dam, raise sand ruin), villages, army teleport and god speed. Reveal the whole map, collect every curiosity.
+
+[b]Diplomacy[/b] — declare war, force peace, force all treaties, make an empire offer surrender, change war score, meet everybody, pick your victory path. [b]Switch local empire[/b] hands you control of another empire, so you can see exactly what the AI is sitting on.
+
+[b]Empire[/b] — reset every cooldown at once or individually. Add or remove any status on a tile. Start any quest, or push one you already have to its next step.
+
+[b]Battle[/b] — the game's own seven battle cheats: infinite movement, infinite action tokens, infinite battle skills, ignore zone of control, ignore round count, ignore empire playing, line-of-sight debug.
+
+[b]Yields[/b] — per-turn multipliers up to ×1000 for Dust, Industry, Science and Influence, plus instant build and instant research.
+
+Item, unit, hero and technology lists show the game's [b]real names in your language[/b], read from the live data tables — so they also pick up anything a data mod adds.
+
+[line]
+
+[size=4][b]Requirements[/b][/size]
+
+[list]
+[*][url=https://github.com/BepInEx/BepInEx/releases]BepInEx 5[/url] (x64, Mono)
+[*]ENDLESS LEGEND 2 — built and tested against [b]V1.0.116[/b]
+[/list]
+
+[size=4][b]Installation[/b][/size]
+
+[list=1]
+[*]Install BepInEx 5 into the game folder — the one containing [b]Endless Legend 2.exe[/b]
+[*]Run the game once and quit, so BepInEx creates its folders
+[*]Copy [b]DevConsole.dll[/b] into [b].../ENDLESS Legend 2/BepInEx/plugins/[/b]
+[*]Start the game, load a save, and press [b]Insert[/b]
+[/list]
+
+If the window does not appear, open [b]BepInEx/LogOutput.log[/b] and look for "GeloDGreat Dev Console" — it logs a line on load and a line for every action, which is the fastest way to see what happened.
+
+[b]Remove any other EL2 cheat plugin first.[/b] The Nexus "EL2 Resource Manager" patches the same income methods, and this plugin refuses to load alongside it.
+
+[line]
+
+[size=4][b]Achievements — please read[/b][/size]
+
+[b]This plugin does not disable achievements.[/b] The game cannot see BepInEx plugins at all; its modded check only ever looks at the Steam Workshop folder and the Modding folder.
+
+[b]Any Workshop or data mod does disable them, though.[/b] When modding is enabled the game never registers its statistic reporters, and EL2 achievements are statistic-driven, so none can fire. If you want achievements, unsubscribe from Workshop mods — and check that [b]steamapps/workshop/content/3407390/[/b] actually emptied, because Steam does not always delete the content straight away.
+
+Your log tells you which state you are in:
+[code]
+[Modification] Modding is not enabled because no modifications were registered.   <- achievements work
+[Modification] Modding is enabled with N active modifications.                    <- achievements off
+[/code]
+
+[line]
+
+[size=4][b]Known limits[/b][/size]
+
+[list]
+[*][b]Yield multipliers affect console actions too.[/b] Orders apply asynchronously, so with Science at ×1000 a console "+10,000 research" is multiplied as well. Set the multipliers to off when you want exact numbers.
+[*][b]Values cap near 2,147,483.[/b] The simulation uses 32-bit fixed-point maths.
+[*][b]No item icons.[/b] The game keeps them in a streamed virtual-texture atlas that only its own UI shader can draw. Names, rarities and rarity colours all work.
+[*][b]Some placements are refused by the game, not the console.[/b] Villages need valid terrain, spacing and ownership; camps need a claimed territory plus a faction ability. The refusal is written to the log so you are not left guessing.
+[*][b]Single player.[/b] Please do not use this against people who have not agreed to it.
+[/list]
+
+Every game member is resolved by name and null-checked, so a future patch that renames something disables that one control and logs a warning instead of breaking the plugin.
+
+[line]
+
+[size=4][b]Open source[/b][/size]
+
+This is a free and open source project, MIT licensed. Source, issues and all releases:
+
+[b][url=https://github.com/theangeloumali/endless-legend-2-dev-console]github.com/theangeloumali/endless-legend-2-dev-console[/url][/b]
+
+Bug reports and pull requests are welcome. If a game update breaks something, the log line naming the missing member is the most useful thing you can paste into an issue.
+
+[line]
+
+[size=2]Unofficial and not affiliated with or endorsed by Amplitude Studios or SEGA. ENDLESS LEGEND is their trademark. No game assets or game code are redistributed — the plugin references the game's own assemblies at build time only.[/size]
+
+
+-------------------------------------------------------------------------------
+ SUGGESTED NEXUS FIELDS
+-------------------------------------------------------------------------------
+Category:   Cheats and God items  (alternative: Utilities)
+Tags:       cheat, console, debug, developer, utility, gameplay, bepinex, open source
+Version:    1.6.0
+Images:     upload from docs/images/ in the repo — console.png works best as the
+            main image; build, heroes, equipment, world, empire, battle and
+            yields cover the rest of the tabs.
+Permissions: MIT — attribution appreciated, forks and reuse allowed.

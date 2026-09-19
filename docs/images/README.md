@@ -13,3 +13,5 @@ Drop PNG or JPG files here using these names and they appear automatically:
   yields.png       Yields tab
 
 Any you leave out simply will not render; remove its line from the README too.
+
+The Nexus Mods listing text lives in docs/nexus-description.txt (BBCode).
