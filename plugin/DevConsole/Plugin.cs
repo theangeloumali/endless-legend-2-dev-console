@@ -5,12 +5,13 @@ using UnityEngine;
 
 namespace DevConsole
 {
-    [BepInPlugin(Guid, "Dev Console", Version)]
+    [BepInPlugin(Guid, Name, Version)]
     [BepInIncompatibility("com.yourname.el2resourcemanager")]  // Nexus "EL2 Resource Manager" patches the same Gain* methods
     public sealed class Plugin : BaseUnityPlugin
     {
-        public const string Guid = "angelo.el2.devconsole";
-        public const string Version = "1.5.0";
+        public const string Guid = "angelo.el2.devconsole";  // unchanged: it names the config file
+        public const string Name = "GeloDGreat Dev Console";
+        public const string Version = "1.6.0";
 
         private State state;
         private Window window;
@@ -36,7 +37,7 @@ namespace DevConsole
             var harmony = new Harmony(Guid);
             Patches.Apply(harmony, state, Logger);
             DebugOverlay.Enable(harmony, Logger, state.NativeOverlay.Value);
-            Logger.LogInfo($"Dev Console {Version} loaded - press {state.Hotkey.Value.MainKey} in game.");
+            Logger.LogInfo($"{Name} {Version} loaded - press {state.Hotkey.Value.MainKey} in game.");
         }
 
         private void Update()

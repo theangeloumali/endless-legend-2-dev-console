@@ -59,7 +59,7 @@ namespace DevConsole.Ui
         private void Contents(int id)
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label("DEV CONSOLE", Theme.Header, GUILayout.ExpandWidth(true));
+            GUILayout.Label("GELODGREAT DEV CONSOLE", Theme.Header, GUILayout.ExpandWidth(true));
             GUILayout.Label(state.Hotkey.Value.MainKey + " hides", Theme.Hint, GUILayout.Width(80));
             if (GUILayout.Button("✕", Theme.Button, GUILayout.Width(34), GUILayout.Height(26)))
             {

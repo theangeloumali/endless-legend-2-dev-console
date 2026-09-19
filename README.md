@@ -1,4 +1,4 @@
-# Dev Console — ENDLESS LEGEND 2
+# GeloDGreat Dev Console — ENDLESS LEGEND 2
 
 An in-game developer console for **ENDLESS LEGEND 2**. Press **Insert**, get a window with eight tabs: set your
 Dust to whatever you like, finish anything in a build queue instantly, hand your heroes levels and Legendary gear,
@@ -12,6 +12,8 @@ their editor did, instead of writing values into memory behind the game's back.
 > multiplayer against people who haven't agreed to it.
 
 ![Game](https://img.shields.io/badge/game-V1.0.116-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+
+![The GeloDGreat Dev Console running in ENDLESS LEGEND 2](docs/images/console.png)
 
 ---
 
@@ -106,6 +108,30 @@ restarting the game clears them.
 Per-turn multipliers (×2 to ×1000) for Dust, Industry, Science and Influence, plus instant build and instant
 research. Unlike everything else these are applied as income arrives, so they show up on your **next turn**, not
 immediately. For a one-off jump use the Economy tab.
+
+---
+
+## Screenshots
+
+| Build                                                                  | Heroes                                                       |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------ |
+| ![Build tab](docs/images/build.png)                                    | ![Heroes tab](docs/images/heroes.png)                        |
+| Instant build and recruit, approval, population — cities **and camps** | Skill points, stats, XP, draws; one hero or the whole roster |
+
+| Equipment                                       | World                                        |
+| ----------------------------------------------- | -------------------------------------------- |
+| ![Equipment tab](docs/images/equipment.png)     | ![World tab](docs/images/world.png)          |
+| All 177 items, rarest first, coloured by rarity | Arm a tile tool, then click the map to place |
+
+| Diplomacy                                                  | Empire                                |
+| ---------------------------------------------------------- | ------------------------------------- |
+| ![Diplomacy tab](docs/images/diplomacy.png)                | ![Empire tab](docs/images/empire.png) |
+| War, peace, treaties, victory path, play as another empire | Cooldowns, statuses on a tile, quests |
+
+| Battle                                | Yields                                   |
+| ------------------------------------- | ---------------------------------------- |
+| ![Battle tab](docs/images/battle.png) | ![Yields tab](docs/images/yields.png)    |
+| The game's own seven battle cheats    | Per-turn multipliers and instant toggles |
 
 ---
 
