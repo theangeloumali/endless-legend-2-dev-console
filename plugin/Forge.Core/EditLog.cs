@@ -31,6 +31,10 @@ namespace Forge.Core
         public OrderRecord Undo;
 
         public bool Undone;
+
+        /// <summary>For undos that destroy what the edit created: the GUID of the entity it created, so a
+        /// different entity that later stands on the same tile is never destroyed in its place.</summary>
+        public ulong? Created;
     }
 
     /// <summary>Most recent edits, oldest dropped first once the capacity is reached.</summary>

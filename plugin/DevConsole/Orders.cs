@@ -32,35 +32,28 @@ namespace DevConsole
 
         /// <summary>A plain order carries no empire field — it is routed to the department of the target empire,
         /// so it must be posted against our own index rather than the default -1.</summary>
-        public static void Post(Order order, string what, EditOrigin origin = EditOrigin.User) =>
+        /// <summary>True when the order reached the game's queue (not rejected, not failed).</summary>
+        public static bool Post(Order order, string what, EditOrigin origin = EditOrigin.User) =>
             Send(order, what, origin, () => SandboxManager.PostOrder(order, Sim.LocalEmpireIndex));
 
         /// <summary>Editor orders are checked by the game before posting, because a rejected one is silently
         /// dropped — a village on the wrong terrain or a camp your faction cannot build would otherwise look like
         /// the console doing nothing at all.</summary>
-        public static void Post(EditorOrder order, string what, EditOrigin origin = EditOrigin.User)
-        {
-            if (!Allowed(order, what, origin))
-            {
-                return;
-            }
-            Send(order, what, origin, () => SandboxManager.PostOrder(order));
-        }
+        public static bool Post(EditorOrder order, string what, EditOrigin origin = EditOrigin.User) =>
+            Allowed(order, what, origin) && Send(order, what, origin, () => SandboxManager.PostOrder(order));
 
         /// <summary>For orders rebuilt from a record (undo, recipes), whose static type is only object.</summary>
-        public static void PostAny(object order, string what, EditOrigin origin)
+        public static bool PostAny(object order, string what, EditOrigin origin)
         {
             switch (order)
             {
                 case EditorOrder editorOrder:
-                    Post(editorOrder, what, origin);
-                    break;
+                    return Post(editorOrder, what, origin);
                 case Order plainOrder:
-                    Post(plainOrder, what, origin);
-                    break;
+                    return Post(plainOrder, what, origin);
                 default:
                     log.LogWarning($"{what}: {order?.GetType().Name ?? "null"} is not a game order");
-                    break;
+                    return false;
             }
         }
 
@@ -90,11 +83,11 @@ namespace DevConsole
             }
         }
 
-        private static void Send(object order, string what, EditOrigin origin, Action post)
+        private static bool Send(object order, string what, EditOrigin origin, Action post)
         {
             if (!Guard(order, what))
             {
-                return;
+                return false;
             }
             try
             {
@@ -102,11 +95,13 @@ namespace DevConsole
                 post();
                 log.LogInfo($"posted {what}");
                 Raise(order, what, origin, EditOutcome.Posted, null);
+                return true;
             }
             catch (Exception exception)
             {
                 log.LogError($"{what} failed: {exception.Message}");
                 Raise(order, what, origin, EditOutcome.Failed, exception.Message);
+                return false;
             }
         }
 

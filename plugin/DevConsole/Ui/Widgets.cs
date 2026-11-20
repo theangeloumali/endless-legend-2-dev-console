@@ -147,12 +147,16 @@ namespace DevConsole.Ui
             GUILayout.EndHorizontal();
         }
 
-        public static void Row(params (string Label, Action Action)[] buttons)
+        public static void Row(params (string Label, Action Action)[] buttons) => Row(true, buttons);
+
+        /// <summary>enabled is passed through to each button, so the search index sees the real state; a raw
+        /// GUI.enabled block around a row would grey it out on screen but not in Ctrl+F.</summary>
+        public static void Row(bool enabled, params (string Label, Action Action)[] buttons)
         {
             GUILayout.BeginHorizontal();
             foreach (var (label, action) in buttons)
             {
-                Button(label, action);
+                Button(label, action, enabled);
             }
             GUILayout.EndHorizontal();
         }

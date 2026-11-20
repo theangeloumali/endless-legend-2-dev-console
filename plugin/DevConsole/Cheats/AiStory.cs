@@ -13,7 +13,7 @@ namespace DevConsole.Cheats
     internal static class AiStory
     {
         public static void SetArmyMission(Units.ArmyPick army, ArmyMissionTypes mission, int targetTile) =>
-            Orders.Post(new EditorOrderSetArmyMission
+            _ = Units.StillThere(army) && Orders.Post(new EditorOrderSetArmyMission
             {
                 ArmyTileIndex = army.Tile,
                 ArmyMissionType = mission,
@@ -24,7 +24,7 @@ namespace DevConsole.Cheats
 
         /// <summary>The attacker is the army's owner, not the player: this is how an AI army is sent at a city.</summary>
         public static void AttackCity(Units.ArmyPick army, int cityTile) =>
-            Orders.Post(new EditorOrderAttackCity { ArmyTileIndex = army.Tile, CityTileIndex = cityTile, EmpireIndex = army.Owner },
+            _ = Units.StillThere(army) && Orders.Post(new EditorOrderAttackCity { ArmyTileIndex = army.Tile, CityTileIndex = cityTile, EmpireIndex = army.Owner },
                         $"{army.Name} (empire #{army.Owner}) attacks the city at tile {cityTile}");
 
         public static void MoodMessage(int source, int target, string mood) =>

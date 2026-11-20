@@ -24,6 +24,10 @@ namespace DevConsole.Ui
             Widgets.Button("Save recipe", () => { Recipes.Save(name); saved = null; }, Recipes.Recording && Recipes.RecordedSteps > 0);
 
             Widgets.Section("Saved recipes");
+            if (Recipes.Busy)
+            {
+                Widgets.Hint("Replaying… one step every few frames, so each step sees the ones before it.");
+            }
             if (saved == null)
             {
                 saved = Recipes.List();
@@ -38,8 +42,8 @@ namespace DevConsole.Ui
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Label($"{listing.Name}   ·   {listing.Steps} edits   ·   made on {listing.Build}", Theme.Label);
-                Widgets.Button("Replay", () => Recipes.Replay(listing, atSameTiles: false), listing.Steps > 0);
-                Widgets.Button("Same tiles", () => Recipes.Replay(listing, atSameTiles: true), listing.Steps > 0);
+                Widgets.Button("Replay", () => Recipes.Replay(listing, atSameTiles: false), listing.Steps > 0 && !Recipes.Busy);
+                Widgets.Button("Same tiles", () => Recipes.Replay(listing, atSameTiles: true), listing.Steps > 0 && !Recipes.Busy);
                 GUILayout.EndHorizontal();
                 foreach (var problem in listing.Problems)
                 {

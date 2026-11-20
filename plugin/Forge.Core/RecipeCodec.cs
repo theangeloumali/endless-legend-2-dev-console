@@ -76,32 +76,47 @@ namespace Forge.Core
                 return null;
             }
 
-            var recipe = new Recipe
+            var recipe = new Recipe();
+            try
             {
-                Format = root.Value<int?>("Format") ?? 0,
-                Name = root.Value<string>("Name"),
-                GameBuild = root.Value<string>("GameBuild"),
-                AnchorTile = root.Value<int?>("AnchorTile") ?? 0,
-            };
+                recipe.Format = root.Value<int?>("Format") ?? 0;
+                recipe.Name = root.Value<string>("Name");
+                recipe.GameBuild = root.Value<string>("GameBuild");
+                recipe.AnchorTile = root.Value<int?>("AnchorTile") ?? 0;
+                if (DateTime.TryParse(root.Value<string>("CreatedUtc"), null, System.Globalization.DateTimeStyles.RoundtripKind, out var created))
+                {
+                    recipe.CreatedUtc = created;
+                }
+                if (Enum.TryParse(root.Value<string>("Anchor"), out RecipeAnchor anchor))
+                {
+                    recipe.Anchor = anchor;
+                }
+            }
+            catch (Exception exception) when (IsBadValue(exception))
+            {
+                problems.Add("recipe header is malformed: " + exception.Message);
+                return recipe;
+            }
             if (recipe.Format != Recipe.CurrentFormat)
             {
                 problems.Add($"recipe format {recipe.Format} is not supported (expected {Recipe.CurrentFormat})");
                 return recipe;
-            }
-            if (DateTime.TryParse(root.Value<string>("CreatedUtc"), null, System.Globalization.DateTimeStyles.RoundtripKind, out var created))
-            {
-                recipe.CreatedUtc = created;
-            }
-            if (Enum.TryParse(root.Value<string>("Anchor"), out RecipeAnchor anchor))
-            {
-                recipe.Anchor = anchor;
             }
 
             var index = 0;
             foreach (var token in root["Steps"] as JArray ?? new JArray())
             {
                 index++;
-                var step = ReadStep(token as JObject);
+                RecipeStep step;
+                try
+                {
+                    step = ReadStep(token as JObject);
+                }
+                catch (Exception exception) when (IsBadValue(exception))
+                {
+                    problems.Add($"step {index}: malformed ({exception.Message}), skipped");
+                    continue;
+                }
                 if (step == null)
                 {
                     problems.Add($"step {index}: no order type, skipped");
@@ -111,6 +126,11 @@ namespace Forge.Core
             }
             return recipe;
         }
+
+        /// <summary>A shared file can hold any JSON: a wrong-typed value is the file's problem, never a crash.</summary>
+        private static bool IsBadValue(Exception exception) =>
+            exception is FormatException || exception is InvalidCastException || exception is OverflowException
+            || exception is ArgumentException || exception is JsonException;
 
         private static JObject WriteOrder(OrderRecord order) =>
             new JObject

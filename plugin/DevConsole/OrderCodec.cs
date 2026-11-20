@@ -53,10 +53,16 @@ namespace DevConsole
                     continue;
                 }
                 var encoded = Encode(value);
-                if (encoded != null)
+                if (encoded == null)
                 {
-                    record.Scalars[field.Name] = encoded;
+                    record.Unrecordable = true;  // a value the codec cannot carry would replay as a default
+                    continue;
                 }
+                if (type == typeof(ulong) && field.Name.EndsWith("Guid", StringComparison.OrdinalIgnoreCase))
+                {
+                    record.Unrecordable = true;  // some orders carry entity GUIDs as plain ulong (HeroGUID, TargetGuid)
+                }
+                record.Scalars[field.Name] = encoded;
             }
             return record;
         }
@@ -88,9 +94,9 @@ namespace DevConsole
             var fields = Fields(type).ToDictionary(field => field.Name);
             foreach (var pair in record.Tiles)
             {
-                if (!fields.TryGetValue(pair.Key, out var field))
+                if (!fields.TryGetValue(pair.Key, out var field) || field.FieldType != typeof(int))
                 {
-                    problem = $"{record.Type}.{pair.Key} is not on this build";
+                    problem = $"{record.Type}.{pair.Key} is not a tile field on this build";
                     return null;
                 }
                 field.SetValue(order, pair.Value);
@@ -139,8 +145,16 @@ namespace DevConsole
                 case double _:
                 case string _:
                     return new JValue(value);
-                case FixedPoint fixedPoint:
-                    return new JValue((int)fixedPoint);
+                case ulong unsigned:
+                    return new JValue(unsigned);
+                case uint _:
+                case short _:
+                case ushort _:
+                case byte _:
+                case sbyte _:
+                    return new JValue(Convert.ToInt64(value));
+                case FixedPoint _:
+                    return new JValue((int)FixedRaw.GetValue(value));  // raw x1000 value, so fractions survive
                 default:
                     return null;  // a nested struct the codec does not know: left at its default on rebuild
             }
@@ -165,7 +179,9 @@ namespace DevConsole
                 }
                 else if (type == typeof(FixedPoint))
                 {
-                    value = (FixedPoint)token.Value<int>();
+                    object boxed = default(FixedPoint);
+                    FixedRaw.SetValue(boxed, token.Value<int>());
+                    value = boxed;
                 }
                 else if (type == typeof(SimulationEntityGUID))
                 {
@@ -182,6 +198,8 @@ namespace DevConsole
                 return false;
             }
         }
+
+        private static readonly FieldInfo FixedRaw = HarmonyLib.AccessTools.Field(typeof(FixedPoint), "RawValue");
 
         /// <summary>The GUID's ulong conversion is the only public way back in; resolved once by reflection.</summary>
         private static readonly MethodInfo GuidFromUlong = typeof(SimulationEntityGUID)

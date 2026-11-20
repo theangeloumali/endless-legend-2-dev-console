@@ -33,12 +33,24 @@ namespace DevConsole.Cheats
                 };
         }
 
+        /// <summary>Tile-addressed orders hit whatever army stands there now; refuse if the picked one has moved.</summary>
+        public static bool StillThere(ArmyPick army)
+        {
+            var now = Sim.ArmyAt(army.Tile);
+            if (now != null && Sim.GuidOf(now).Equals(army.Guid))
+            {
+                return true;
+            }
+            Orders.Log.LogWarning($"{army.Name} is no longer on tile {army.Tile}: pick it again");
+            return false;
+        }
+
         public static void Add(ArmyPick army, string unitDefinition) =>
-            Orders.Post(new EditorOrderAddUnitToArmy { UnitDefinitionName = new StaticString(unitDefinition), ArmyTileIndex = army.Tile },
+            _ = StillThere(army) && Orders.Post(new EditorOrderAddUnitToArmy { UnitDefinitionName = new StaticString(unitDefinition), ArmyTileIndex = army.Tile },
                         $"{army.Name}: add {unitDefinition}");
 
         public static void Remove(ArmyPick army, int unitIndex) =>
-            Orders.Post(new EditorOrderRemoveUnitFromArmy { ArmyTileIndex = army.Tile, UnitIndex = unitIndex },
+            _ = StillThere(army) && Orders.Post(new EditorOrderRemoveUnitFromArmy { ArmyTileIndex = army.Tile, UnitIndex = unitIndex },
                         $"{army.Name}: remove unit {unitIndex + 1}");
 
         /// <summary>An evolution is named by the unit definition it turns into.</summary>
@@ -51,10 +63,10 @@ namespace DevConsole.Cheats
                         $"{army.Name}: {amount} damage to every unit");
 
         public static void Destroy(ArmyPick army) =>
-            Orders.Post(new EditorOrderDestroyArmy { ArmyTileIndex = army.Tile }, $"destroy {army.Name}");
+            _ = StillThere(army) && Orders.Post(new EditorOrderDestroyArmy { ArmyTileIndex = army.Tile }, $"destroy {army.Name}");
 
         public static void SetMovementRatio(ArmyPick army, float ratio) =>
-            Orders.Post(new EditorOrderSetArmyMovementRatio { ArmyTileIndex = army.Tile, MovementRatio = ratio },
+            _ = StillThere(army) && Orders.Post(new EditorOrderSetArmyMovementRatio { ArmyTileIndex = army.Tile, MovementRatio = ratio },
                         $"{army.Name}: movement ratio {ratio}");
 
         /// <summary>The army travels through the burrow network and comes out at the burrow on the clicked tile.</summary>

@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Forge.Core;
+using UnityEngine;
 
 namespace DevConsole
 {
@@ -20,6 +22,20 @@ namespace DevConsole
 
         /// <summary>Raised after every entry, for the recipe recorder.</summary>
         public static event Action<EditEntry> Added;
+
+        /// <summary>Raised when an entry's undo reached the game, so a recording can drop that step.</summary>
+        public static event Action<EditEntry> Undid;
+
+        /// <summary>Undos that destroy an entity: which lookup finds what the original edit created.</summary>
+        private static readonly Dictionary<string, Func<int, object>> Destroying = new Dictionary<string, Func<int, object>>
+        {
+            ["EditorOrderDestroyArmy"] = Sim.ArmyAt,
+            ["EditorOrderDestroySettlement"] = Sim.SettlementAt,
+            ["EditorOrderDestroyVillageAt"] = Sim.SettlementAt,
+        };
+
+        private const int CreatedLookupFrames = 120;  // orders apply on the simulation thread a few frames later
+        private static readonly List<(EditEntry Entry, int Until, ulong? Before)> AwaitingCreated = new List<(EditEntry, int, ulong?)>();
 
         public static void Initialize()
         {
@@ -48,7 +64,45 @@ namespace DevConsole
                 InverseTable.TryInvert(record, field => previous != null && previous.Field == field ? previous.Value : (int?)null, out undo);
             }
             Before.Remove(order);
-            Add(new EditEntry { Turn = Sim.Turn, Label = label, Origin = origin, Outcome = outcome, Reason = reason, Record = record, Undo = undo });
+            var entry = new EditEntry { Turn = Sim.Turn, Label = label, Origin = origin, Outcome = outcome, Reason = reason, Record = record, Undo = undo };
+            if (undo != null && Destroying.ContainsKey(undo.Type))
+            {
+                // the order is queued but not applied yet, so whatever stands on the tile now is not ours
+                var before = OnUndoTile(entry);
+                AwaitingCreated.Add((entry, Time.frameCount + CreatedLookupFrames, before == null ? (ulong?)null : (ulong)Sim.GuidOf(before)));
+            }
+            Add(entry);
+        }
+
+        /// <summary>Called every frame: records the GUID of each newly created army or settlement once it appears.</summary>
+        public static void Tick()
+        {
+            for (var i = AwaitingCreated.Count - 1; i >= 0; i--)
+            {
+                var (entry, until, before) = AwaitingCreated[i];
+                var created = OnUndoTile(entry);
+                if (created != null && (ulong)Sim.GuidOf(created) == before)
+                {
+                    created = null;
+                }
+                if (created != null)
+                {
+                    entry.Created = (ulong)Sim.GuidOf(created);
+                }
+                if (created != null || Time.frameCount > until)
+                {
+                    AwaitingCreated.RemoveAt(i);
+                }
+            }
+        }
+
+        private static object OnUndoTile(EditEntry entry)
+        {
+            foreach (var tile in entry.Undo.Tiles.Values)
+            {
+                return Destroying[entry.Undo.Type](tile);
+            }
+            return null;
         }
 
         public static void Add(EditEntry entry)
@@ -64,14 +118,29 @@ namespace DevConsole
             {
                 return;
             }
+            if (Destroying.ContainsKey(entry.Undo.Type))
+            {
+                var now = OnUndoTile(entry);
+                if (entry.Created == null || now == null || (ulong)Sim.GuidOf(now) != entry.Created)
+                {
+                    Skip(entry, "what this edit created is no longer on that tile, so nothing was destroyed");
+                    return;
+                }
+            }
             var order = OrderCodec.Build(entry.Undo, out var problem);
             if (order == null)
             {
-                Add(new EditEntry { Turn = Sim.Turn, Label = "undo " + entry.Label, Origin = EditOrigin.Undo, Outcome = EditOutcome.Skipped, Reason = problem });
+                Skip(entry, problem);
                 return;
             }
-            entry.Undone = true;
-            Orders.PostAny(order, "undo " + entry.Label, EditOrigin.Undo);
+            entry.Undone = Orders.PostAny(order, "undo " + entry.Label, EditOrigin.Undo);
+            if (entry.Undone)
+            {
+                Undid?.Invoke(entry);
+            }
         }
+
+        private static void Skip(EditEntry entry, string reason) =>
+            Add(new EditEntry { Turn = Sim.Turn, Label = "undo " + entry.Label, Origin = EditOrigin.Undo, Outcome = EditOutcome.Skipped, Reason = reason });
     }
 }

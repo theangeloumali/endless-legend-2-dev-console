@@ -70,6 +70,29 @@ namespace Forge.Core.Tests
         }
 
         [Fact]
+        public void Read_WrongTypedTile_SkipsThatStepOnly()
+        {
+            var json = JObject.Parse(RecipeCodec.Write(Sample()));
+            var bad = (JObject)json["Steps"][0].DeepClone();
+            bad["Order"]["Tiles"]["TileIndex"] = "abc";
+            ((JArray)json["Steps"]).Add(bad);
+
+            var recipe = RecipeCodec.Read(json.ToString(), out var problems);
+
+            Assert.Single(recipe.Steps);
+            Assert.Contains(problems, problem => problem.StartsWith("step 2: malformed"));
+        }
+
+        [Fact]
+        public void Read_WrongTypedFormat_ReportsProblemInsteadOfThrowing()
+        {
+            var recipe = RecipeCodec.Read("{\"Format\": \"one\", \"Steps\": []}", out var problems);
+
+            Assert.NotNull(recipe);
+            Assert.Contains(problems, problem => problem.StartsWith("recipe header is malformed"));
+        }
+
+        [Fact]
         public void Read_InvalidJson_ReturnsNullWithProblem()
         {
             Assert.Null(RecipeCodec.Read("{ not json", out var problems));

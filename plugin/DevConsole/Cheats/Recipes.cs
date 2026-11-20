@@ -27,12 +27,38 @@ namespace DevConsole.Cheats
 
         private static Recipe recording;
         private static HexGrid? recordingGrid;
+        private static readonly Dictionary<EditEntry, RecipeStep> RecordedFrom = new Dictionary<EditEntry, RecipeStep>();
+
+        /// <summary>Frames between replayed steps: a step that builds on the previous one (a district beside a city
+        /// the recipe just founded) is validated only after the simulation has applied that city.</summary>
+        private const int FramesPerStep = 12;
+
+        private sealed class Replaying
+        {
+            public string Name;
+            public Queue<RecipeStep> Steps;
+            public bool Relative;
+            public HexGrid? Grid;
+            public int Capital;
+            public int Posted;
+            public int Skipped;
+            public List<string> Problems;
+            public int NextFrame;
+        }
+
+        private static Replaying replaying;
 
         public static bool Recording => recording != null;
 
+        public static bool Busy => replaying != null;
+
         public static int RecordedSteps => recording?.Steps.Count ?? 0;
 
-        public static void Initialize() => Edits.Added += Capture;
+        public static void Initialize()
+        {
+            Edits.Added += Capture;
+            Edits.Undid += Forget;
+        }
 
         public static void StartRecording()
         {
@@ -51,7 +77,11 @@ namespace DevConsole.Cheats
                 : "recipe: recording at absolute tiles (no capital yet, or this map's hex layout was not recognised)");
         }
 
-        public static void StopRecording() => recording = null;
+        public static void StopRecording()
+        {
+            recording = null;
+            RecordedFrom.Clear();
+        }
 
         public static void Save(string name)
         {
@@ -64,7 +94,7 @@ namespace DevConsole.Cheats
             var path = System.IO.Path.Combine(Folder, FileName(recording.Name) + ".json");
             File.WriteAllText(path, RecipeCodec.Write(recording));
             Orders.Log.LogInfo($"recipe saved: {path} ({recording.Steps.Count} steps)");
-            recording = null;
+            StopRecording();
         }
 
         public static List<Listing> List()
@@ -87,9 +117,14 @@ namespace DevConsole.Cheats
             }).ToList();
         }
 
-        /// <summary>atSameTiles replays the recorded tile numbers, which only makes sense on the same map.</summary>
+        /// <summary>Queues the recipe; Tick posts one step every few frames. atSameTiles replays the recorded tile
+        /// numbers, which only makes sense on the same map.</summary>
         public static void Replay(Listing listing, bool atSameTiles)
         {
+            if (replaying != null)
+            {
+                return;
+            }
             var recipe = Load(listing.Path, out var problems);
             if (recipe == null)
             {
@@ -104,21 +139,52 @@ namespace DevConsole.Cheats
                 problems.Add("no capital or unrecognised map layout here, so tiles were replayed as recorded");
                 relative = false;
             }
-            int posted = 0, skipped = 0;
-            foreach (var step in recipe.Steps)
+            replaying = new Replaying
             {
-                var reason = Prepare(step, relative, grid, capital, out var record);
-                var order = reason == null ? OrderCodec.Build(record, out reason) : null;
-                if (order == null)
-                {
-                    skipped++;
-                    problems.Add($"{step.Order.Type}: {reason}");
-                    continue;
-                }
-                Orders.PostAny(order, $"recipe {recipe.Name}: {step.Order.Type}", EditOrigin.Replay);
-                posted++;
+                Name = recipe.Name,
+                Steps = new Queue<RecipeStep>(recipe.Steps),
+                Relative = relative,
+                Grid = grid,
+                Capital = capital,
+                Problems = problems,
+            };
+        }
+
+        public static void Tick()
+        {
+            if (replaying == null || UnityEngine.Time.frameCount < replaying.NextFrame)
+            {
+                return;
             }
-            Report(recipe.Name, posted, skipped, problems);
+            if (replaying.Steps.Count == 0)
+            {
+                Report(replaying.Name, replaying.Posted, replaying.Skipped, replaying.Problems);
+                replaying = null;
+                return;
+            }
+            replaying.NextFrame = UnityEngine.Time.frameCount + FramesPerStep;
+            var step = replaying.Steps.Dequeue();
+            string reason;
+            try
+            {
+                reason = Prepare(step, replaying.Relative, replaying.Grid, replaying.Capital, out var record);
+                var order = reason == null ? OrderCodec.Build(record, out reason) : null;
+                if (order != null && !Orders.PostAny(order, $"recipe {replaying.Name}: {step.Order.Type}", EditOrigin.Replay))
+                {
+                    reason = "rejected by the game here";
+                }
+            }
+            catch (Exception exception)
+            {
+                reason = "could not be rebuilt: " + exception.Message;
+            }
+            if (reason == null)
+            {
+                replaying.Posted++;
+                return;
+            }
+            replaying.Skipped++;
+            replaying.Problems.Add($"{step.Order.Type}: {reason}");
         }
 
         private static void Capture(EditEntry entry)
@@ -129,6 +195,7 @@ namespace DevConsole.Cheats
                 return;
             }
             var step = new RecipeStep { Order = entry.Record.Clone() };
+            RecordedFrom[entry] = step;
             if (recording.Anchor == RecipeAnchor.Capital && recordingGrid is HexGrid grid)
             {
                 foreach (var tile in step.Order.Tiles.Where(tile => grid.Contains(tile.Value)))
@@ -139,14 +206,28 @@ namespace DevConsole.Cheats
             recording.Steps.Add(step);
         }
 
+        /// <summary>An undone edit is not part of what the user ended up with, so it leaves the recording.</summary>
+        private static void Forget(EditEntry undone)
+        {
+            if (recording != null && RecordedFrom.TryGetValue(undone, out var step))
+            {
+                recording.Steps.Remove(step);
+                RecordedFrom.Remove(undone);
+            }
+        }
+
         /// <summary>Null when the step can be built; otherwise why it is skipped.</summary>
         private static string Prepare(RecipeStep step, bool relative, HexGrid? grid, int capital, out OrderRecord record)
         {
             record = step.Order.Clone();
             foreach (var field in record.Tiles.Keys.ToList())
             {
-                if (relative && grid is HexGrid map && step.RelativeTiles.TryGetValue(field, out var offset))
+                if (relative && grid is HexGrid map && record.Tiles[field] >= 0)
                 {
+                    if (!step.RelativeTiles.TryGetValue(field, out var offset))
+                    {
+                        return "no position relative to the capital was recorded";
+                    }
                     if (!map.TryApply(capital, offset, out var tile))
                     {
                         return "off map";
@@ -167,7 +248,7 @@ namespace DevConsole.Cheats
             {
                 return RecipeCodec.Read(File.ReadAllText(path), out problems);
             }
-            catch (IOException exception)
+            catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException)
             {
                 problems = new List<string> { exception.Message };
                 return null;

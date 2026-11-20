@@ -70,9 +70,9 @@ namespace DevConsole.Ui
         {
             ApplyRequests();
             var showPalette = palette.Open;  // one value per event: Esc can close it mid-event, the layout must not change
-            if (showPalette && Time.frameCount == collectFrame)
+            if (Event.current.type == EventType.MouseDown)
             {
-                CollectCommands();
+                GUIUtility.keyboardControl = 0;  // a click anywhere drops text focus; a clicked text field takes it back
             }
             Header();
             if (!showPalette && GUILayout.Button("Search every command…  (" + state.SearchHotkey.Value + ")", Theme.Field, GUILayout.Height(28)))
@@ -99,6 +99,11 @@ namespace DevConsole.Ui
             ScrollToPendingSection();
 
             EditLogStrip.Draw();
+            // last, so the off-screen controls never shift the IDs (and focus) of the visible ones
+            if (showPalette && Time.frameCount == collectFrame)
+            {
+                CollectCommands();
+            }
 
             // stops short of the close button: DragWindow swallows clicks inside its rect
             GUI.DragWindow(new Rect(0, 0, Width - 130f, 24f));

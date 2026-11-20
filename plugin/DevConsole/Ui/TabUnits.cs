@@ -13,6 +13,9 @@ namespace DevConsole.Ui
         private int unitIndex;
         private string damage = "50";
         private string ratio = "2";
+        private int reloadAt = -1;  // orders apply a few frames later; until then indexes in the list are stale
+
+        private bool Stale => reloadAt >= 0;
 
         public string Title => "Units";
 
@@ -20,6 +23,11 @@ namespace DevConsole.Ui
         {
             Widgets.Section("Pick an army");
             Widgets.Pick("Pick army on the map", Pick);
+            if (Stale && Time.frameCount >= reloadAt && army != null)
+            {
+                army = Units.At(army.Tile) ?? army;
+                reloadAt = -1;
+            }
             var has = army != null;
             Widgets.ValueRow("Army", has ? $"{army.Name} · tile #{army.Tile} · empire #{army.Owner} · {army.Units.Count} units" : "none: pick one on the map", has);
             Widgets.Button("Reload army", () => army = Units.At(army.Tile), has);
@@ -38,7 +46,7 @@ namespace DevConsole.Ui
                         unitIndex = i;
                     }
                     GUILayout.Label($"{unit.Health}/{unit.MaxHealth} HP", Theme.Value, GUILayout.Width(110));
-                    Widgets.Button("Remove", () => { Units.Remove(army, index); army = Units.At(army.Tile); });
+                    Widgets.Button("Remove", () => { Units.Remove(army, index); ReloadSoon(); }, !Stale);
                     GUILayout.EndHorizontal();
                 }
             }
@@ -52,8 +60,8 @@ namespace DevConsole.Ui
             Widgets.Section("Add to this army");
             addUnit.Draw(Catalog.Units, 150f);
             var chosen = addUnit.Selected(Catalog.Units);
-            Widgets.Button(chosen == null ? "Pick a unit" : "Add " + chosen.Display, () => { Units.Add(army, chosen.Name); army = Units.At(army.Tile); },
-                           has && chosen != null);
+            Widgets.Button(chosen == null ? "Pick a unit" : "Add " + chosen.Display, () => { Units.Add(army, chosen.Name); ReloadSoon(); },
+                           has && chosen != null && !Stale);
 
             Widgets.Section("Combat and movement");
             Widgets.ValueButton("Damage", ref damage, "Damage every unit", amount => Units.Damage(army, amount), has);
@@ -67,8 +75,11 @@ namespace DevConsole.Ui
             Widgets.DangerButton(has ? "Destroy " + army.Name : "Destroy army", () => { Units.Destroy(army); army = null; }, has);
         }
 
+        private void ReloadSoon() => reloadAt = Time.frameCount + 15;
+
         private void Pick(int tile)
         {
+            reloadAt = -1;
             army = Units.At(tile);
             unitIndex = 0;
             if (army == null)

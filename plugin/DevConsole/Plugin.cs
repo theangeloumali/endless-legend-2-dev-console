@@ -17,6 +17,7 @@ namespace DevConsole
         private Window window;
         private bool visible;
         private int lastPlacedFrame = -1;
+        private bool dropTextFocus;
 
         private void Awake()
         {
@@ -63,7 +64,14 @@ namespace DevConsole
             {
                 SelfCheck.Run();
             }
+            var mouse = UnityInput.Current;
+            if (visible && (mouse.GetMouseButtonDown(0) || mouse.GetMouseButtonDown(1)) && !window.ContainsMouse())
+            {
+                dropTextFocus = true;  // a map click ends typing, so the game's keyboard comes back
+            }
             Cheats.World.Track();
+            Edits.Tick();
+            Cheats.Recipes.Tick();
             Place();
         }
 
@@ -95,6 +103,11 @@ namespace DevConsole
 
         private void OnGUI()
         {
+            if (dropTextFocus || !visible)
+            {
+                dropTextFocus = false;
+                GUIUtility.keyboardControl = 0;
+            }
             if (visible)
             {
                 visible = window.Draw();

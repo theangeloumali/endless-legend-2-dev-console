@@ -67,15 +67,21 @@ namespace Forge.Core.Tests
         public void Search_WordPrefixOutranksSubstring()
         {
             var index = new CommandIndex<string>();
-            index.Add("mid", "Clear underground dungeon", "AI & Story");
+            index.Add("substring", "Aardungeon", "World");
             index.Add("prefix", "Remove dungeon", "World › Places");
             index.Add("other", "Plant forest", "World");
 
-            var results = index.Search("dung");
+            Assert.Equal(new[] { "prefix", "substring" }, index.Search("dung"));
+        }
 
-            Assert.Equal(new[] { "mid", "prefix" }, results.OrderBy(r => r).ToArray());
-            index.Add("inner", "Redungeoned", "World");
-            Assert.Equal("inner", index.Search("dung").Last());
+        [Fact]
+        public void Search_TiesSortAlphabetically()
+        {
+            var index = new CommandIndex<string>();
+            index.Add("b", "Spawn dungeon", "World");
+            index.Add("a", "Clear dungeon", "AI & Story");
+
+            Assert.Equal(new[] { "a", "b" }, index.Search("dung"));
         }
 
         [Fact]
