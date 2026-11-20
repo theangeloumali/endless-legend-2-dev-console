@@ -10,7 +10,8 @@ namespace Forge.Core
         private sealed class Pair
         {
             public string Undo;
-            public (string From, string To)[] TileFields;
+            public string FromTile;
+            public string ToTile;
         }
 
         private static readonly Dictionary<string, Pair> Pairs = new Dictionary<string, Pair>
@@ -36,7 +37,9 @@ namespace Forge.Core
             ["EditorOrderSetInfluenceStock"] = "InfluenceStock",
         };
 
-        public static bool HasUndo(string orderType) => Pairs.ContainsKey(orderType) || StockSetters.ContainsKey(orderType);
+        /// <summary>The field whose pre-edit value undo needs, or null: callers read only what an order overwrites.</summary>
+        public static string PreviousValueField(string orderType) =>
+            orderType != null && StockSetters.TryGetValue(orderType, out var field) ? field : null;
 
         /// <summary>previousValue answers "what was this field before the edit?" for stock setters; null means unknown.</summary>
         public static bool TryInvert(OrderRecord done, Func<string, int?> previousValue, out OrderRecord undo)
@@ -61,20 +64,16 @@ namespace Forge.Core
             {
                 return false;
             }
-            undo = new OrderRecord { Type = pair.Undo, LocalEmpireFields = new HashSet<string>(done.LocalEmpireFields) };
-            foreach (var (from, to) in pair.TileFields)
+            if (!done.Tiles.TryGetValue(pair.FromTile, out var tile))
             {
-                if (!done.Tiles.TryGetValue(from, out var tile))
-                {
-                    undo = null;
-                    return false;
-                }
-                undo.Tiles[to] = tile;
+                return false;
             }
+            undo = new OrderRecord { Type = pair.Undo, LocalEmpireFields = new HashSet<string>(done.LocalEmpireFields) };
+            undo.Tiles[pair.ToTile] = tile;
             return true;
         }
 
-        private static Pair Make(string undo, params (string From, string To)[] tileFields) =>
-            new Pair { Undo = undo, TileFields = tileFields };
+        private static Pair Make(string undo, (string From, string To) tile) =>
+            new Pair { Undo = undo, FromTile = tile.From, ToTile = tile.To };
     }
 }

@@ -23,7 +23,7 @@ namespace DevConsole.Ui
         private readonly Widgets.EnumPicker<BypassSGELevelType> sgeLevel = new Widgets.EnumPicker<BypassSGELevelType>("SGE level");
         private readonly Widgets.EnumPicker<EnqueuePosition> techPosition = new Widgets.EnumPicker<EnqueuePosition>("Queue position");
         private List<Sim.EmpireRow> empires = new List<Sim.EmpireRow>();
-        private List<object> heroes = new List<object>();
+        private List<Heroes.Entry> heroes = new List<Heroes.Entry>();
         private List<AiStory.SeatRow> seats = new List<AiStory.SeatRow>();
         private int acting, other, hero, seat;
         private Units.ArmyPick army;
@@ -55,7 +55,7 @@ namespace DevConsole.Ui
             var otherIndex = hasEmpires ? empires[other].Index : -1;
 
             Widgets.Section("Command any army (AI included)");
-            Widgets.Plot("Pick army on the map", t => { army = Units.At(t); Cheats.World.Disarm(); });
+            Widgets.Pick("Pick army on the map", t => army = Units.At(t));
             Widgets.Hint(army == null ? "No army picked." : $"{army.Name} · empire #{army.Owner} · tile #{army.Tile}");
             mission.Draw();
             Widgets.Plot($"Set mission {mission.Value} (click the target tile)", t => AiStory.SetArmyMission(army, mission.Value, t), army != null);
@@ -84,12 +84,13 @@ namespace DevConsole.Ui
             Widgets.Section("Heroes of the acting empire");
             if (heroes.Count > 0)
             {
-                hero = heroPicker.Draw(heroes, hero, h => Sim.NameOf(h, "hero"));
+                hero = heroPicker.Draw(heroes, hero, h => h.Label);
             }
             var hasHero = hero < heroes.Count;
-            Widgets.Plot("Deploy hero at the clicked tile", t => AiStory.DeployHero(hero, actingIndex, t), hasHero);
-            Widgets.Plot("Build partner den at the clicked tile", t => AiStory.PartnerDen(actingIndex, heroes[hero], t), hasHero);
-            Widgets.DangerButton("Dismiss hero", () => AiStory.DismissHero(hero, actingIndex), hasHero);
+            // orders take the hero's global Index, not its position in this list
+            Widgets.Plot("Deploy hero at the clicked tile", t => AiStory.DeployHero(heroes[hero].Index, actingIndex, t), hasHero);
+            Widgets.Plot("Build partner den at the clicked tile", t => AiStory.PartnerDen(actingIndex, heroes[hero].Handle, t), hasHero);
+            Widgets.DangerButton("Dismiss hero", () => AiStory.DismissHero(heroes[hero].Index, actingIndex), hasHero);
             Widgets.Button("Redistribute heroes", AiStory.RedistributeHeroes);
 
             Widgets.Section("Minor factions");
@@ -134,7 +135,7 @@ namespace DevConsole.Ui
         private void RefreshActing()
         {
             var empire = acting < empires.Count ? empires[acting].Entity : null;
-            heroes = Sim.Collection(empire, "Heroes").ToList();
+            heroes = empire == null ? new List<Heroes.Entry>() : Heroes.Roster(empire);
             seats = AiStory.Seats(empire);
             hero = 0;
             seat = 0;

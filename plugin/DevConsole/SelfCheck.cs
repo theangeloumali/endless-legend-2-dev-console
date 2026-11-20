@@ -18,9 +18,10 @@ namespace DevConsole
 
         public static bool Done { get; private set; }
 
-        public static int Found { get; private set; }
-
         public static int Total { get; private set; }
+
+        /// <summary>Computed once when the check finishes; drawn on every IMGUI event.</summary>
+        public static string Summary { get; private set; } = "Self-check: waiting for a game";
 
         public static readonly List<string> Missing = new List<string>();
 
@@ -47,7 +48,6 @@ namespace DevConsole
                         invalidRun = 0;
                         if (IsGame(member))
                         {
-                            Found++;
                             Total++;
                         }
                     }
@@ -67,6 +67,9 @@ namespace DevConsole
                     }
                 }
             }
+            Summary = Missing.Count == 0
+                ? $"Self-check: every game reference found on {GameVersion}"
+                : $"Self-check: {Missing.Count} of {Total} game references missing on {GameVersion} (see log)";
             if (Missing.Count == 0)
             {
                 Orders.Log.LogInfo($"self-check: all {Total} game references found on {GameVersion}");
@@ -77,11 +80,6 @@ namespace DevConsole
                                       + string.Join("; ", Missing.Take(10)));
             }
         }
-
-        public static string Summary =>
-            !Done ? "Self-check: waiting for a game"
-            : Missing.Count == 0 ? $"Self-check: every game reference found on {GameVersion}"
-            : $"Self-check: {Missing.Count} of {Total} game references missing on {GameVersion} (see log)";
 
         /// <summary>Only Amplitude's assemblies move between patches; Unity, BepInEx and mscorlib are not counted.</summary>
         private static bool IsGame(MemberInfo member)

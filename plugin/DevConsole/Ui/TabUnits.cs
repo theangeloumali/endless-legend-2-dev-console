@@ -1,4 +1,3 @@
-using System.Globalization;
 using DevConsole.Cheats;
 using UnityEngine;
 
@@ -20,13 +19,9 @@ namespace DevConsole.Ui
         public void Draw()
         {
             Widgets.Section("Pick an army");
-            Widgets.Plot("Pick army on the map", Pick);
+            Widgets.Pick("Pick army on the map", Pick);
             var has = army != null;
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Army", Theme.Label, GUILayout.Width(Widgets.LabelWidth));
-            GUILayout.Label(has ? $"{army.Name} · tile #{army.Tile} · empire #{army.Owner} · {army.Units.Count} units" : "none: pick one on the map",
-                            has ? Theme.Value : Theme.Hint);
-            GUILayout.EndHorizontal();
+            Widgets.ValueRow("Army", has ? $"{army.Name} · tile #{army.Tile} · empire #{army.Owner} · {army.Units.Count} units" : "none: pick one on the map", has);
             Widgets.Button("Reload army", () => army = Units.At(army.Tile), has);
             Widgets.Hint("Works on any empire's army, AI included.");
 
@@ -63,10 +58,8 @@ namespace DevConsole.Ui
             Widgets.Section("Combat and movement");
             Widgets.ValueButton("Damage", ref damage, "Damage every unit", amount => Units.Damage(army, amount), has);
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Movement ratio", Theme.Label, GUILayout.Width(Widgets.LabelWidth));
-            ratio = GUILayout.TextField(ratio, Theme.Field, GUILayout.Width(80));
-            var ratioOk = float.TryParse(ratio, NumberStyles.Float, CultureInfo.InvariantCulture, out var movement) && movement > 0f;
-            Widgets.Button("Set movement", () => Units.SetMovementRatio(army, movement), has && ratioOk);
+            var ratioOk = Widgets.FloatField("Movement ratio", ref ratio, out var movement, fieldWidth: 80) && movement > 0f;
+            Widgets.Button("Set movement", () => Units.SetMovementRatio(army, movement), has && ratioOk, searchLabel: "Movement ratio: Set movement");
             GUILayout.EndHorizontal();
             Widgets.Plot("Travel by burrow (click the exit burrow)", t => Units.EnterBurrow(army, t), has);
 
@@ -82,7 +75,6 @@ namespace DevConsole.Ui
             {
                 Orders.Log.LogWarning($"no army on tile {tile}");
             }
-            Cheats.World.Disarm();  // one pick, not a repeating tool
         }
     }
 }

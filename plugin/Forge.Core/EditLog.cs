@@ -1,8 +1,15 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Forge.Core
 {
+    /// <summary>Who caused an edit: recipes record only what the user did, never undos or replays.</summary>
+    public enum EditOrigin
+    {
+        User,
+        Undo,
+        Replay,
+    }
+
     public enum EditOutcome
     {
         Posted,
@@ -16,6 +23,7 @@ namespace Forge.Core
         public int Turn;
         public string Label;
         public EditOutcome Outcome;
+        public EditOrigin Origin;
         public string Reason;
         public OrderRecord Record;
 
@@ -47,7 +55,15 @@ namespace Forge.Core
             }
         }
 
-        /// <summary>Newest first.</summary>
-        public IReadOnlyList<EditEntry> Latest(int count) => entries.Reverse().Take(count).ToList();
+        /// <summary>Newest first; walks back from the end instead of copying the whole log.</summary>
+        public IReadOnlyList<EditEntry> Latest(int count)
+        {
+            var latest = new List<EditEntry>(count);
+            for (var node = entries.Last; node != null && latest.Count < count; node = node.Previous)
+            {
+                latest.Add(node.Value);
+            }
+            return latest;
+        }
     }
 }

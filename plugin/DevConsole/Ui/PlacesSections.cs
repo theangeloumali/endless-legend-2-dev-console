@@ -68,11 +68,7 @@ namespace DevConsole.Ui
                         ("Force road update", Places.ForceRoadUpdate));
 
             Widgets.Section("Curiosity paths (advanced)");
-            if (GUILayout.Button(showPaths ? "Hide curiosity path tools" : "Show curiosity path tools", Theme.Button, GUILayout.Height(25)))
-            {
-                showPaths = !showPaths;
-            }
-            if (!showPaths && !Commands.Collecting)
+            if (!Widgets.Foldout("Curiosity path tools", ref showPaths))
             {
                 return;
             }

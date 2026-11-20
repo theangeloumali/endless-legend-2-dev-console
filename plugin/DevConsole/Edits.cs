@@ -9,8 +9,14 @@ namespace DevConsole
     {
         public static readonly EditLog Log = new EditLog();
 
-        /// <summary>Values an order is about to overwrite, keyed by the order instance until its outcome arrives.</summary>
-        private static readonly ConditionalWeakTable<object, Func<string, int?>> Before = new ConditionalWeakTable<object, Func<string, int?>>();
+        /// <summary>The value an order is about to overwrite, kept per order instance until its outcome arrives.</summary>
+        private sealed class Previous
+        {
+            public string Field;
+            public int Value;
+        }
+
+        private static readonly ConditionalWeakTable<object, Previous> Before = new ConditionalWeakTable<object, Previous>();
 
         /// <summary>Raised after every entry, for the recipe recorder.</summary>
         public static event Action<EditEntry> Added;
@@ -23,24 +29,30 @@ namespace DevConsole
 
         private static void Capture(object order)
         {
-            int money = Sim.MoneyStock, influence = Sim.InfluenceStock;
+            var field = InverseTable.PreviousValueField(order.GetType().Name);
+            var value = field == null ? -1 : Sim.StockOf(field);
             Before.Remove(order);
-            Before.Add(order, field => field == "MoneyStock" && money >= 0 ? money
-                                     : field == "InfluenceStock" && influence >= 0 ? influence
-                                     : (int?)null);
+            if (value >= 0)
+            {
+                Before.Add(order, new Previous { Field = field, Value = value });
+            }
         }
 
-        private static void Record(object order, string label, EditOutcome outcome, string reason)
+        private static void Record(object order, string label, EditOrigin origin, EditOutcome outcome, string reason)
         {
             var record = OrderCodec.Snapshot(order);
             OrderRecord undo = null;
             if (outcome == EditOutcome.Posted)
             {
                 Before.TryGetValue(order, out var previous);
-                InverseTable.TryInvert(record, previous, out undo);
+                InverseTable.TryInvert(record, field => previous != null && previous.Field == field ? previous.Value : (int?)null, out undo);
             }
             Before.Remove(order);
-            var entry = new EditEntry { Turn = Sim.Turn, Label = label, Outcome = outcome, Reason = reason, Record = record, Undo = undo };
+            Add(new EditEntry { Turn = Sim.Turn, Label = label, Origin = origin, Outcome = outcome, Reason = reason, Record = record, Undo = undo });
+        }
+
+        public static void Add(EditEntry entry)
+        {
             Log.Add(entry);
             Added?.Invoke(entry);
         }
@@ -55,11 +67,11 @@ namespace DevConsole
             var order = OrderCodec.Build(entry.Undo, out var problem);
             if (order == null)
             {
-                Log.Add(new EditEntry { Turn = Sim.Turn, Label = "undo " + entry.Label, Outcome = EditOutcome.Skipped, Reason = problem });
+                Add(new EditEntry { Turn = Sim.Turn, Label = "undo " + entry.Label, Origin = EditOrigin.Undo, Outcome = EditOutcome.Skipped, Reason = problem });
                 return;
             }
             entry.Undone = true;
-            Orders.PostAny(order, "undo " + entry.Label);
+            Orders.PostAny(order, "undo " + entry.Label, EditOrigin.Undo);
         }
     }
 }

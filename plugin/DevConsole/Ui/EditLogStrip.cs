@@ -37,7 +37,7 @@ namespace DevConsole.Ui
             GUILayout.Label(entry.Turn >= 0 ? "turn " + entry.Turn : string.Empty, Theme.Hint, GUILayout.Width(62));
             var ok = entry.Outcome == EditOutcome.Posted;
             GUILayout.Label(ok ? "✓" : "✗", ok ? Theme.Value : Theme.Danger, GUILayout.Width(18));
-            var text = entry.Reason == null ? entry.Label : $"{entry.Label}: {Describe(entry.Outcome)} ({entry.Reason})";
+            var text = entry.Reason == null ? entry.Label : $"{entry.Label}: {entry.Outcome.ToString().ToLowerInvariant()} ({entry.Reason})";
             GUILayout.Label(text, Theme.Label);
             var previous = GUI.enabled;
             GUI.enabled = previous && entry.Undo != null && !entry.Undone;
@@ -47,21 +47,6 @@ namespace DevConsole.Ui
             }
             GUI.enabled = previous;
             GUILayout.EndHorizontal();
-        }
-
-        private static string Describe(EditOutcome outcome)
-        {
-            switch (outcome)
-            {
-                case EditOutcome.Rejected:
-                    return "rejected";
-                case EditOutcome.Failed:
-                    return "failed";
-                case EditOutcome.Skipped:
-                    return "skipped";
-                default:
-                    return "posted";
-            }
         }
     }
 }

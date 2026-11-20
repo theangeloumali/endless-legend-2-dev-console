@@ -45,9 +45,7 @@ namespace DevConsole.Cheats
             var queue = Traverse.Create(settlement).Field("ConstructionQueue").Property("Entity").GetValue();
             foreach (var construction in Sim.Structs(queue, "Constructions"))
             {
-                var definition = Traverse.Create(construction).Field("ConstructibleDefinition").GetValue();
-                var name = definition == null ? null : Traverse.Create(definition).Property("Name").GetValue();
-                names.Add(name?.ToString() ?? "construction");
+                names.Add(Sim.DefinitionName(construction, "ConstructibleDefinition", "construction"));
             }
             return names;
         }

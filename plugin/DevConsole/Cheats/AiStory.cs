@@ -50,10 +50,10 @@ namespace DevConsole.Cheats
 
         public static void DeployHero(int heroIndex, int empire, int tile) =>
             Orders.Post(new EditorOrderForceHeroDeployAt { HeroIndex = heroIndex, EmpireIndex = empire, TileIndex = tile },
-                        $"deploy hero {heroIndex + 1} of #{empire} at tile {tile}");
+                        $"deploy hero #{heroIndex} of empire #{empire} at tile {tile}");
 
         public static void DismissHero(int heroIndex, int empire) =>
-            Orders.Post(new EditorOrderForceHeroDismiss { HeroIndex = heroIndex, EmpireIndex = empire }, $"dismiss hero {heroIndex + 1} of #{empire}");
+            Orders.Post(new EditorOrderForceHeroDismiss { HeroIndex = heroIndex, EmpireIndex = empire }, $"dismiss hero #{heroIndex} of empire #{empire}");
 
         public static void RedistributeHeroes() => Orders.Post(new EditorOrderForceHeroDistribution(), "redistribute heroes");
 
@@ -96,10 +96,9 @@ namespace DevConsole.Cheats
         public static List<SeatRow> Seats(object empire) =>
             Sim.Collection(empire, "CouncilSeats").Select(seat =>
             {
-                var definition = Traverse.Create(seat).Field("CouncilSeatDefinition").GetValue();
                 return new SeatRow
                 {
-                    Name = definition == null ? "seat" : Traverse.Create(definition).Property("Name").GetValue()?.ToString() ?? "seat",
+                    Name = Sim.DefinitionName(seat, "CouncilSeatDefinition", "seat"),
                     Locked = Traverse.Create(seat).Field("IsLocked").GetValue() is bool locked && locked,
                     Guid = Sim.GuidOf(seat),
                 };

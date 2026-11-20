@@ -50,28 +50,32 @@ namespace DevConsole
         public static Entry[] MoodMessages => MappersNamed("MoodMessage_");
 
         /// <summary>Everything a production queue accepts, best first: districts, units and improvements together.</summary>
-        public static Entry[] Constructibles =>
+        public static Entry[] Constructibles => Cached("constructibles", () =>
             Districts.Concat(Units).Concat(Improvements).OrderByDescending(entry => entry.Rank)
-                     .ThenBy(entry => entry.Display, StringComparer.CurrentCultureIgnoreCase).ToArray();
-
-        private static readonly Dictionary<string, Entry[]> PrefixCache = new Dictionary<string, Entry[]>();
+                     .ThenBy(entry => entry.Display, StringComparer.CurrentCultureIgnoreCase));
 
         /// <summary>For names that exist only as UIMappers (mood messages have no definition type of their own).</summary>
-        private static Entry[] MappersNamed(string prefix)
+        private static Entry[] MappersNamed(string prefix) => Cached("mappers:" + prefix, () =>
+            Databases.GetDatabase<UIMapper>(false) is IDatabase<UIMapper> mappers
+                ? mappers.Where(mapper => mapper.Name.ToString().StartsWith(prefix, StringComparison.Ordinal))
+                         .Select(mapper => new Entry { Name = mapper.Name.ToString(), Display = Title(mapper) ?? mapper.Name.ToString() })
+                         .OrderBy(entry => entry.Display, StringComparer.CurrentCultureIgnoreCase)
+                : Enumerable.Empty<Entry>());
+
+        private static readonly Dictionary<string, Entry[]> KeyedCache = new Dictionary<string, Entry[]>();
+
+        /// <summary>Lists built from other lists or by name. An empty result is not cached, because the databases
+        /// load after the plugin and the next call should try again.</summary>
+        private static Entry[] Cached(string key, Func<IEnumerable<Entry>> build)
         {
-            if (PrefixCache.TryGetValue(prefix, out var cached))
+            if (KeyedCache.TryGetValue(key, out var cached))
             {
                 return cached;
             }
             Entry[] entries;
             try
             {
-                entries = Databases.GetDatabase<UIMapper>(false) is IDatabase<UIMapper> mappers
-                    ? mappers.Where(mapper => mapper.Name.ToString().StartsWith(prefix, StringComparison.Ordinal))
-                             .Select(mapper => new Entry { Name = mapper.Name.ToString(), Display = Title(mapper) ?? mapper.Name.ToString() })
-                             .OrderBy(entry => entry.Display, StringComparer.CurrentCultureIgnoreCase)
-                             .ToArray()
-                    : new Entry[0];
+                entries = build().ToArray();
             }
             catch (Exception)
             {
@@ -79,7 +83,7 @@ namespace DevConsole
             }
             if (entries.Length > 0)
             {
-                PrefixCache[prefix] = entries;
+                KeyedCache[key] = entries;
             }
             return entries;
         }

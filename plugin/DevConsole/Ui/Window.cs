@@ -19,6 +19,7 @@ namespace DevConsole.Ui
         private int active;
         private bool closeRequested;
         private bool paletteRequested;
+        private int collectFrame = -1;
         private Command pendingJump;
 
         public Window(State state, ITab[] tabs)
@@ -69,6 +70,10 @@ namespace DevConsole.Ui
         {
             ApplyRequests();
             var showPalette = palette.Open;  // one value per event: Esc can close it mid-event, the layout must not change
+            if (showPalette && Time.frameCount == collectFrame)
+            {
+                CollectCommands();
+            }
             Header();
             if (!showPalette && GUILayout.Button("Search every command…  (" + state.SearchHotkey.Value + ")", Theme.Field, GUILayout.Height(28)))
             {
@@ -94,10 +99,6 @@ namespace DevConsole.Ui
             ScrollToPendingSection();
 
             EditLogStrip.Draw();
-            if (showPalette)
-            {
-                CollectCommands();
-            }
 
             // stops short of the close button: DragWindow swallows clicks inside its rect
             GUI.DragWindow(new Rect(0, 0, Width - 130f, 24f));
@@ -113,6 +114,7 @@ namespace DevConsole.Ui
             {
                 paletteRequested = false;
                 palette.Show();
+                collectFrame = Time.frameCount;  // every event of this one frame draws the same off-screen pass
             }
             if (pendingJump != null)
             {
@@ -136,10 +138,11 @@ namespace DevConsole.Ui
         }
 
         /// <summary>Draws every tab off-screen and disabled, so each Widgets button records itself for the search
-        /// with its current selections. Runs in every event while the palette is open, keeping layout passes equal.</summary>
+        /// with its current selections. Runs for one whole frame when the palette opens: tabs cannot change while
+        /// it covers them, and drawing in every event of that frame keeps the layout passes equal.</summary>
         private void CollectCommands()
         {
-            Commands.Index.Clear();
+            Commands.BeginCollecting();
             var previous = GUI.enabled;
             GUI.enabled = false;
             GUILayout.BeginArea(new Rect(-40000f, -40000f, Width, 40000f));

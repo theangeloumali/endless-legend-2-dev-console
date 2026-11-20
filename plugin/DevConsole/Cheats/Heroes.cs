@@ -50,10 +50,11 @@ namespace DevConsole.Cheats
             public string Label => $"{Name} — lvl {Level} · {SkillPoints} pts · {State}";
         }
 
-        public static List<Entry> Roster()
+        /// <summary>The local empire's heroes, or another empire's when one is given.</summary>
+        public static List<Entry> Roster(object empire = null)
         {
             var roster = new List<Entry>();
-            foreach (var hero in Sim.Heroes())
+            foreach (var hero in empire == null ? Sim.Heroes() : Sim.Collection(empire, "Heroes"))
             {
                 var traverse = Traverse.Create(hero);
                 roster.Add(new Entry

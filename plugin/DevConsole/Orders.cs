@@ -25,38 +25,38 @@ namespace DevConsole
         public static event Action<object> Posting;
 
         /// <summary>Every attempt the game saw: posted, rejected by its validator, or thrown while posting.</summary>
-        public static event Action<object, string, EditOutcome, string> Outcome;
+        public static event Action<object, string, EditOrigin, EditOutcome, string> Outcome;
 
         /// <summary>True once a game is running; posting before that only logs on the game's side.</summary>
         public static bool Ready => SandboxManager.IsSandboxAlive && Sim.LocalEmpireIndex >= 0;
 
         /// <summary>A plain order carries no empire field — it is routed to the department of the target empire,
         /// so it must be posted against our own index rather than the default -1.</summary>
-        public static void Post(Order order, string what) =>
-            Send(order, what, () => SandboxManager.PostOrder(order, Sim.LocalEmpireIndex));
+        public static void Post(Order order, string what, EditOrigin origin = EditOrigin.User) =>
+            Send(order, what, origin, () => SandboxManager.PostOrder(order, Sim.LocalEmpireIndex));
 
         /// <summary>Editor orders are checked by the game before posting, because a rejected one is silently
         /// dropped — a village on the wrong terrain or a camp your faction cannot build would otherwise look like
         /// the console doing nothing at all.</summary>
-        public static void Post(EditorOrder order, string what)
+        public static void Post(EditorOrder order, string what, EditOrigin origin = EditOrigin.User)
         {
-            if (!Allowed(order, what))
+            if (!Allowed(order, what, origin))
             {
                 return;
             }
-            Send(order, what, () => SandboxManager.PostOrder(order));
+            Send(order, what, origin, () => SandboxManager.PostOrder(order));
         }
 
         /// <summary>For orders rebuilt from a record (undo, recipes), whose static type is only object.</summary>
-        public static void PostAny(object order, string what)
+        public static void PostAny(object order, string what, EditOrigin origin)
         {
             switch (order)
             {
                 case EditorOrder editorOrder:
-                    Post(editorOrder, what);
+                    Post(editorOrder, what, origin);
                     break;
                 case Order plainOrder:
-                    Post(plainOrder, what);
+                    Post(plainOrder, what, origin);
                     break;
                 default:
                     log.LogWarning($"{what}: {order?.GetType().Name ?? "null"} is not a game order");
@@ -67,7 +67,7 @@ namespace DevConsole
         private static readonly MethodInfo Validate =
             AccessTools.Method(AccessTools.TypeByName("Amplitude.Mercury.Simulation.EditorOrderProcessors"), "ValidateOrder");
 
-        private static bool Allowed(EditorOrder order, string what)
+        private static bool Allowed(EditorOrder order, string what, EditOrigin origin)
         {
             if (Validate == null)
             {
@@ -80,7 +80,7 @@ namespace DevConsole
                     return true;
                 }
                 log.LogWarning($"{what}: the game rejected this — not valid here (terrain, ownership or a faction ability)");
-                Raise(order, what, EditOutcome.Rejected, "not valid here");
+                Raise(order, what, origin, EditOutcome.Rejected, "not valid here");
                 return false;
             }
             catch (Exception exception)
@@ -90,7 +90,7 @@ namespace DevConsole
             }
         }
 
-        private static void Send(object order, string what, Action post)
+        private static void Send(object order, string what, EditOrigin origin, Action post)
         {
             if (!Guard(order, what))
             {
@@ -101,18 +101,18 @@ namespace DevConsole
                 Notify(() => Posting?.Invoke(order), what);
                 post();
                 log.LogInfo($"posted {what}");
-                Raise(order, what, EditOutcome.Posted, null);
+                Raise(order, what, origin, EditOutcome.Posted, null);
             }
             catch (Exception exception)
             {
                 log.LogError($"{what} failed: {exception.Message}");
-                Raise(order, what, EditOutcome.Failed, exception.Message);
+                Raise(order, what, origin, EditOutcome.Failed, exception.Message);
             }
         }
 
         /// <summary>A listener bug must never stop an order or take the console down with it.</summary>
-        private static void Raise(object order, string what, EditOutcome outcome, string reason) =>
-            Notify(() => Outcome?.Invoke(order, what, outcome, reason), what);
+        private static void Raise(object order, string what, EditOrigin origin, EditOutcome outcome, string reason) =>
+            Notify(() => Outcome?.Invoke(order, what, origin, outcome, reason), what);
 
         private static void Notify(Action listeners, string what)
         {

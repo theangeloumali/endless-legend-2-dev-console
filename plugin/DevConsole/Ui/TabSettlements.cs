@@ -23,7 +23,7 @@ namespace DevConsole.Ui
         public void Draw()
         {
             Widgets.Section("Pick a settlement");
-            Widgets.Plot("Pick settlement on the map", Pick);
+            Widgets.Pick("Pick settlement on the map", Pick);
             Widgets.Button("Refresh my settlements", () => { own = Build.Sites(); ownIndex = 0; });
             if (own.Count > 0)
             {
@@ -34,11 +34,8 @@ namespace DevConsole.Ui
                     Select(own[ownIndex]);
                 }
             }
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Selected", Theme.Label, GUILayout.Width(Widgets.LabelWidth));
-            GUILayout.Label(site == null ? "none: pick one on the map or from the list" : $"{site.Name}  ({site.Kind}, tile #{site.TileIndex})",
-                            site == null ? Theme.Hint : Theme.Value);
-            GUILayout.EndHorizontal();
+            Widgets.ValueRow("Selected", site == null ? "none: pick one on the map or from the list" : $"{site.Name}  ({site.Kind}, tile #{site.TileIndex})",
+                             site != null);
             var has = site != null;
 
             Widgets.Section("Identity");
@@ -95,7 +92,6 @@ namespace DevConsole.Ui
             }
             var status = HarmonyLib.Traverse.Create(settlement).Field("SettlementStatus").GetValue()?.ToString() ?? string.Empty;
             Select(Build.SiteOf(settlement, status.IndexOf("Camp", System.StringComparison.OrdinalIgnoreCase) >= 0 ? "camp" : "city"));
-            Cheats.World.Disarm();  // one pick, not a repeating tool
         }
 
         private void Select(Build.Site chosen)

@@ -13,8 +13,6 @@ namespace DevConsole
     {
         private static Keyboard blocked;
 
-        public static bool Active => blocked != null;
-
         /// <summary>Called from OnGUI with whether one of the console's text fields owns the keyboard.</summary>
         public static void Update(bool textFocused)
         {

@@ -17,6 +17,8 @@ namespace DevConsole.Ui
         private int selected;
         private bool focusPending;
         private IReadOnlyList<Command> results = new Command[0];
+        private string searchedQuery;
+        private int searchedVersion = -1;
 
         public bool Open { get; private set; }
 
@@ -53,7 +55,12 @@ namespace DevConsole.Ui
                 focusPending = false;
             }
 
-            results = Commands.Index.Search(query, MaxResults);
+            if (query != searchedQuery || Commands.Version != searchedVersion)
+            {
+                results = Commands.Index.Search(query, MaxResults);
+                searchedQuery = query;
+                searchedVersion = Commands.Version;
+            }
             selected = results.Count == 0 ? 0 : Mathf.Clamp(selected, 0, results.Count - 1);
             if (query.Trim().Length == 0)
             {
@@ -138,7 +145,7 @@ namespace DevConsole.Ui
             Hide();
             if (command.RunAtTile != null)
             {
-                Cheats.World.Arm(command.Label, command.RunAtTile);
+                Cheats.World.Arm(command.Label, command.RunAtTile, command.Pick);
             }
             else
             {

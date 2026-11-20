@@ -41,13 +41,16 @@ namespace DevConsole.Cheats
         public static string ArmedLabel { get; private set; }
 
         private static Action<int> armed;
+        private static bool armedOnce;
 
         public static bool IsArmed => armed != null;
 
-        public static void Arm(string label, Action<int> action)
+        /// <summary>once: a pick tool (choose an army, a settlement) that disarms after its first click.</summary>
+        public static void Arm(string label, Action<int> action, bool once = false)
         {
             ArmedLabel = label;
             armed = action;
+            armedOnce = once;
             Orders.Log.LogInfo($"armed: {label} — click the map to place, right-click or Escape to cancel");
         }
 
@@ -78,7 +81,12 @@ namespace DevConsole.Cheats
                 return;
             }
             Orders.Log.LogInfo($"placing {ArmedLabel} at tile {tile} (hover={hovered}, latched={TargetTile})");
-            armed(tile);
+            var action = armed;
+            if (armedOnce)
+            {
+                Disarm();
+            }
+            action(tile);
         }
 
         /// <summary>Called once per frame; the last valid hover wins unless the target is locked.</summary>
@@ -176,7 +184,7 @@ namespace DevConsole.Cheats
         /// <summary>Reveal is a single order carrying every tile index; the world size tells us how many there are.</summary>
         public static void RevealMap()
         {
-            var tiles = TileCount;
+            var tiles = Sim.MapWidth * Sim.MapHeight;
             if (tiles <= 0)
             {
                 return;
@@ -187,20 +195,6 @@ namespace DevConsole.Cheats
                 TileIndexes = Enumerable.Range(0, tiles).ToArray(),
                 Set = true,
             }, $"reveal {tiles} tiles");
-        }
-
-        private static int TileCount
-        {
-            get
-            {
-                var provider = Traverse.Create(typeof(Presentation)).Property("WorldMapProvider").GetValue();
-                if (provider == null)
-                {
-                    return 0;
-                }
-                var traverse = Traverse.Create(provider);
-                return traverse.Property<int>("MapWidth").Value * traverse.Property<int>("MapHeight").Value;
-            }
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 namespace Forge.Core
 {
     /// <summary>Ranks commands for the search palette: a word starting with the query beats the query appearing
-    /// mid-word, which beats a keyword or location hit. Ties sort alphabetically.</summary>
+    /// mid-word, which beats a hit on the location only. Ties sort alphabetically.</summary>
     public sealed class CommandIndex<T>
     {
         private sealed class Item
@@ -13,7 +13,6 @@ namespace Forge.Core
             public T Value;
             public string Label;
             public string Location;
-            public string[] Keywords;
         }
 
         private readonly List<Item> items = new List<Item>();
@@ -22,14 +21,8 @@ namespace Forge.Core
 
         public void Clear() => items.Clear();
 
-        public void Add(T value, string label, string location, IEnumerable<string> keywords = null) =>
-            items.Add(new Item
-            {
-                Value = value,
-                Label = label ?? string.Empty,
-                Location = location ?? string.Empty,
-                Keywords = keywords?.Where(k => !string.IsNullOrEmpty(k)).ToArray() ?? new string[0],
-            });
+        public void Add(T value, string label, string location) =>
+            items.Add(new Item { Value = value, Label = label ?? string.Empty, Location = location ?? string.Empty });
 
         public IReadOnlyList<T> Search(string query, int max = 8)
         {
@@ -57,8 +50,7 @@ namespace Forge.Core
             {
                 return 2;
             }
-            if (item.Location.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0
-                || item.Keywords.Any(keyword => keyword.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0))
+            if (item.Location.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 return 1;
             }

@@ -19,12 +19,15 @@ namespace DevConsole
         private static readonly Type WorldPositionType = AccessTools.TypeByName("Amplitude.Mercury.WorldPosition");
         private static readonly MethodInfo TryGetArmyAtMethod = TileLookup("TryGetArmyAt");
         private static readonly MethodInfo TryGetSettlementAtMethod = TileLookup("TryGetSettlementAt");
+        private static readonly MethodInfo TileToAxial =
+            WorldPositionType == null ? null : AccessTools.Method(WorldPositionType, "TileIndexToAxialCoord", new[] { typeof(int) });
 
         public static int Turn => Sandbox is object sandbox ? Traverse.Create(sandbox).Field<int>("turn").Value : -1;
 
-        public static int MapWidth => StaticInt("WorldWidth");
+        /// <summary>The presentation's map provider: the source the Reveal Map button has always used.</summary>
+        public static int MapWidth => MapProperty("MapWidth");
 
-        public static int MapHeight => StaticInt("WorldHeight");
+        public static int MapHeight => MapProperty("MapHeight");
 
         public static bool MapWraps => WorldPositionType != null && Traverse.Create(WorldPositionType).Field("WorldWrap").GetValue() is bool wraps && wraps;
 
@@ -34,20 +37,10 @@ namespace DevConsole
 
         public static object SettlementAt(int tile) => AtTile(TryGetSettlementAtMethod, tile);
 
-        /// <summary>Burrows are not in the world's tile lookups; the sandbox keeps them in one list.</summary>
-        public static object BurrowAt(int tile)
-        {
-            var burrows = Sandbox is object sandbox ? Traverse.Create(sandbox).Field("BurrowRepository").Field("Burrows").GetValue() : null;
-            return (burrows as System.Collections.IEnumerable)?.Cast<object>()
-                .FirstOrDefault(burrow => Traverse.Create(burrow).Field("TileIndex").GetValue() is int at && at == tile);
-        }
+        /// <summary>Burrows and dungeons are not in the world's tile lookups; the sandbox keeps each in one list.</summary>
+        public static object BurrowAt(int tile) => RepositoryItemAt("BurrowRepository", "Burrows", tile);
 
-        public static object DungeonAt(int tile)
-        {
-            var dungeons = Sandbox is object sandbox ? Traverse.Create(sandbox).Field("DungeonRepository").Field("Dungeons").GetValue() : null;
-            return (dungeons as System.Collections.IEnumerable)?.Cast<object>()
-                .FirstOrDefault(dungeon => Traverse.Create(dungeon).Field("TileIndex").GetValue() is int at && at == tile);
-        }
+        public static object DungeonAt(int tile) => RepositoryItemAt("DungeonRepository", "Dungeons", tile);
 
         public sealed class EmpireRow
         {
@@ -117,10 +110,6 @@ namespace DevConsole
             return TileOf(entity);
         }
 
-        public static int MoneyStock => StockOf("MoneyStock");
-
-        public static int InfluenceStock => StockOf("InfluenceStock");
-
         public sealed class UnitRow
         {
             public string Name;
@@ -137,8 +126,7 @@ namespace DevConsole
                 var ratio = traverse.Field("HealthRatio").GetValue();
                 var current = health is FixedPoint points ? (int)points : 0;
                 var fraction = ratio is FixedPoint r ? (float)(int)(r * 1000) / 1000f : 1f;
-                var definition = traverse.Field("UnitDefinition").GetValue();
-                var name = definition == null ? "unit" : Traverse.Create(definition).Property("Name").GetValue()?.ToString() ?? "unit";
+                var name = DefinitionName(unit, "UnitDefinition", "unit");
                 return new UnitRow
                 {
                     Name = Catalog.Units.FirstOrDefault(entry => entry.Name == name)?.Display ?? name,
@@ -152,8 +140,7 @@ namespace DevConsole
         /// layouts this map follows instead of assuming one.</summary>
         public static (int Q, int R)? GameAxial(int tile)
         {
-            var method = WorldPositionType == null ? null : AccessTools.Method(WorldPositionType, "TileIndexToAxialCoord", new[] { typeof(int) });
-            var coord = method?.Invoke(null, new object[] { tile });
+            var coord = TileToAxial?.Invoke(null, new object[] { tile });
             if (coord == null)
             {
                 return null;
@@ -204,10 +191,28 @@ namespace DevConsole
             return lookup.Invoke(world, arguments) is bool found && found ? arguments[1] : null;
         }
 
-        private static int StaticInt(string field) =>
-            WorldPositionType != null && Traverse.Create(WorldPositionType).Field(field).GetValue() is int value ? value : 0;
+        /// <summary>The Name of a definition an entity points at (UnitDefinition, ConstructibleDefinition…).</summary>
+        public static string DefinitionName(object entity, string definitionField, string fallback)
+        {
+            var definition = entity == null ? null : Traverse.Create(entity).Field(definitionField).GetValue();
+            return definition == null ? fallback : Traverse.Create(definition).Property("Name").GetValue()?.ToString() ?? fallback;
+        }
 
-        private static int StockOf(string field)
+        private static object RepositoryItemAt(string repository, string list, int tile)
+        {
+            var items = Sandbox is object sandbox ? Traverse.Create(sandbox).Field(repository).Field(list).GetValue() : null;
+            return (items as System.Collections.IEnumerable)?.Cast<object>()
+                .FirstOrDefault(item => Traverse.Create(item).Field("TileIndex").GetValue() is int at && at == tile);
+        }
+
+        private static int MapProperty(string property)
+        {
+            var provider = Traverse.Create(typeof(Amplitude.Mercury.Presentation.Presentation)).Property("WorldMapProvider").GetValue();
+            return provider == null ? 0 : Traverse.Create(provider).Property<int>(property).Value;
+        }
+
+        /// <summary>A FixedPoint or int stock on the local empire (MoneyStock, InfluenceStock); -1 when unreadable.</summary>
+        public static int StockOf(string field)
         {
             var value = LocalEmpire == null ? null : Traverse.Create(LocalEmpire).Field(field).GetValue();
             switch (value)

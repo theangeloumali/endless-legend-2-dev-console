@@ -53,12 +53,11 @@ namespace DevConsole.Cheats
 
         public static void StopRecording() => recording = null;
 
-        /// <summary>Returns the saved path, or null when there was nothing to save.</summary>
-        public static string Save(string name)
+        public static void Save(string name)
         {
             if (recording == null || recording.Steps.Count == 0)
             {
-                return null;
+                return;
             }
             Directory.CreateDirectory(Folder);
             recording.Name = string.IsNullOrWhiteSpace(name) ? "recipe" : name.Trim();
@@ -66,7 +65,6 @@ namespace DevConsole.Cheats
             File.WriteAllText(path, RecipeCodec.Write(recording));
             Orders.Log.LogInfo($"recipe saved: {path} ({recording.Steps.Count} steps)");
             recording = null;
-            return path;
         }
 
         public static List<Listing> List()
@@ -117,7 +115,7 @@ namespace DevConsole.Cheats
                     problems.Add($"{step.Order.Type}: {reason}");
                     continue;
                 }
-                Orders.PostAny(order, $"recipe {recipe.Name}: {step.Order.Type}");
+                Orders.PostAny(order, $"recipe {recipe.Name}: {step.Order.Type}", EditOrigin.Replay);
                 posted++;
             }
             Report(recipe.Name, posted, skipped, problems);
@@ -125,8 +123,8 @@ namespace DevConsole.Cheats
 
         private static void Capture(EditEntry entry)
         {
-            if (recording == null || entry.Outcome != EditOutcome.Posted || entry.Record == null || entry.Record.Unrecordable
-                || entry.Label.StartsWith("undo ", StringComparison.Ordinal) || entry.Label.StartsWith("recipe ", StringComparison.Ordinal))
+            if (recording == null || entry.Origin != EditOrigin.User || entry.Outcome != EditOutcome.Posted
+                || entry.Record == null || entry.Record.Unrecordable)
             {
                 return;
             }
@@ -179,10 +177,11 @@ namespace DevConsole.Cheats
         private static void Report(string name, int posted, int skipped, List<string> problems)
         {
             var summary = $"recipe {name}: {posted} posted, {skipped} skipped";
-            Edits.Log.Add(new EditEntry
+            Edits.Add(new EditEntry
             {
                 Turn = Sim.Turn,
                 Label = summary,
+                Origin = EditOrigin.Replay,
                 Outcome = skipped == 0 && problems.Count == 0 ? EditOutcome.Posted : EditOutcome.Skipped,
                 Reason = problems.Count == 0 ? null : string.Join("; ", problems.Take(3)) + (problems.Count > 3 ? " …" : string.Empty),
             });
