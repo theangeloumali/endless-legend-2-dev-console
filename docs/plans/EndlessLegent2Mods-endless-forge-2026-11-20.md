@@ -162,17 +162,27 @@
 
 **Route: inline.** There is one owner. Every phase needs the same running game instance for its in-game check, and Phases 2–7 all touch `Window.cs`, `Catalog.cs` and `Sim.cs`, so parallel agents would contend for both.
 
+## Status and deviations (2026-11-20)
+
+- **60 commands, not 61.** `EditorOrderPolicyRule` is an internal order-filter class in `Amplitude.Mercury.Sandbox`, not an editor command.
+- **One DLL.** `Forge.Core` sources compile into `DevConsole.dll`, so players still install a single file; `tests/Forge.Core.Tests` builds the same sources.
+- **Search index:** built by drawing every tab off-screen for the one frame the palette opens, instead of registering each button by hand.
+- **Grid layout and wrap** are read at runtime (the game's `TileIndexToAxialCoord` and `WorldPosition.WorldWrap`), not determined by an in-game experiment.
+- **In-game checks batched.** Civilization VII was running when Phase 0 started, so the game was not launched over that session. Every phase is build-verified (warnings are errors) and `Forge.Core` has 22 passing tests; the in-game checks of Phases 0–7, the screenshots and the E2E video run together once Angelo okays launching the game.
+- **Bug found by the tests:** recipe timestamps shifted by the local UTC offset (`JObject.Parse` date handling); fixed.
+- **Bug found by /simplify:** AI & Story passed a hero's list position as `HeroIndex`; it now uses the hero's global index.
+
 ## Phase ledger
 
-- [ ] Phase 0: Baseline on game 1.0.239. **2h with Claude | 4h without**
-- [ ] Phase 1: `Forge.Core` library. **4h | 10h**
-- [ ] Phase 2: Shell v2 (command registry, 14 tabs, search, edit log, self-check, input guard). **7h | 18h**
-- [ ] Phase 3: World › Places (24 commands). **5h | 12h**
-- [ ] Phase 4: Settlements tab (9 commands). **4h | 10h**
-- [ ] Phase 5: Units tab (7 commands). **5h | 12h**
-- [ ] Phase 6: AI & Story tab (21 commands). **6h | 16h**
-- [ ] Phase 7: Undo and Recipes. **6h | 16h**
-- [ ] Phase 8: Release and settle (tests, /simplify, review, Codex, E2E video, vault, checklist). **7h | 16h**
+- [ ] Phase 0: Baseline on game 1.0.239 (compiles against 1.0.239; in-game smoke batched, see Status). **2h with Claude | 4h without** — built; in-game check pending
+- [ ] Phase 1: `Forge.Core` library. **4h | 10h** — built; in-game check pending
+- [ ] Phase 2: Shell v2 (command registry, 14 tabs, search, edit log, self-check, input guard). **7h | 18h** — built; in-game check pending
+- [ ] Phase 3: World › Places (23 commands; Build foundation moved to Settlements). **5h | 12h** — built; in-game check pending
+- [ ] Phase 4: Settlements tab (9 commands + Build foundation). **4h | 10h** — built; in-game check pending
+- [ ] Phase 5: Units tab (7 commands). **5h | 12h** — built; in-game check pending
+- [ ] Phase 6: AI & Story tab (20 commands; `EditorOrderPolicyRule` is an order filter, not a command). **6h | 16h** — built; in-game check pending
+- [ ] Phase 7: Undo and Recipes. **6h | 16h** — built; in-game check pending
+- [ ] Phase 8: Release and settle (tests, /simplify, docs, code review done; in-game checks, screenshots and E2E video wait for Angelo's go-ahead to launch the game) (tests, /simplify, review, Codex, E2E video, vault, checklist). **7h | 16h**
 
 **Total: 46h with Claude | 114h without (60% saved).** The proposal estimated 30h / 80h for Forge before the code was read. The increase covers the input guard, registering the existing tabs' buttons as commands so search covers them, the self-check, and the Phase 0 re-verification on 1.0.239. The figures include the 50% buffer for unexplored game code from your estimation guidelines.
 
