@@ -35,6 +35,12 @@
     <Reference Include="Assembly-CSharp" HintPath="$(Managed)\Assembly-CSharp.dll" Private="false" />
     <Reference Include="Amplitude.UI" HintPath="$(Managed)\Amplitude.UI.dll" Private="false" />
     <Reference Include="Amplitude.DebugOverlay" HintPath="$(Managed)\Amplitude.DebugOverlay.dll" Private="false" />
+    <Reference Include="Newtonsoft.Json" HintPath="$(Managed)\Newtonsoft.Json.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- Game-free logic is compiled in so players still install one DLL; tests build the same files on their own. -->
+  <ItemGroup>
+    <Compile Include="..\Forge.Core\*.cs" Link="Core\%(Filename)%(Extension)" />
   </ItemGroup>
 
 </Project>
