@@ -34,6 +34,14 @@ namespace DevConsole
 
         public static object SettlementAt(int tile) => AtTile(TryGetSettlementAtMethod, tile);
 
+        /// <summary>Burrows are not in the world's tile lookups; the sandbox keeps them in one list.</summary>
+        public static object BurrowAt(int tile)
+        {
+            var burrows = Sandbox is object sandbox ? Traverse.Create(sandbox).Field("BurrowRepository").Field("Burrows").GetValue() : null;
+            return (burrows as System.Collections.IEnumerable)?.Cast<object>()
+                .FirstOrDefault(burrow => Traverse.Create(burrow).Field("TileIndex").GetValue() is int at && at == tile);
+        }
+
         public static int EmpireIndexOf(object entity)
         {
             if (entity == null)

@@ -74,7 +74,10 @@ namespace DevConsole
             object order;
             try
             {
-                order = Activator.CreateInstance(type);
+                // some orders only have a full constructor; every field is set from the record below anyway
+                order = type.GetConstructor(Type.EmptyTypes) != null
+                    ? Activator.CreateInstance(type)
+                    : System.Runtime.Serialization.FormatterServices.GetUninitializedObject(type);
             }
             catch (Exception exception)
             {
