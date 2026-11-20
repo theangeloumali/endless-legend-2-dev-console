@@ -1,0 +1,24 @@
+[h1]GeloDGreat Dev Console 2.0: Endless Forge[/h1]
+An in-game world editor and sandbox for ENDLESS Legend 2, built on Amplitude's own editor commands, the ones their in-house map editor uses. Press [b]Insert[/b] for fourteen tabs and [b]Ctrl+F[/b] to search every command.
+
+[h2]Requirements: read before subscribing[/h2]
+This is a BepInEx plugin, not a data mod. Once, install:
+[list]
+[*][b]BepInEx 5.4.23.x[/b] (x64) into the game folder: github.com/BepInEx/BepInEx/releases
+[*][b]Hazardous BepInEx Mod Loader[/b] or [b]EL2 Mod Picker[/b] from the Workshop, which loads this DLL from your subscription
+[/list]
+[b]Achievements:[/b] any Workshop subscription turns achievements off while it is active. If you want achievements, install the DLL by hand from Nexus or GitHub instead; the plugin itself is invisible to the game's modding check.
+
+[h2]What it does[/h2]
+[list]
+[*][b]Economy, Build, Heroes, Equipment[/b]: set Dust and Influence, finish any queue instantly, level heroes, hand out Legendary gear.
+[*][b]World[/b]: click the map to spawn units, found cities, plant forests, place villages, districts and wonders. New [b]Places[/b] tools: curiosities, dungeons, observatories, burrows, coral, the Tormented, village spawn points, rivers, roads, curiosity paths.
+[*][b]Settlements[/b]: pick any settlement, then rename it, make it the capital, turn a camp into a city, merge or detach territory, edit its queue and population, or destroy it.
+[*][b]Units[/b]: pick any army, AI included, then add, remove, evolve or damage units, change movement, send it through a burrow.
+[*][b]AI & Story[/b]: send any army at a city, set missions, mood messages, dialogs, dungeons, heroes, council seats, the tech queue.
+[*][b]Recipes[/b]: record a run of edits and replay it around the capital of your next game. Share recipes as files.
+[*][b]Edit log with Undo[/b] where the game has an opposite command, and a [b]self-check[/b] that tells you if a game patch moved anything.
+[/list]
+
+Single player only. Unofficial; not affiliated with Amplitude Studios or SEGA.
+Source, docs and issues: github.com/theangeloumali/endless-legend-2-dev-console

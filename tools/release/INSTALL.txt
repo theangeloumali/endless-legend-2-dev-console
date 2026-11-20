@@ -1,0 +1,70 @@
+GeloDGreat Dev Console 2.0 (Endless Forge) for ENDLESS LEGEND 2
+================================================================
+
+INSTALL (manual, Nexus or GitHub download)
+  1. Install BepInEx 5 (x64, Mono) into your game folder - the one with
+     "Endless Legend 2.exe":
+        https://github.com/BepInEx/BepInEx/releases
+  2. Run the game once and quit, so BepInEx creates its folders.
+  3. Copy DevConsole.dll into:
+        .../ENDLESS Legend 2/BepInEx/plugins/
+     replacing any older DevConsole.dll. Your settings file is kept.
+  4. Start the game, load a save, and press INSERT.
+
+INSTALL (Steam Workshop)
+  Subscribe on the Workshop, then install BepInEx 5 (step 1 above) and one
+  Workshop mod loader, once: "Hazardous BepInEx Mod Loader" or "EL2 Mod
+  Picker". The loader picks DevConsole.dll up from your subscription.
+
+  Remove any other EL2 cheat plugin first - the Nexus "EL2 Resource Manager"
+  patches the same income methods and would double your multipliers.
+
+USING IT
+  INSERT opens and closes the window; CTRL+F searches every command.
+  Fourteen tabs, everything applies on click:
+
+  Quick        the switches you flip mid-game, plus finish-every-queue
+  Economy      set Dust / Influence / city cap, add every resource, unlock eras
+  Build        complete anything in a settlement's queue free and instantly
+  Heroes       skill points, stats, XP, heal, draws, spawn a named hero
+  Equipment    all items, rarest first, add to stash and equip
+  Empire       cooldowns, statuses on a tile, quests
+  Yields       per-turn multipliers (these apply NEXT turn)
+  World        tile tools: spawn units, cities, camps, districts, wonders,
+               terraform, villages - plus Places: curiosities, dungeons,
+               observatories, burrows, coral, Tormented, village spawn points,
+               rivers, roads, curiosity paths
+  Settlements  pick any settlement: rename, capital, camp to city, merge or
+               detach territory, foundations, queue, population, destroy
+  Units        pick any army (AI too): add, remove, evolve, damage units,
+               movement, burrow travel, destroy
+  AI & Story   army missions, attack a city, moods, dialogs, dungeons, heroes,
+               minor-faction traits, empire state, council seats, tech queue
+  Diplomacy    war, peace, treaties, war score, victory path, play as another
+  Battle       the game's own seven battle cheats
+  Recipes      record edits, save them, replay them around a new capital
+
+  The EDIT LOG under every tab shows what the game accepted or rejected, with
+  UNDO where the game has an opposite command.
+
+SETTINGS
+  BepInEx/config/angelo.el2.devconsole.cfg - hotkeys, UI scale, window height.
+  Delete the file to reset it. Recipes live in BepInEx/config/forge-recipes.
+
+ACHIEVEMENTS
+  The plugin itself does not disable achievements - the game cannot see
+  BepInEx plugins. ANY Steam Workshop subscription or data mod does, though,
+  including this mod's own Workshop item: the game skips its statistic
+  reporters when modding is enabled. Install manually (above) if you want
+  achievements, and check Player.log for:
+        "Modding is not enabled because no modifications were registered."
+
+NOTES
+  - Typing in a console field pauses the game's keyboard until you click away.
+  - Values cap near 2,147,483 (the game uses 32-bit fixed point).
+  - Built against game version V1.0.239; the status line runs a self-check of
+    every game reference on whatever build you are running.
+  - Single player only. Unofficial, not affiliated with Amplitude or SEGA.
+
+  Source, full docs and issues:
+  https://github.com/theangeloumali/endless-legend-2-dev-console
