@@ -1,8 +1,14 @@
 # GeloDGreat Dev Console — ENDLESS LEGEND 2
 
-An in-game developer console for **ENDLESS LEGEND 2**. Press **Insert**, get a window with eight tabs: set your
+An in-game developer console for **ENDLESS LEGEND 2**. Press **Insert**, get a window with fourteen tabs: set your
 Dust to whatever you like, finish anything in a build queue instantly, hand your heroes levels and Legendary gear,
 spawn armies on the tile you're pointing at, force a war, or switch to playing another empire entirely.
+
+**2.0 is Endless Forge**: a world editor and sandbox on top of the console. Place dungeons, curiosities,
+observatories and village spawn points; rename, merge or destroy any settlement; add, evolve or damage units in
+any army, AI included; send AI armies at a city; start dialogs; and record a run of edits as a **recipe** you can
+replay around the capital of your next game. **Ctrl+F** searches every command, and an **edit log** lets you undo
+the edits the game has an opposite command for.
 
 It works by using **the game's own developer tools**. Amplitude shipped their in-house map editor in the retail
 build — about 110 editor commands — and left it public. The console asks the simulation to do things the same way
@@ -11,7 +17,7 @@ their editor did, instead of writing values into memory behind the game's back.
 > Unofficial and not affiliated with Amplitude Studios or SEGA. Single-player testing tool — don't use it in
 > multiplayer against people who haven't agreed to it.
 
-![Game](https://img.shields.io/badge/game-V1.0.116-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)
+![Game](https://img.shields.io/badge/game-V1.0.239-blue) ![Version](https://img.shields.io/badge/version-2.0.0-orange) ![License](https://img.shields.io/badge/license-MIT-green) ![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)
 
 **[Download the latest release](../../releases/latest)** · free and open source, MIT licensed · [report an issue](../../issues)
 
@@ -125,6 +131,62 @@ immediately. For a one-off jump use the Economy tab.
 
 ---
 
+### World › Places (new in 2.0)
+
+Below the original World sections. Every button is a tile tool: press it, then click the map.
+
+- **Curiosities**: place any curiosity, or remove a collectible.
+- **Dungeons**: spawn a dungeon or spawn point at a danger level you choose, or remove one.
+- **Observatories, burrows, coral**: spawn, evolve to a chosen type, or remove.
+- **The Tormented**: create a Tormented army of any type, fill a settlement's Tormented gauge, settle or unsettle.
+- **Village spawn points**: add one for any minor faction, or remove it.
+- **Terrain extras**: refresh a river, remove a district, set your empire's road quality, force a road update.
+- **Curiosity paths** (collapsed): build the paths the Path Curiosity victory uses.
+
+### Settlements (new)
+
+Pick a settlement **on the map** (anyone's) or from your own list. Rename it, make it the capital, turn a camp into
+a city, merge another settlement into it or detach a territory, build a foundation, enqueue any district, unit or
+improvement at a tile you click, remove queue entries, and change its population. **Destroy** asks for a second
+click, because nothing undoes it.
+
+### Units (new)
+
+Pick **any army on the map**, including the AI's. You get its units with their health; add a unit, remove one,
+evolve one into its next form, damage every unit, change the army's movement ratio, send it through a burrow to
+the exit you click, or destroy it.
+
+### AI & Story (new)
+
+Choose an **acting empire** and an **other empire**, then:
+
+- give any army a mission (attack, explore and the rest) toward a tile you click, or order it to attack a city;
+- send a diplomatic mood message, or clear the mood cooldown between two empires;
+- start any dialog, clear or regenerate a dungeon, continue a dungeon crawl;
+- deploy, dismiss or redistribute heroes, and build a partner den;
+- replace a minor faction's trait, set an empire state, make an empire action ready, unlock a council seat;
+- enqueue a technology or clear the tech queue.
+
+### Recipes (new)
+
+Press **Start recording**, make your edits, then **Save**. Recipes are JSON files in
+`BepInEx/config/forge-recipes/`, so you can share them. **Replay** places every edit in the same shape around the
+capital of the game you are in now, so a "fortress start" works on any map. **Same tiles** reuses the recorded
+tile numbers for the same map. Steps that fall off the map, or use something your game build lacks, are skipped and
+listed in the edit log.
+
+### Search, edit log and self-check
+
+- **Ctrl+F** searches every button in every tab. Enter runs it, or arms it if it is a tile tool. Tab jumps to it.
+  Destroy-style commands only jump, so they still need their confirm click.
+- The **edit log** under every tab shows what was posted (✓) and what the game rejected (✗), with **Undo** where the
+  game has an opposite command: spawned armies, cities, camps, villages, districts, observatories, burrows,
+  dungeons, spawn points, curiosities, planted forests, and Dust or Influence you set.
+- The status line runs a **self-check** when a game loads: it resolves every game type and member the plugin uses
+  on the build you are running, so a game patch that moves something shows up as a count instead of a dead button.
+
+---
+
 ## Screenshots
 
 | Build                                                                  | Heroes                                                       |
@@ -156,6 +218,7 @@ Edit `BepInEx/config/angelo.el2.devconsole.cfg`, or delete it to reset:
 | Setting         | Default  | What it does                                                                          |
 | --------------- | -------- | ------------------------------------------------------------------------------------- |
 | `Hotkey`        | `Insert` | Key that opens and closes the window                                                  |
+| `SearchHotkey`  | `Ctrl+F` | Opens the command search                                                              |
 | `UiScale`       | `0`      | Window scale. `0` picks one from your resolution (×2 at 4K); set a number to override |
 | `WindowHeight`  | `520`    | Height of the scrolling area                                                          |
 | `NativeOverlay` | `true`   | Unlocks the game's built-in debug overlay (see Known limits)                          |
@@ -193,8 +256,13 @@ folder actually emptied) if you want achievements. `Player.log` tells you which 
   reports itself disabled in retail and the plugin flips that — but **F2 still does not raise it** on V1.0.116,
   because the manager that registers the key never starts. Set `NativeOverlay = false` to skip the patch. The
   Insert window is unaffected either way.
-- **Built against V1.0.116.** Every game member is resolved by name and null-checked, so a future patch that renames
-  something disables that one control and logs a warning instead of breaking the plugin.
+- **Built against V1.0.239.** Every game member is resolved by name and null-checked, so a future patch that renames
+  something disables that one control and logs a warning instead of breaking the plugin. The self-check on the
+  status line counts anything that moved.
+- **No terrain painting.** None of the game's editor commands change a tile's terrain type or elevation, so Forge
+  can reshape forests, mountains, rivers and roads but not repaint biomes.
+- **Typing in a console field pauses the game's keyboard.** That keeps "wasd" in a search box from moving the
+  camera. It comes back the moment the field loses focus.
 - Cadavers and Spirits exist only for the factions that use them; those buttons are harmless elsewhere.
 
 ---
@@ -233,12 +301,17 @@ anything a data mod adds.
 
 ```
 plugin/DevConsole/
-  Plugin.cs        entry point, hotkey
-  Orders.cs        order dispatch          Sim.cs      reflection reads
-  Catalog.cs       names, rarities, sort   Patches.cs  yield multipliers
+  Plugin.cs        entry point, hotkeys
+  Orders.cs        order dispatch          Sim.cs, SimWorld.cs   reflection reads
+  Catalog.cs       names, rarities, sort   Patches.cs            yield multipliers
+  Edits.cs         edit log and undo       OrderCodec.cs         order <-> plain record
+  Commands.cs      search index            SelfCheck.cs          game-reference check
+  InputGuard.cs    keyboard pause while typing
   DebugOverlay.cs  native overlay unlock
-  Cheats/          one file per tab's actions
-  Ui/              Theme.cs, Widgets.cs, Window.cs, one Tab*.cs per tab
+  Cheats/          one file per tab's actions, plus Recipes.cs
+  Ui/              Theme.cs, Widgets.cs, Window.cs, SearchPalette.cs, EditLogStrip.cs, one Tab*.cs per tab
+plugin/Forge.Core/ game-free logic compiled into the same DLL: hex grid, recipe format, undo table, search, log
+tests/             xUnit tests for Forge.Core (dotnet test tests/Forge.Core.Tests)
 tools/             build and install scripts
 mod/DevConsole/    a separate data-only mod (see below)
 docs/plans/        design notes and the research behind it

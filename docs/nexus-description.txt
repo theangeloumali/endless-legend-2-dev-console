@@ -13,7 +13,7 @@ GeloDGreat Dev Console
 -------------------------------------------------------------------------------
  SUMMARY  (the short description field, shown in search results)
 -------------------------------------------------------------------------------
-An in-game developer console built on ENDLESS LEGEND 2's own editor commands. Press Insert for ten tabs: set Dust and Influence to any value, finish any build queue instantly, level heroes and hand them Legendary gear, click the map to place districts, armies and terrain, force wars, and switch which empire you play.
+2.0 Endless Forge: a world editor and sandbox built on ENDLESS LEGEND 2's own editor commands. Fourteen tabs: set Dust to any value, spawn and edit any army (AI included), place dungeons, curiosities and observatories, rename or destroy any settlement, start dialogs, record edits as recipes, search every command with Ctrl+F, and undo.
 
 
 -------------------------------------------------------------------------------
@@ -22,7 +22,18 @@ An in-game developer console built on ENDLESS LEGEND 2's own editor commands. Pr
 
 [size=5][b]GeloDGreat Dev Console[/b][/size]
 
-An in-game developer console for [b]ENDLESS LEGEND 2[/b]. Press [b]Insert[/b] and you get a window with ten tabs — set your Dust to whatever you like, finish anything in a build queue instantly, hand your heroes levels and Legendary gear, click the map to plant forests or drop armies, force a war, or switch to playing another empire entirely.
+An in-game developer console for [b]ENDLESS LEGEND 2[/b]. Press [b]Insert[/b] and you get a window with fourteen tabs — set your Dust to whatever you like, finish anything in a build queue instantly, hand your heroes levels and Legendary gear, click the map to plant forests or drop armies, force a war, or switch to playing another empire entirely.
+
+[size=4][b]New in 2.0: Endless Forge[/b][/size]
+
+[list]
+[*][b]World › Places[/b]: place curiosities, dungeons (pick the danger), observatories, burrows, coral, Tormented armies and village spawn points; refresh rivers, remove districts, set road quality, build curiosity paths.
+[*][b]Settlements[/b]: pick any settlement on the map. Rename, make capital, camp → city, merge or detach territory, foundations, edit the build queue, change population, destroy (with a confirm click).
+[*][b]Units[/b]: pick any army on the map, AI included. Add, remove, evolve or damage units, change movement, travel by burrow, destroy.
+[*][b]AI & Story[/b]: give any army a mission or send it at a city, mood messages, dialogs, dungeons, heroes and partner dens, minor-faction traits, empire state, council seats, the tech queue.
+[*][b]Recipes[/b]: record a run of edits, save it as a shareable file, replay it around the capital of your next game.
+[*][b]Ctrl+F search[/b] across every button, an [b]edit log[/b] with [b]Undo[/b] where the game has an opposite command, and a [b]self-check[/b] that tells you if a game patch moved anything.
+[/list]
 
 [size=4][b]It uses the game's own developer tools[/b][/size]
 
@@ -62,7 +73,7 @@ Item, unit, hero and technology lists show the game's [b]real names in your lang
 
 [list]
 [*][url=https://github.com/BepInEx/BepInEx/releases]BepInEx 5[/url] (x64, Mono)
-[*]ENDLESS LEGEND 2 — built and tested against [b]V1.0.116[/b]
+[*]ENDLESS LEGEND 2 — built against [b]V1.0.239[/b]
 [/list]
 
 [size=4][b]Installation[/b][/size]
