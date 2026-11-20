@@ -42,6 +42,32 @@ namespace DevConsole
                 .FirstOrDefault(burrow => Traverse.Create(burrow).Field("TileIndex").GetValue() is int at && at == tile);
         }
 
+        public static object DungeonAt(int tile)
+        {
+            var dungeons = Sandbox is object sandbox ? Traverse.Create(sandbox).Field("DungeonRepository").Field("Dungeons").GetValue() : null;
+            return (dungeons as System.Collections.IEnumerable)?.Cast<object>()
+                .FirstOrDefault(dungeon => Traverse.Create(dungeon).Field("TileIndex").GetValue() is int at && at == tile);
+        }
+
+        public sealed class EmpireRow
+        {
+            public int Index;
+            public string Name;
+            public object Entity;
+        }
+
+        /// <summary>Major empires only: the ones that can be picked as a diplomacy or story target.</summary>
+        public static List<EmpireRow> MajorEmpires()
+        {
+            var empires = Sandbox is object sandbox ? Traverse.Create(sandbox).Field("MajorEmpires").GetValue() as System.Collections.IEnumerable : null;
+            return empires?.Cast<object>().Where(empire => empire != null).Select(empire =>
+            {
+                var index = Traverse.Create(empire).Field("Index").GetValue() is int i ? i : EmpireIndexOf(empire);
+                var name = NameOf(empire, null);
+                return new EmpireRow { Index = index, Entity = empire, Name = $"#{index}{(name == null ? string.Empty : "  " + name)}{(IsLocal(index) ? "  (you)" : string.Empty)}" };
+            }).ToList() ?? new List<EmpireRow>();
+        }
+
         public static int EmpireIndexOf(object entity)
         {
             if (entity == null)
