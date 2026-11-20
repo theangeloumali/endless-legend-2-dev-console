@@ -18,3 +18,7 @@ dist/
 
 # raw screenshot drops; the named copies in docs/images are what the README uses
 screenshots/
+
+# test build output
+tests/**/bin/
+tests/**/obj/

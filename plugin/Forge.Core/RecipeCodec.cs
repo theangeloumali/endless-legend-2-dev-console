@@ -64,7 +64,11 @@ namespace Forge.Core
             JObject root;
             try
             {
-                root = JObject.Parse(json);
+                // DateParseHandling.None: JObject.Parse would turn "…Z" into a local DateTime and shift CreatedUtc
+                using (var reader = new JsonTextReader(new System.IO.StringReader(json)) { DateParseHandling = DateParseHandling.None })
+                {
+                    root = JObject.Load(reader);
+                }
             }
             catch (JsonException exception)
             {
