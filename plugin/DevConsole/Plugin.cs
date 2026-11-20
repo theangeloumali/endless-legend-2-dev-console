@@ -23,6 +23,7 @@ namespace DevConsole
             state = new State(Config);
             Orders.Initialize(Logger);
             Edits.Initialize();
+            Cheats.Recipes.Initialize();
             // two rows of seven: the empire's own levers on top, the world and other empires below
             window = new Window(state, new ITab[]
             {
