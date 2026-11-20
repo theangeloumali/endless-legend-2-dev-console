@@ -40,7 +40,7 @@ namespace DevConsole.Ui
             var text = entry.Reason == null ? entry.Label : $"{entry.Label}: {entry.Outcome.ToString().ToLowerInvariant()} ({entry.Reason})";
             GUILayout.Label(text, Theme.Label);
             var previous = GUI.enabled;
-            GUI.enabled = previous && entry.Undo != null && !entry.Undone;
+            GUI.enabled = previous && entry.Undo != null && !entry.Undone && entry.Session == Sim.Session;
             if (GUILayout.Button(entry.Undone ? "undone" : entry.Undo == null ? "—" : "Undo", Theme.Button, GUILayout.Width(70), GUILayout.Height(22)))
             {
                 Edits.Undo(entry);

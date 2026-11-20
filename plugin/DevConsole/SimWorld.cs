@@ -121,11 +121,8 @@ namespace DevConsole
         public static List<UnitRow> UnitsOf(object army) =>
             Collection(army, "Units").Select(unit =>
             {
-                var traverse = Traverse.Create(unit);
-                var health = traverse.Field("HealthPoints").GetValue();
-                var ratio = traverse.Field("HealthRatio").GetValue();
-                var current = health is FixedPoint points ? (int)points : 0;
-                var fraction = ratio is FixedPoint r ? (float)(int)(r * 1000) / 1000f : 1f;
+                var current = PropertyValue(unit, "HealthPoints") is FixedPoint points ? (int)points : 0;
+                var fraction = PropertyValue(unit, "HealthRatio") is FixedPoint r ? (float)(int)(r * 1000) / 1000f : 1f;
                 var name = DefinitionName(unit, "UnitDefinition", "unit");
                 return new UnitRow
                 {
@@ -212,18 +209,26 @@ namespace DevConsole
         }
 
         /// <summary>A FixedPoint or int stock on the local empire (MoneyStock, InfluenceStock); -1 when unreadable.</summary>
-        public static int StockOf(string field)
+        public static int StockOf(string field) => (int?)PropertyValue(LocalEmpire, field) ?? -1;
+
+        /// <summary>Simulation numbers are Property/EditableProperty wrappers around a FixedPoint (stocks, health);
+        /// interop snapshots hold the bare FixedPoint. Null when the field is missing or not a number.</summary>
+        public static FixedPoint? PropertyValue(object entity, string field)
         {
-            var value = LocalEmpire == null ? null : Traverse.Create(LocalEmpire).Field(field).GetValue();
+            var value = entity == null ? null : Traverse.Create(entity).Field(field).GetValue();
             switch (value)
             {
-                case FixedPoint stock:
-                    return (int)stock;
+                case null:
+                    return null;
+                case FixedPoint fixedPoint:
+                    return fixedPoint;
                 case int whole:
-                    return whole;
-                default:
-                    return -1;
+                    return (FixedPoint)whole;
             }
+            return Traverse.Create(value).Property("Value").GetValue() is FixedPoint wrapped ? wrapped : (FixedPoint?)null;
         }
+
+        /// <summary>Identifies the running game, so an edit-log entry from a previous game is never undone in this one.</summary>
+        public static int Session => Sandbox is object sandbox ? System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(sandbox) : 0;
     }
 }

@@ -31,7 +31,6 @@ namespace DevConsole
         {
             ["EditorOrderDestroyArmy"] = Sim.ArmyAt,
             ["EditorOrderDestroySettlement"] = Sim.SettlementAt,
-            ["EditorOrderDestroyVillageAt"] = Sim.SettlementAt,
         };
 
         private const int CreatedLookupFrames = 120;  // orders apply on the simulation thread a few frames later
@@ -64,7 +63,7 @@ namespace DevConsole
                 InverseTable.TryInvert(record, field => previous != null && previous.Field == field ? previous.Value : (int?)null, out undo);
             }
             Before.Remove(order);
-            var entry = new EditEntry { Turn = Sim.Turn, Label = label, Origin = origin, Outcome = outcome, Reason = reason, Record = record, Undo = undo };
+            var entry = new EditEntry { Turn = Sim.Turn, Session = Sim.Session, Label = label, Origin = origin, Outcome = outcome, Reason = reason, Record = record, Undo = undo };
             if (undo != null && Destroying.ContainsKey(undo.Type))
             {
                 // the order is queued but not applied yet, so whatever stands on the tile now is not ours
@@ -116,6 +115,11 @@ namespace DevConsole
         {
             if (entry?.Undo == null || entry.Undone)
             {
+                return;
+            }
+            if (entry.Session != Sim.Session)
+            {
+                Skip(entry, "that edit was made in another game");
                 return;
             }
             if (Destroying.ContainsKey(entry.Undo.Type))

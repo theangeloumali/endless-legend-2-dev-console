@@ -32,6 +32,9 @@ namespace Forge.Core
 
         public bool Undone;
 
+        /// <summary>Which game the edit was made in; undo is refused once another game is loaded.</summary>
+        public int Session;
+
         /// <summary>For undos that destroy what the edit created: the GUID of the entity it created, so a
         /// different entity that later stands on the same tile is never destroyed in its place.</summary>
         public ulong? Created;

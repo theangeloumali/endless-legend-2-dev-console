@@ -71,11 +71,7 @@ namespace DevConsole.Cheats
         }
 
         /// <summary>Hero stats are Property/EditableProperty objects wrapping a FixedPoint.</summary>
-        private static int PropertyValue(object hero, string name)
-        {
-            var property = Traverse.Create(hero).Field(name).GetValue();
-            return property == null ? 0 : (int)Traverse.Create(property).Property<FixedPoint>("Value").Value;
-        }
+        private static int PropertyValue(object hero, string name) => Sim.PropertyValue(hero, name) is FixedPoint value ? (int)value : 0;
 
         /// <summary>Stat increases are PAID FOR out of SkillPoint, so top it up first. No order grants points, so
         /// this is the one direct write we make. EditableProperty is a STRUCT: reading it through reflection hands

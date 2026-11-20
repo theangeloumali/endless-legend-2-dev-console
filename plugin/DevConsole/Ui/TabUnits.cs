@@ -39,14 +39,13 @@ namespace DevConsole.Ui
                 for (var i = 0; i < army.Units.Count; i++)
                 {
                     var unit = army.Units[i];
-                    var index = i;
                     GUILayout.BeginHorizontal();
                     if (GUILayout.Button($"{i + 1}. {unit.Name}", i == unitIndex ? Theme.TabActive : Theme.Button, GUILayout.Height(25)))
                     {
                         unitIndex = i;
                     }
                     GUILayout.Label($"{unit.Health}/{unit.MaxHealth} HP", Theme.Value, GUILayout.Width(110));
-                    Widgets.Button("Remove", () => { Units.Remove(army, index); ReloadSoon(); }, !Stale);
+                    Widgets.Button("Remove", () => { Units.Remove(army, unit); ReloadSoon(); }, !Stale);
                     GUILayout.EndHorizontal();
                 }
             }

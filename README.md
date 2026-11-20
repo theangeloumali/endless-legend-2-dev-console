@@ -180,7 +180,7 @@ listed in the edit log.
 - **Ctrl+F** searches every button in every tab. Enter runs it, or arms it if it is a tile tool. Tab jumps to it.
   Destroy-style commands only jump, so they still need their confirm click.
 - The **edit log** under every tab shows what was posted (✓) and what the game rejected (✗), with **Undo** where the
-  game has an opposite command: spawned armies, cities, camps, villages, districts, observatories, burrows,
+  game has an opposite command: spawned armies, cities, camps, districts, observatories, burrows,
   dungeons, spawn points, curiosities, planted forests, and Dust or Influence you set.
 - The status line runs a **self-check** when a game loads: it resolves every game type and member the plugin uses
   on the build you are running, so a game patch that moves something shows up as a count instead of a dead button.

@@ -49,9 +49,21 @@ namespace DevConsole.Cheats
             _ = StillThere(army) && Orders.Post(new EditorOrderAddUnitToArmy { UnitDefinitionName = new StaticString(unitDefinition), ArmyTileIndex = army.Tile },
                         $"{army.Name}: add {unitDefinition}");
 
-        public static void Remove(ArmyPick army, int unitIndex) =>
-            _ = StillThere(army) && Orders.Post(new EditorOrderRemoveUnitFromArmy { ArmyTileIndex = army.Tile, UnitIndex = unitIndex },
-                        $"{army.Name}: remove unit {unitIndex + 1}");
+        /// <summary>The order takes a position, which shifts as units leave; it is looked up from the unit's GUID now.</summary>
+        public static void Remove(ArmyPick army, Sim.UnitRow unit)
+        {
+            if (!StillThere(army))
+            {
+                return;
+            }
+            var index = Sim.UnitsOf(Sim.ArmyAt(army.Tile)).FindIndex(row => row.Guid.Equals(unit.Guid));
+            if (index < 0)
+            {
+                Orders.Log.LogWarning($"{army.Name}: {unit.Name} is no longer in this army");
+                return;
+            }
+            Orders.Post(new EditorOrderRemoveUnitFromArmy { ArmyTileIndex = army.Tile, UnitIndex = index }, $"{army.Name}: remove {unit.Name}");
+        }
 
         /// <summary>An evolution is named by the unit definition it turns into.</summary>
         public static void Evolve(ArmyPick army, Sim.UnitRow unit, string evolution) =>

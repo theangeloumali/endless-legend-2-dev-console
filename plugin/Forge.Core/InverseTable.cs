@@ -19,7 +19,6 @@ namespace Forge.Core
             ["EditorOrderCreateArmyAt"] = Make("EditorOrderDestroyArmy", ("TileIndex", "ArmyTileIndex")),
             ["EditorOrderCreateCityAt"] = Make("EditorOrderDestroySettlement", ("CityTileIndex", "SettlementTileIndex")),
             ["EditorOrderCreateCampAt"] = Make("EditorOrderDestroySettlement", ("CampTileIndex", "SettlementTileIndex")),
-            ["EditorOrderCreateVillageAt"] = Make("EditorOrderDestroyVillageAt", ("TileIndex", "TileIndex")),
             ["EditorOrderCreateDistrictAt"] = Make("EditorOrderRemoveDistrictAt", ("TileIndex", "TileIndex")),
             ["EditorOrderSpawnObservatoryAt"] = Make("EditorOrderRemoveObservatoryAt", ("TileIndex", "TileIndex")),
             ["EditorOrderSpawnBurrowAt"] = Make("EditorOrderRemoveBurrowAt", ("TileIndex", "TileIndex")),

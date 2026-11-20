@@ -38,6 +38,7 @@ namespace DevConsole.Cheats
             public string Name;
             public Queue<RecipeStep> Steps;
             public bool Relative;
+            public bool AnchorMissing;
             public HexGrid? Grid;
             public int Capital;
             public int Posted;
@@ -134,16 +135,17 @@ namespace DevConsole.Cheats
             var grid = Sim.Grid();
             var capital = Sim.CapitalTile();
             var relative = !atSameTiles && recipe.Anchor == RecipeAnchor.Capital;
-            if (relative && (grid == null || capital < 0))
+            var anchorMissing = relative && (grid == null || capital < 0);
+            if (anchorMissing)
             {
-                problems.Add("no capital or unrecognised map layout here, so tiles were replayed as recorded");
-                relative = false;
+                problems.Add("no capital or unrecognised map layout here, so edits placed on tiles were skipped");
             }
             replaying = new Replaying
             {
                 Name = recipe.Name,
                 Steps = new Queue<RecipeStep>(recipe.Steps),
                 Relative = relative,
+                AnchorMissing = anchorMissing,
                 Grid = grid,
                 Capital = capital,
                 Problems = problems,
@@ -167,12 +169,7 @@ namespace DevConsole.Cheats
             string reason;
             try
             {
-                reason = Prepare(step, replaying.Relative, replaying.Grid, replaying.Capital, out var record);
-                var order = reason == null ? OrderCodec.Build(record, out reason) : null;
-                if (order != null && !Orders.PostAny(order, $"recipe {replaying.Name}: {step.Order.Type}", EditOrigin.Replay))
-                {
-                    reason = "rejected by the game here";
-                }
+                reason = Attempt(step);
             }
             catch (Exception exception)
             {
@@ -185,6 +182,26 @@ namespace DevConsole.Cheats
             }
             replaying.Skipped++;
             replaying.Problems.Add($"{step.Order.Type}: {reason}");
+        }
+
+        /// <summary>Posts one replayed step; null when the game accepted it, otherwise why it was skipped.</summary>
+        private static string Attempt(RecipeStep step)
+        {
+            if (replaying.AnchorMissing && step.Order.Tiles.Values.Any(tile => tile >= 0))
+            {
+                return "no capital here to place it around";
+            }
+            var reason = Prepare(step, replaying.Relative, replaying.Grid, replaying.Capital, out var record);
+            if (reason != null)
+            {
+                return reason;
+            }
+            var order = OrderCodec.Build(record, out reason);
+            if (order == null)
+            {
+                return reason;
+            }
+            return Orders.PostAny(order, $"recipe {replaying.Name}: {step.Order.Type}", EditOrigin.Replay) ? null : "rejected by the game here";
         }
 
         private static void Capture(EditEntry entry)
