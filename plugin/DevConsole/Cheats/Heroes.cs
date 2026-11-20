@@ -50,10 +50,11 @@ namespace DevConsole.Cheats
             public string Label => $"{Name} — lvl {Level} · {SkillPoints} pts · {State}";
         }
 
-        public static List<Entry> Roster()
+        /// <summary>The local empire's heroes, or another empire's when one is given.</summary>
+        public static List<Entry> Roster(object empire = null)
         {
             var roster = new List<Entry>();
-            foreach (var hero in Sim.Heroes())
+            foreach (var hero in empire == null ? Sim.Heroes() : Sim.Collection(empire, "Heroes"))
             {
                 var traverse = Traverse.Create(hero);
                 roster.Add(new Entry
@@ -70,11 +71,7 @@ namespace DevConsole.Cheats
         }
 
         /// <summary>Hero stats are Property/EditableProperty objects wrapping a FixedPoint.</summary>
-        private static int PropertyValue(object hero, string name)
-        {
-            var property = Traverse.Create(hero).Field(name).GetValue();
-            return property == null ? 0 : (int)Traverse.Create(property).Property<FixedPoint>("Value").Value;
-        }
+        private static int PropertyValue(object hero, string name) => Sim.PropertyValue(hero, name) is FixedPoint value ? (int)value : 0;
 
         /// <summary>Stat increases are PAID FOR out of SkillPoint, so top it up first. No order grants points, so
         /// this is the one direct write we make. EditableProperty is a STRUCT: reading it through reflection hands

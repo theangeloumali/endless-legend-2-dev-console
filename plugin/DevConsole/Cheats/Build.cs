@@ -24,22 +24,18 @@ namespace DevConsole.Cheats
             public string Label => $"{Name}  ({Kind}, {Queue.Count} queued)";
         }
 
-        public static List<Site> Sites()
-        {
-            var sites = new List<Site>();
-            foreach (var entry in Sim.Settled())
+        public static List<Site> Sites() => Sim.Settled().Select(entry => SiteOf(entry.Value, entry.Key)).ToList();
+
+        /// <summary>Any empire's settlement, e.g. one picked on the map in the Settlements tab.</summary>
+        public static Site SiteOf(object settlement, string kind) =>
+            new Site
             {
-                sites.Add(new Site
-                {
-                    Name = Sim.NameOf(entry.Value, entry.Key),
-                    Kind = entry.Key,
-                    TileIndex = Traverse.Create(entry.Value).Field<int>("WorldPosition").Value,
-                    Guid = Sim.GuidOf(entry.Value),
-                    Queue = QueueOf(entry.Value),
-                });
-            }
-            return sites;
-        }
+                Name = Sim.NameOf(settlement, kind),
+                Kind = kind,
+                TileIndex = Sim.TileOf(settlement),
+                Guid = Sim.GuidOf(settlement),
+                Queue = QueueOf(settlement),
+            };
 
         /// <summary>Construction is an internal struct, so entries are read through the shared walker and only
         /// their definition name is kept.</summary>
@@ -49,9 +45,7 @@ namespace DevConsole.Cheats
             var queue = Traverse.Create(settlement).Field("ConstructionQueue").Property("Entity").GetValue();
             foreach (var construction in Sim.Structs(queue, "Constructions"))
             {
-                var definition = Traverse.Create(construction).Field("ConstructibleDefinition").GetValue();
-                var name = definition == null ? null : Traverse.Create(definition).Property("Name").GetValue();
-                names.Add(name?.ToString() ?? "construction");
+                names.Add(Sim.DefinitionName(construction, "ConstructibleDefinition", "construction"));
             }
             return names;
         }

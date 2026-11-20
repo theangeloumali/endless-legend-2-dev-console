@@ -11,17 +11,21 @@ namespace DevConsole
     {
         public const string Guid = "angelo.el2.devconsole";  // unchanged: it names the config file
         public const string Name = "GeloDGreat Dev Console";
-        public const string Version = "1.7.0";
+        public const string Version = "2.0.0";
 
         private State state;
         private Window window;
         private bool visible;
         private int lastPlacedFrame = -1;
+        private bool dropTextFocus;
 
         private void Awake()
         {
             state = new State(Config);
             Orders.Initialize(Logger);
+            Edits.Initialize();
+            Cheats.Recipes.Initialize();
+            // two rows of seven: the empire's own levers on top, the world and other empires below
             window = new Window(state, new ITab[]
             {
                 new TabQuick(state),
@@ -29,11 +33,15 @@ namespace DevConsole
                 new TabBuild(),
                 new TabHeroes(),
                 new TabEquipment(),
-                new TabWorld(),
-                new TabDiplomacy(),
                 new TabEmpire(),
-                new TabBattle(),
                 new TabYields(state),
+                new TabWorld(),
+                new TabSettlements(),
+                new TabUnits(),
+                new TabAiStory(),
+                new TabDiplomacy(),
+                new TabBattle(),
+                new TabRecipes(),
             });
             var harmony = new Harmony(Guid);
             Patches.Apply(harmony, state, Logger);
@@ -47,7 +55,23 @@ namespace DevConsole
             {
                 visible = !visible;
             }
+            if (state.SearchHotkey.Value.IsDown())
+            {
+                visible = true;
+                window.RequestPalette();
+            }
+            if (Orders.Ready)
+            {
+                SelfCheck.Run();
+            }
+            var mouse = UnityInput.Current;
+            if (visible && (mouse.GetMouseButtonDown(0) || mouse.GetMouseButtonDown(1)) && !window.ContainsMouse())
+            {
+                dropTextFocus = true;  // a map click ends typing, so the game's keyboard comes back
+            }
             Cheats.World.Track();
+            Edits.Tick();
+            Cheats.Recipes.Tick();
             Place();
         }
 
@@ -79,10 +103,18 @@ namespace DevConsole
 
         private void OnGUI()
         {
+            if (dropTextFocus || !visible)
+            {
+                dropTextFocus = false;
+                GUIUtility.keyboardControl = 0;
+            }
             if (visible)
             {
                 visible = window.Draw();
             }
+            InputGuard.Update(visible && InputGuard.ConsoleTextFocused);
         }
+
+        private void OnDestroy() => InputGuard.Release();
     }
 }

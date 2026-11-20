@@ -10,6 +10,7 @@ namespace DevConsole
         public static readonly int[] MultiplierSteps = { 1, 2, 10, 100, 1000 };
 
         public readonly ConfigEntry<KeyboardShortcut> Hotkey;
+        public readonly ConfigEntry<KeyboardShortcut> SearchHotkey;
         public readonly ConfigEntry<float> UiScale;
         public readonly ConfigEntry<bool> NativeOverlay;
         public readonly ConfigEntry<int> WindowHeight;
@@ -23,6 +24,7 @@ namespace DevConsole
         public State(ConfigFile config)
         {
             Hotkey = config.Bind("General", "Hotkey", new KeyboardShortcut(KeyCode.Insert), "Shows / hides the console window.");
+            SearchHotkey = config.Bind("General", "SearchHotkey", new KeyboardShortcut(KeyCode.F, KeyCode.LeftControl), "Opens the console's command search.");
             NativeOverlay = config.Bind("General", "NativeOverlay", true, "Unlock the game's own debug overlay (F2). Turn off if it misbehaves; the Insert window is unaffected.");
             WindowHeight = config.Bind("General", "WindowHeight", 520, "Height of the scrolling area, before UI scaling.");
             UiScale = config.Bind("General", "UiScale", 0f, "Window scale; 0 = auto from screen height (2 at 4K), so the window stays readable at high resolutions.");

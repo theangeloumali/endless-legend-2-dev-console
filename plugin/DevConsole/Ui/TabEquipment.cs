@@ -79,7 +79,7 @@ namespace DevConsole.Ui
                 GUILayout.EndHorizontal();
             }
             GUILayout.EndScrollView();
-            Widgets.Button("Clear ALL equipment in the empire", () => { Equipment.ClearAll(); Refresh(); });
+            Widgets.DangerButton("Clear ALL equipment in the empire", () => { Equipment.ClearAll(); Refresh(); });
         }
     }
 }

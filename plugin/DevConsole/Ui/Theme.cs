@@ -76,6 +76,9 @@ namespace DevConsole.Ui
 
             Danger = new GUIStyle(Button);
             Danger.normal.textColor = new Color32(0xE8, 0x8C, 0x7A, 0xFF);
+            // brighter on hover: the base red is only 4.4:1 against the Hover background
+            Danger.hover.textColor = new Color32(0xF2, 0xA4, 0x93, 0xFF);
+            Danger.active.textColor = Danger.hover.textColor;
 
             Tab = Style(skin.button, Panel, TextDim, 12, TextAnchor.MiddleCenter);
             Tab.padding = new RectOffset(6, 6, 7, 7);

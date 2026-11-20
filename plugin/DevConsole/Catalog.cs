@@ -43,6 +43,50 @@ namespace DevConsole
         public static Entry[] Quests => Entries<QuestDefinition, UIMapper>(None);
         public static Entry[] Populations => Entries<PopulationDefinition, PopulationUIMapper>(None);
         public static Entry[] Statuses => Entries<StatusDefinition, StatusUIMapper>(None);
+        public static Entry[] Collectibles => Entries<CollectibleDefinition, UIMapper>(None);
+        public static Entry[] MinorFactions => Entries<MinorFactionDefinition, UIMapper>(None);
+        public static Entry[] TormentedArmies => Entries<TormentedArmyTypeDefinition, UIMapper>(None);
+        public static Entry[] Dialogs => Entries<DialogDefinition, UIMapper>(None);
+        public static Entry[] MoodMessages => MappersNamed("MoodMessage_");
+
+        /// <summary>Everything a production queue accepts, best first: districts, units and improvements together.</summary>
+        public static Entry[] Constructibles => Cached("constructibles", () =>
+            Districts.Concat(Units).Concat(Improvements).OrderByDescending(entry => entry.Rank)
+                     .ThenBy(entry => entry.Display, StringComparer.CurrentCultureIgnoreCase));
+
+        /// <summary>For names that exist only as UIMappers (mood messages have no definition type of their own).</summary>
+        private static Entry[] MappersNamed(string prefix) => Cached("mappers:" + prefix, () =>
+            Databases.GetDatabase<UIMapper>(false) is IDatabase<UIMapper> mappers
+                ? mappers.Where(mapper => mapper.Name.ToString().StartsWith(prefix, StringComparison.Ordinal))
+                         .Select(mapper => new Entry { Name = mapper.Name.ToString(), Display = Title(mapper) ?? mapper.Name.ToString() })
+                         .OrderBy(entry => entry.Display, StringComparer.CurrentCultureIgnoreCase)
+                : Enumerable.Empty<Entry>());
+
+        private static readonly Dictionary<string, Entry[]> KeyedCache = new Dictionary<string, Entry[]>();
+
+        /// <summary>Lists built from other lists or by name. An empty result is not cached, because the databases
+        /// load after the plugin and the next call should try again.</summary>
+        private static Entry[] Cached(string key, Func<IEnumerable<Entry>> build)
+        {
+            if (KeyedCache.TryGetValue(key, out var cached))
+            {
+                return cached;
+            }
+            Entry[] entries;
+            try
+            {
+                entries = build().ToArray();
+            }
+            catch (Exception)
+            {
+                entries = new Entry[0];
+            }
+            if (entries.Length > 0)
+            {
+                KeyedCache[key] = entries;
+            }
+            return entries;
+        }
 
         /// <summary>Some definitions share a database with their base type — artificial wonders are stored as
         /// districts — so the list is the database filtered to the concrete type.</summary>

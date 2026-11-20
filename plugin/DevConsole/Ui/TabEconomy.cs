@@ -28,12 +28,10 @@ namespace DevConsole.Ui
             GUILayout.BeginHorizontal();
             var hasAmount = Widgets.IntField("Amount each", ref resources, out var amount);
             GUILayout.EndHorizontal();
-            GUI.enabled = hasAmount;
-            Widgets.Row(("All strategic", () => Economy.AddResources(Economy.Strategic, amount)),
+            Widgets.Row(hasAmount, ("All strategic", () => Economy.AddResources(Economy.Strategic, amount)),
                         ("All luxury", () => Economy.AddResources(Economy.Luxury, amount)),
                         ("Cadavers & Spirits", () => Economy.AddResources(Economy.Specials, amount)));
             Widgets.Button("Everything", () => Economy.AddResources(Economy.All, amount), hasAmount);
-            GUI.enabled = true;
 
             Widgets.Section("Technologies");
             GUILayout.BeginHorizontal();

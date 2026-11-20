@@ -7,7 +7,7 @@
     <AssemblyName>DevConsole</AssemblyName>
     <Product>GeloDGreat Dev Console</Product>
     <RootNamespace>DevConsole</RootNamespace>
-    <Version>1.7.0</Version>
+    <Version>2.0.0</Version>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -35,6 +35,14 @@
     <Reference Include="Assembly-CSharp" HintPath="$(Managed)\Assembly-CSharp.dll" Private="false" />
     <Reference Include="Amplitude.UI" HintPath="$(Managed)\Amplitude.UI.dll" Private="false" />
     <Reference Include="Amplitude.DebugOverlay" HintPath="$(Managed)\Amplitude.DebugOverlay.dll" Private="false" />
+    <Reference Include="Newtonsoft.Json" HintPath="$(Managed)\Newtonsoft.Json.dll" Private="false" />
+    <Reference Include="Amplitude.Mercury.Terrain" HintPath="$(Managed)\Amplitude.Mercury.Terrain.dll" Private="false" />
+    <Reference Include="Unity.InputSystem" HintPath="$(Managed)\Unity.InputSystem.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- Game-free logic is compiled in so players still install one DLL; tests build the same files on their own. -->
+  <ItemGroup>
+    <Compile Include="..\Forge.Core\*.cs" Link="Core\%(Filename)%(Extension)" />
   </ItemGroup>
 
 </Project>

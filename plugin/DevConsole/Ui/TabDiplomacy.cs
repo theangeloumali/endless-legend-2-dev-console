@@ -24,13 +24,11 @@ namespace DevConsole.Ui
             GUILayout.BeginHorizontal();
             var hasTarget = Widgets.IntField("Empire index", ref target, out var other);
             GUILayout.EndHorizontal();
-            GUI.enabled = hasTarget;
-            Widgets.Row(("Declare war", () => Diplomacy.DeclareWar(other)),
+            Widgets.Row(hasTarget, ("Declare war", () => Diplomacy.DeclareWar(other)),
                         ("Force peace", () => Diplomacy.ForcePeace(other)),
                         ("All treaties", () => Diplomacy.AllTreaties(other)));
             Widgets.Button("Make them offer surrender", () => Diplomacy.ForceSurrender(other), hasTarget);
             Widgets.ValueButton("War score", ref warScore, "Apply", score => Diplomacy.ChangeWarScore(other, score), hasTarget);
-            GUI.enabled = true;
 
             Widgets.Section("Empire");
             GUILayout.BeginHorizontal();

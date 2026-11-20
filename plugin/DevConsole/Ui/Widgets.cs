@@ -11,7 +11,15 @@ namespace DevConsole.Ui
         /// <summary>One label column width everywhere, so fields and buttons line up across every tab.</summary>
         public const int LabelWidth = 130;
 
-        public static void Section(string title) => GUILayout.Label(title.ToUpperInvariant(), Theme.Section);
+        public static void Section(string title)
+        {
+            GUILayout.Label(title.ToUpperInvariant(), Theme.Section);
+            Commands.EnterSection(title);
+            if (!Commands.Collecting && Event.current.type == EventType.Repaint)
+            {
+                Commands.RememberSectionTop(title, GUILayoutUtility.GetLastRect().y);
+            }
+        }
 
         /// <summary>The latched map target plus its lock. Every tile action reads this, because the live hover is
         /// always invalid at the moment you click a button — the mouse is over the window by then.</summary>
@@ -29,37 +37,104 @@ namespace DevConsole.Ui
 
         public static void Hint(string text) => GUILayout.Label(text, Theme.Hint);
 
-        /// <summary>Restores the previous GUI.enabled rather than forcing true, so a disabled block stays disabled.</summary>
-        public static void Button(string label, Action action, bool enabled = true)
+        /// <summary>searchLabel is what the Ctrl+F palette lists, when the button text alone is ambiguous ("Set").</summary>
+        public static void Button(string label, Action action, bool enabled = true, string searchLabel = null)
         {
-            var previous = GUI.enabled;
-            GUI.enabled = previous && enabled;
-            if (GUILayout.Button(label, Theme.Button, GUILayout.Height(27)))
+            if (Commands.Collecting)
+            {
+                Commands.Record(searchLabel ?? label, action, null, enabled, destructive: false, pick: false);
+            }
+            if (Draw(label, Theme.Button, enabled))
             {
                 action();
             }
-            GUI.enabled = previous;
+        }
+
+        private const float ConfirmSeconds = 3f;
+        private static string pendingConfirm;
+        private static float pendingUntil;
+
+        /// <summary>Destroy-style actions with no undo: the first click arms a 3-second confirm, the second runs it.</summary>
+        public static void DangerButton(string label, Action action, bool enabled = true)
+        {
+            if (Commands.Collecting)
+            {
+                Commands.Record(label, action, null, enabled, destructive: true, pick: false);
+            }
+            var confirming = pendingConfirm == label && Time.unscaledTime < pendingUntil;
+            if (!Draw(confirming ? "Click again to confirm: " + label : label, Theme.Danger, enabled))
+            {
+                return;
+            }
+            if (confirming)
+            {
+                pendingConfirm = null;
+                action();
+            }
+            else
+            {
+                pendingConfirm = label;
+                pendingUntil = Time.unscaledTime + ConfirmSeconds;
+            }
         }
 
         /// <summary>Arms a tile tool instead of firing once: the armed button stays highlighted and every map
         /// click places another. Clicking it again cancels.</summary>
-        public static void Plot(string label, Action<int> action, bool enabled = true)
+        public static void Plot(string label, Action<int> action, bool enabled = true) => Arming(label, action, enabled, once: false);
+
+        /// <summary>A one-click tile tool for choosing something on the map (an army, a settlement): it disarms
+        /// after the first click instead of repeating.</summary>
+        public static void Pick(string label, Action<int> action, bool enabled = true) => Arming(label, action, enabled, once: true);
+
+        private static void Arming(string label, Action<int> action, bool enabled, bool once)
         {
+            if (Commands.Collecting)
+            {
+                Commands.Record(label, null, action, enabled, destructive: false, pick: once);
+            }
             var armed = Cheats.World.IsArmed && Cheats.World.ArmedLabel == label;
+            if (!Draw(armed ? label + "  ●" : label, armed ? Theme.TabActive : Theme.Button, enabled))
+            {
+                return;
+            }
+            if (armed)
+            {
+                Cheats.World.Disarm();
+            }
+            else
+            {
+                Cheats.World.Arm(label, action, once);
+            }
+        }
+
+        /// <summary>Restores the previous GUI.enabled rather than forcing true, so a disabled block stays disabled.</summary>
+        private static bool Draw(string label, GUIStyle style, bool enabled)
+        {
             var previous = GUI.enabled;
             GUI.enabled = previous && enabled;
-            if (GUILayout.Button(armed ? label + "  ●" : label, armed ? Theme.TabActive : Theme.Button, GUILayout.Height(27)))
-            {
-                if (armed)
-                {
-                    Cheats.World.Disarm();
-                }
-                else
-                {
-                    Cheats.World.Arm(label, action);
-                }
-            }
+            var clicked = GUILayout.Button(label, style, GUILayout.Height(27));
             GUI.enabled = previous;
+            return clicked;
+        }
+
+        /// <summary>A collapsible section. While the search index is being built it reports open, so the commands
+        /// inside a collapsed section are still searchable.</summary>
+        public static bool Foldout(string label, ref bool open)
+        {
+            if (GUILayout.Button((open ? "▾ " : "▸ ") + label, Theme.Button, GUILayout.Height(25)))
+            {
+                open = !open;
+            }
+            return open || Commands.Collecting;
+        }
+
+        /// <summary>A label column and a value, the read-out shape used for "Selected", "Army" and "Target tile".</summary>
+        public static void ValueRow(string label, string value, bool known = true)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(label, Theme.Label, GUILayout.Width(LabelWidth));
+            GUILayout.Label(value, known ? Theme.Value : Theme.Hint);
+            GUILayout.EndHorizontal();
         }
 
         public static void PlotRow(params (string Label, Action<int> Action)[] buttons)
@@ -72,12 +147,16 @@ namespace DevConsole.Ui
             GUILayout.EndHorizontal();
         }
 
-        public static void Row(params (string Label, Action Action)[] buttons)
+        public static void Row(params (string Label, Action Action)[] buttons) => Row(true, buttons);
+
+        /// <summary>enabled is passed through to each button, so the search index sees the real state; a raw
+        /// GUI.enabled block around a row would grey it out on screen but not in Ctrl+F.</summary>
+        public static void Row(bool enabled, params (string Label, Action Action)[] buttons)
         {
             GUILayout.BeginHorizontal();
             foreach (var (label, action) in buttons)
             {
-                Button(label, action);
+                Button(label, action, enabled);
             }
             GUILayout.EndHorizontal();
         }
@@ -86,6 +165,10 @@ namespace DevConsole.Ui
         /// a 12px square, which is the wrong affordance for the handful of toggles people flip constantly.</summary>
         public static void BigToggle(string label, bool value, Action<bool> set, string note = null)
         {
+            if (Commands.Collecting)
+            {
+                Commands.Record($"{label} ({(value ? "turn off" : "turn on")})", () => set(!value), null, true, destructive: false, pick: false);
+            }
             GUILayout.BeginHorizontal();
             if (GUILayout.Button(value ? "  ON " : "  OFF", value ? Theme.TabActive : Theme.Button,
                                  GUILayout.Width(70), GUILayout.Height(34)))
@@ -120,8 +203,41 @@ namespace DevConsole.Ui
         {
             GUILayout.BeginHorizontal();
             var parsed = IntField(label, ref buffer, out var value, labelWidth, fieldWidth);
-            Button(action, () => apply(value), parsed && enabled);
+            Button(action, () => apply(value), parsed && enabled, searchLabel: label + ": " + action);
             GUILayout.EndHorizontal();
+        }
+
+        /// <summary>IntField's float twin, read with the invariant culture so "2.5" works in every locale.</summary>
+        public static bool FloatField(string label, ref string buffer, out float value, int labelWidth = LabelWidth, int fieldWidth = 120)
+        {
+            GUILayout.Label(label, Theme.Label, GUILayout.Width(labelWidth));
+            buffer = GUILayout.TextField(buffer ?? string.Empty, Theme.Field, GUILayout.Width(fieldWidth));
+            return float.TryParse(buffer, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out value)
+                   && value >= 0f;
+        }
+
+        /// <summary>A dropdown over a game enum's values, read at runtime so a patch that adds a value shows it.</summary>
+        public sealed class EnumPicker<T> where T : struct, Enum
+        {
+            private readonly Dropdown dropdown;
+            private readonly T[] values = (T[])Enum.GetValues(typeof(T));
+            private int index;
+
+            public EnumPicker(string label) => dropdown = new Dropdown(label);
+
+            public T Value => values.Length == 0 ? default : values[Mathf.Clamp(index, 0, values.Length - 1)];
+
+            public void Draw() => index = dropdown.Draw(values, index, value => value.ToString());
+        }
+
+        /// <summary>A labelled single-line text field; the caller keeps the buffer.</summary>
+        public static string TextRow(string label, string value, int labelWidth = LabelWidth)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(label, Theme.Label, GUILayout.Width(labelWidth));
+            value = GUILayout.TextField(value ?? string.Empty, Theme.Field);
+            GUILayout.EndHorizontal();
+            return value;
         }
 
         /// <summary>IMGUI has no combo box. This draws the current choice as a button that expands into a

@@ -1,0 +1,18 @@
+flowchart LR
+  subgraph Plugin["DevConsole.dll (BepInEx)"]
+    P[Plugin.cs] --> W["Window.cs<br/>14 tabs · search · edit log · self-check"]
+    W --> T["Ui/Tab*.cs"]
+    T --> C["Commands registry"]
+    T --> CH["Cheats/*.cs"]
+    CH --> O["Orders.Post"]
+    O --> V["ValidateOrder"] --> S["SandboxManager.PostOrder"] --> G[(Game simulation)]
+    O --> OC["OrderCodec"]
+    OC --> L["EditLog ✓/✗"]
+    OC --> U["InverseTable (undo)"]
+    OC --> R["RecipeRecorder / Player"]
+  end
+  subgraph Core["Forge.Core.dll (no game refs, unit-tested)"]
+    HG[HexGrid] --- RC[RecipeCodec] --- IT[InverseTable] --- CI[CommandIndex] --- EL[EditLog]
+  end
+  C -. ranked by .-> CI
+  R --> F[("BepInEx/config/forge-recipes/*.json")]
