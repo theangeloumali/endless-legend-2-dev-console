@@ -11,7 +11,15 @@ namespace DevConsole.Ui
         /// <summary>One label column width everywhere, so fields and buttons line up across every tab.</summary>
         public const int LabelWidth = 130;
 
-        public static void Section(string title) => GUILayout.Label(title.ToUpperInvariant(), Theme.Section);
+        public static void Section(string title)
+        {
+            GUILayout.Label(title.ToUpperInvariant(), Theme.Section);
+            Commands.EnterSection(title);
+            if (!Commands.Collecting && Event.current.type == EventType.Repaint)
+            {
+                Commands.RememberSectionTop(title, GUILayoutUtility.GetLastRect().y);
+            }
+        }
 
         /// <summary>The latched map target plus its lock. Every tile action reads this, because the live hover is
         /// always invalid at the moment you click a button — the mouse is over the window by then.</summary>
@@ -32,6 +40,7 @@ namespace DevConsole.Ui
         /// <summary>Restores the previous GUI.enabled rather than forcing true, so a disabled block stays disabled.</summary>
         public static void Button(string label, Action action, bool enabled = true)
         {
+            Commands.Record(label, action, null, enabled, destructive: false);
             var previous = GUI.enabled;
             GUI.enabled = previous && enabled;
             if (GUILayout.Button(label, Theme.Button, GUILayout.Height(27)))
@@ -41,10 +50,38 @@ namespace DevConsole.Ui
             GUI.enabled = previous;
         }
 
+        private const float ConfirmSeconds = 3f;
+        private static string pendingConfirm;
+        private static float pendingUntil;
+
+        /// <summary>Destroy-style actions with no undo: the first click arms a 3-second confirm, the second runs it.</summary>
+        public static void DangerButton(string label, Action action, bool enabled = true)
+        {
+            Commands.Record(label, action, null, enabled, destructive: true);
+            var confirming = pendingConfirm == label && Time.unscaledTime < pendingUntil;
+            var previous = GUI.enabled;
+            GUI.enabled = previous && enabled;
+            if (GUILayout.Button(confirming ? "Click again to confirm: " + label : label, Theme.Danger, GUILayout.Height(27)))
+            {
+                if (confirming)
+                {
+                    pendingConfirm = null;
+                    action();
+                }
+                else
+                {
+                    pendingConfirm = label;
+                    pendingUntil = Time.unscaledTime + ConfirmSeconds;
+                }
+            }
+            GUI.enabled = previous;
+        }
+
         /// <summary>Arms a tile tool instead of firing once: the armed button stays highlighted and every map
         /// click places another. Clicking it again cancels.</summary>
         public static void Plot(string label, Action<int> action, bool enabled = true)
         {
+            Commands.Record(label, null, action, enabled, destructive: false);
             var armed = Cheats.World.IsArmed && Cheats.World.ArmedLabel == label;
             var previous = GUI.enabled;
             GUI.enabled = previous && enabled;
@@ -86,6 +123,7 @@ namespace DevConsole.Ui
         /// a 12px square, which is the wrong affordance for the handful of toggles people flip constantly.</summary>
         public static void BigToggle(string label, bool value, Action<bool> set, string note = null)
         {
+            Commands.Record($"{label} ({(value ? "turn off" : "turn on")})", () => set(!value), null, true, destructive: false);
             GUILayout.BeginHorizontal();
             if (GUILayout.Button(value ? "  ON " : "  OFF", value ? Theme.TabActive : Theme.Button,
                                  GUILayout.Width(70), GUILayout.Height(34)))
@@ -120,7 +158,15 @@ namespace DevConsole.Ui
         {
             GUILayout.BeginHorizontal();
             var parsed = IntField(label, ref buffer, out var value, labelWidth, fieldWidth);
-            Button(action, () => apply(value), parsed && enabled);
+            // the palette shows "Dust: Set", not a bare "Set"
+            Commands.Record(label + ": " + action, () => apply(value), null, parsed && enabled, destructive: false);
+            var previous = GUI.enabled;
+            GUI.enabled = previous && parsed && enabled;
+            if (GUILayout.Button(action, Theme.Button, GUILayout.Height(27)))
+            {
+                apply(value);
+            }
+            GUI.enabled = previous;
             GUILayout.EndHorizontal();
         }
 

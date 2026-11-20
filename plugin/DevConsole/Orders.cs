@@ -3,6 +3,7 @@ using Amplitude.Mercury.Interop;
 using Amplitude.Mercury.Sandbox;
 using System.Reflection;
 using BepInEx.Logging;
+using Forge.Core;
 using HarmonyLib;
 
 namespace DevConsole
@@ -19,6 +20,12 @@ namespace DevConsole
         public static void Initialize(ManualLogSource logger) => log = logger;
 
         public static ManualLogSource Log => log;
+
+        /// <summary>Raised just before posting, so undo can read a value the order is about to overwrite.</summary>
+        public static event Action<object> Posting;
+
+        /// <summary>Every attempt the game saw: posted, rejected by its validator, or thrown while posting.</summary>
+        public static event Action<object, string, EditOutcome, string> Outcome;
 
         /// <summary>True once a game is running; posting before that only logs on the game's side.</summary>
         public static bool Ready => SandboxManager.IsSandboxAlive && Sim.LocalEmpireIndex >= 0;
@@ -40,6 +47,23 @@ namespace DevConsole
             Send(order, what, () => SandboxManager.PostOrder(order));
         }
 
+        /// <summary>For orders rebuilt from a record (undo, recipes), whose static type is only object.</summary>
+        public static void PostAny(object order, string what)
+        {
+            switch (order)
+            {
+                case EditorOrder editorOrder:
+                    Post(editorOrder, what);
+                    break;
+                case Order plainOrder:
+                    Post(plainOrder, what);
+                    break;
+                default:
+                    log.LogWarning($"{what}: {order?.GetType().Name ?? "null"} is not a game order");
+                    break;
+            }
+        }
+
         private static readonly MethodInfo Validate =
             AccessTools.Method(AccessTools.TypeByName("Amplitude.Mercury.Simulation.EditorOrderProcessors"), "ValidateOrder");
 
@@ -56,6 +80,7 @@ namespace DevConsole
                     return true;
                 }
                 log.LogWarning($"{what}: the game rejected this — not valid here (terrain, ownership or a faction ability)");
+                Raise(order, what, EditOutcome.Rejected, "not valid here");
                 return false;
             }
             catch (Exception exception)
@@ -73,12 +98,31 @@ namespace DevConsole
             }
             try
             {
+                Notify(() => Posting?.Invoke(order), what);
                 post();
                 log.LogInfo($"posted {what}");
+                Raise(order, what, EditOutcome.Posted, null);
             }
             catch (Exception exception)
             {
                 log.LogError($"{what} failed: {exception.Message}");
+                Raise(order, what, EditOutcome.Failed, exception.Message);
+            }
+        }
+
+        /// <summary>A listener bug must never stop an order or take the console down with it.</summary>
+        private static void Raise(object order, string what, EditOutcome outcome, string reason) =>
+            Notify(() => Outcome?.Invoke(order, what, outcome, reason), what);
+
+        private static void Notify(Action listeners, string what)
+        {
+            try
+            {
+                listeners();
+            }
+            catch (Exception exception)
+            {
+                log.LogError($"edit log listener failed for {what}: {exception.Message}");
             }
         }
 

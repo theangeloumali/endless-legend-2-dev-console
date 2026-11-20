@@ -16,7 +16,7 @@ namespace DevConsole
     /// Reflection bridge to Amplitude.Mercury.Simulation. Every simulation type is internal, so members are
     /// resolved by name once and null-checked; a missing member disables its feature instead of throwing.
     /// </summary>
-    internal static class Sim
+    internal static partial class Sim
     {
         private const string Ns = "Amplitude.Mercury.Simulation.";
 

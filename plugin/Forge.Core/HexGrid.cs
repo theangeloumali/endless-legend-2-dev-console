@@ -6,7 +6,9 @@ namespace Forge.Core
     public enum HexLayout
     {
         OddRow,
+        EvenRow,
         OddColumn,
+        EvenColumn,
     }
 
     /// <summary>A step between two tiles in axial coordinates, so it means the same thing on any map.</summary>
@@ -112,15 +114,27 @@ namespace Forge.Core
         private static int Distance(HexOffset offset) =>
             (Math.Abs(offset.Dq) + Math.Abs(offset.Dr) + Math.Abs(offset.Dq + offset.Dr)) / 2;
 
-        // (x & 1) is the parity for negative coordinates too, so (x - (x & 1)) / 2 stays exact.
-        private (int Q, int R) ToAxial(int column, int row) =>
-            Layout == HexLayout.OddRow
-                ? (column - (row - (row & 1)) / 2, row)
-                : (column, row - (column - (column & 1)) / 2);
+        // (x & 1) is the parity for negative coordinates too, so (x ± (x & 1)) / 2 stays exact.
+        public (int Q, int R) ToAxial(int column, int row)
+        {
+            switch (Layout)
+            {
+                case HexLayout.OddRow: return (column - (row - (row & 1)) / 2, row);
+                case HexLayout.EvenRow: return (column - (row + (row & 1)) / 2, row);
+                case HexLayout.OddColumn: return (column, row - (column - (column & 1)) / 2);
+                default: return (column, row - (column + (column & 1)) / 2);
+            }
+        }
 
-        private (int Column, int Row) ToOffset(int q, int r) =>
-            Layout == HexLayout.OddRow
-                ? (q + (r - (r & 1)) / 2, r)
-                : (q, r + (q - (q & 1)) / 2);
+        private (int Column, int Row) ToOffset(int q, int r)
+        {
+            switch (Layout)
+            {
+                case HexLayout.OddRow: return (q + (r - (r & 1)) / 2, r);
+                case HexLayout.EvenRow: return (q + (r + (r & 1)) / 2, r);
+                case HexLayout.OddColumn: return (q, r + (q - (q & 1)) / 2);
+                default: return (q, r + (q + (q & 1)) / 2);
+            }
+        }
     }
 }

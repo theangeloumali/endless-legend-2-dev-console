@@ -61,7 +61,7 @@ namespace DevConsole.Ui
                                 xp => ForEachTarget(hero => Heroes.GiveExperience(hero, xp)), roster.Count > 0);
             GUILayout.BeginHorizontal();
             Widgets.Button("Heal", () => ForEachTarget(Heroes.Heal), roster.Count > 0);
-            Widgets.Button("Dismiss", () => ForEachTarget(Heroes.Dismiss), roster.Count > 0);
+            Widgets.DangerButton("Dismiss", () => ForEachTarget(Heroes.Dismiss), roster.Count > 0);
             GUILayout.EndHorizontal();
             Widgets.Hint("Heal is the game's paid recovery and it only accepts a hero reading WOUNDED — every row "
                          + "above shows its state. A refusal is now named in the log instead of being swallowed.");
