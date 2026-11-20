@@ -170,6 +170,30 @@ namespace DevConsole.Ui
             GUILayout.EndHorizontal();
         }
 
+        /// <summary>A dropdown over a game enum's values, read at runtime so a patch that adds a value shows it.</summary>
+        public sealed class EnumPicker<T> where T : struct, Enum
+        {
+            private readonly Dropdown dropdown;
+            private readonly T[] values = (T[])Enum.GetValues(typeof(T));
+            private int index;
+
+            public EnumPicker(string label) => dropdown = new Dropdown(label);
+
+            public T Value => values.Length == 0 ? default : values[Mathf.Clamp(index, 0, values.Length - 1)];
+
+            public void Draw() => index = dropdown.Draw(values, index, value => value.ToString());
+        }
+
+        /// <summary>A labelled single-line text field; the caller keeps the buffer.</summary>
+        public static string TextRow(string label, string value, int labelWidth = LabelWidth)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(label, Theme.Label, GUILayout.Width(labelWidth));
+            value = GUILayout.TextField(value ?? string.Empty, Theme.Field);
+            GUILayout.EndHorizontal();
+            return value;
+        }
+
         /// <summary>IMGUI has no combo box. This draws the current choice as a button that expands into a
         /// filterable, scrolling list — the only shape that works for both a 4-hero roster and 177 items.
         /// Catalogue rows carry a tier and a rarity tint; a plain list supplies just a label.</summary>

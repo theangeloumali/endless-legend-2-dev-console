@@ -36,6 +36,7 @@
     <Reference Include="Amplitude.UI" HintPath="$(Managed)\Amplitude.UI.dll" Private="false" />
     <Reference Include="Amplitude.DebugOverlay" HintPath="$(Managed)\Amplitude.DebugOverlay.dll" Private="false" />
     <Reference Include="Newtonsoft.Json" HintPath="$(Managed)\Newtonsoft.Json.dll" Private="false" />
+    <Reference Include="Amplitude.Mercury.Terrain" HintPath="$(Managed)\Amplitude.Mercury.Terrain.dll" Private="false" />
     <Reference Include="Unity.InputSystem" HintPath="$(Managed)\Unity.InputSystem.dll" Private="false" />
   </ItemGroup>
 

@@ -11,6 +11,7 @@ namespace DevConsole.Ui
         private readonly Widgets.Dropdown district = new Widgets.Dropdown("District");
         private readonly Widgets.Dropdown wonder = new Widgets.Dropdown("Wonder");
         private readonly Widgets.Dropdown picker = new Widgets.Dropdown("Army");
+        private readonly PlacesSections places = new PlacesSections();
         private List<World.ArmyEntry> armies = new List<World.ArmyEntry>();
         private string speed = "99";
         private int selected;
@@ -63,6 +64,8 @@ namespace DevConsole.Ui
             Widgets.Button("Reveal entire map", World.RevealMap);
             Widgets.Button("Collect all curiosities", World.CollectCuriosities);
             GUILayout.EndHorizontal();
+
+            places.Draw();
         }
     }
 }
